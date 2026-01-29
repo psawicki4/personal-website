@@ -89,5 +89,13 @@
       "@angular/common": "$@angular/common",
       "@angular/core": "$@angular/core"
     }
+  },
+  "lint-staged": {
+    "*.{ts,js,json,md,html,css,scss}": [
+      "prettier --write"
+    ],
+    "*.{ts,js,html}": [
+      "eslint --fix"
+    ]
   }
 }
