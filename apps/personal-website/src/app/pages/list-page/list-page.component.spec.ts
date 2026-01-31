@@ -51,7 +51,7 @@ describe('ListPageComponent', () => {
     const spy = vi.spyOn(store, 'setRooms');
     component.getFirstRooms();
     expect(spy).toHaveBeenCalledWith({ total: 9999, data: component.allRooms.slice(0, 50) });
-    expect(store.rooms().data.length).toBe(50);
+    expect(store.entities().length).toBe(50);
   });
 
   it('should fetch more rooms', () => {
@@ -59,14 +59,14 @@ describe('ListPageComponent', () => {
     // Initial state
     store.setRooms({ total: 10000, data: [] });
 
-    const spy = vi.spyOn(store, 'patchRooms');
+    const spy = vi.spyOn(store, 'addRooms');
 
     component.fetchMoreRooms();
 
     expect(component.skip).toBe(50);
     expect(spy).toHaveBeenCalled();
     // Verify state changed
-    expect(store.rooms().data.length).toBe(50);
+    expect(store.entities().length).toBe(50);
   });
 
   it('should not fetch more rooms if all are loaded', () => {
@@ -74,10 +74,10 @@ describe('ListPageComponent', () => {
     // Set store to full
     store.setRooms({
       total,
-      data: Array.from({ length: total }, (_, i) => ({ roomNumber: i, booked: false })),
+      data: Array.from({ length: total }, (_, i) => ({ id: i + 1, booked: false })),
     });
 
-    const spy = vi.spyOn(store, 'patchRooms');
+    const spy = vi.spyOn(store, 'addRooms');
 
     component.fetchMoreRooms();
 
@@ -85,57 +85,51 @@ describe('ListPageComponent', () => {
   });
 
   it('should select a room', () => {
-    const room: Room = { roomNumber: 101, booked: false };
+    const room: Room = { id: 101, booked: false };
     const spy = vi.spyOn(store, 'patchSelectedRoom');
 
     component.selectRoom(room);
 
-    expect(spy).toHaveBeenCalledWith(room);
-    expect(store.selectedRoom()).toEqual(room);
-  });
-
-  it('should not select a room if room is not provided', () => {
-    const spy = vi.spyOn(store, 'patchSelectedRoom');
-    component.selectRoom(null as unknown as Room);
-    expect(spy).not.toHaveBeenCalled();
+    expect(spy).toHaveBeenCalledWith(room.id);
+    expect(store.selectedRoomId()).toEqual(room.id);
   });
 
   it('should cancel selection', () => {
     const spy = vi.spyOn(store, 'patchSelectedRoom');
     component.cancel();
-    expect(spy).toHaveBeenCalledWith({ roomNumber: 0, booked: false });
-    expect(store.selectedRoom()).toEqual({ roomNumber: 0, booked: false });
+    expect(spy).toHaveBeenCalledWith(null);
+    expect(store.selectedRoomId()).toBeNull();
   });
 
   it('should book a room', () => {
-    const roomToBook: Room = { roomNumber: 1, booked: false };
-    const spySetRooms = vi.spyOn(store, 'setRooms');
+    const roomToBook: Room = { id: 1, booked: false };
+    const spyPatchRoom = vi.spyOn(store, 'patchRoom');
     const spyPatchSelected = vi.spyOn(store, 'patchSelectedRoom');
 
     // Setup state
-    store.patchSelectedRoom(roomToBook);
     store.setRooms({ total: 9999, data: [{ ...roomToBook }] });
+    store.patchSelectedRoom(roomToBook.id);
 
     component.book();
 
-    expect(spySetRooms).toHaveBeenCalled();
-    expect(store.rooms().data[0].booked).toBe(true);
-    expect(spyPatchSelected).toHaveBeenCalledWith({ roomNumber: 0, booked: false });
+    expect(spyPatchRoom).toHaveBeenCalledWith(roomToBook.id, true);
+    expect(store.entities()[0].booked).toBe(true);
+    expect(spyPatchSelected).toHaveBeenCalledWith(null);
   });
 
   it('should delete a reservation', () => {
-    const roomToUnbook: Room = { roomNumber: 1, booked: true };
-    const spySetRooms = vi.spyOn(store, 'setRooms');
+    const roomToUnbook: Room = { id: 1, booked: true };
+    const spyPatchRoom = vi.spyOn(store, 'patchRoom');
     const spyPatchSelected = vi.spyOn(store, 'patchSelectedRoom');
 
     // Setup state
-    store.patchSelectedRoom(roomToUnbook);
     store.setRooms({ total: 9999, data: [{ ...roomToUnbook }] });
+    store.patchSelectedRoom(roomToUnbook.id);
 
     component.deleteReservation(roomToUnbook);
 
-    expect(spySetRooms).toHaveBeenCalled();
-    expect(store.rooms().data[0].booked).toBe(false);
-    expect(spyPatchSelected).toHaveBeenCalledWith({ roomNumber: 0, booked: false });
+    expect(spyPatchRoom).toHaveBeenCalledWith(roomToUnbook.id, false);
+    expect(store.entities()[0].booked).toBe(false);
+    expect(spyPatchSelected).toHaveBeenCalledWith(null);
   });
 });

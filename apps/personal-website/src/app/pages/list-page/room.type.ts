@@ -1,5 +1,5 @@
 export type Room = {
-  roomNumber: number;
+  id: number;
   booked: boolean;
 };
 

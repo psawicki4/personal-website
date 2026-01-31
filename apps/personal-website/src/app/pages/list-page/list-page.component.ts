@@ -1,17 +1,26 @@
 import { NgClass } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
 import { MatButton, MatIconButton } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
 import { TranslocoDirective } from '@jsverse/transloco';
 import { CardComponent } from '../../components/card/card.component';
 import { ListItemTemplateDirective } from '../../components/list/list-item-template.directive';
 import { ListComponent } from '../../components/list/list.component';
 import { Room } from './room.type';
 import { RoomsStore } from './rooms.store';
-import { MatIcon } from "@angular/material/icon";
 
 @Component({
   selector: 'psa-list-page',
-  imports: [CardComponent, ListComponent, ListItemTemplateDirective, TranslocoDirective, NgClass, MatButton, MatIconButton, MatIcon],
+  imports: [
+    CardComponent,
+    ListComponent,
+    ListItemTemplateDirective,
+    TranslocoDirective,
+    NgClass,
+    MatButton,
+    MatIconButton,
+    MatIcon,
+  ],
   providers: [RoomsStore],
   templateUrl: './list-page.component.html',
   styleUrl: './list-page.component.scss',
@@ -22,11 +31,11 @@ export class ListPageComponent implements OnInit {
   skip = 0;
   allRooms = Array.from(
     { length: 10000 },
-    (value, index): Room => ({
-      roomNumber: index + 1,
+    (_, index): Room => ({
+      id: index + 1,
       booked: false,
     })
-  ).filter((i) => i.roomNumber !== 404);
+  ).filter((i) => i.id !== 404);
 
   ngOnInit(): void {
     this.getFirstRooms();
@@ -39,42 +48,32 @@ export class ListPageComponent implements OnInit {
   }
 
   fetchMoreRooms() {
-    if (this.store.rooms().data.length === this.store.rooms().total) {
+    if (this.store.entities().length === this.store.total()) {
       return;
     }
     this.skip += 50;
     const nextRooms = this.allRooms.slice(this.skip, this.skip + 50);
-    this.store.patchRooms(nextRooms);
+    this.store.addRooms(nextRooms);
   }
 
   selectRoom(selectedRoom: Room) {
-    if (selectedRoom) {
-      this.store.patchSelectedRoom(selectedRoom);
-    }
+    this.store.patchSelectedRoom(selectedRoom.id);
   }
 
   cancel() {
-    this.store.patchSelectedRoom({ roomNumber: 0, booked: false });
+    this.store.patchSelectedRoom(null);
   }
 
   book() {
-    const updatedRooms = { ...this.store.rooms() };
-    console.log(this.store.selectedRoom().roomNumber);
-    const index = updatedRooms.data.findIndex((r) => r.roomNumber === this.store.selectedRoom().roomNumber);
-    if (index !== -1) {
-      updatedRooms.data[index].booked = true;
+    const index = this.store.selectedRoomId();
+    if (index) {
+      this.store.patchRoom(index, true);
     }
-    this.store.setRooms(updatedRooms);
     this.cancel();
   }
 
   deleteReservation(room: Room) {
-    const updatedRooms = { ...this.store.rooms() };
-    const index = updatedRooms.data.findIndex((r) => r.roomNumber === room.roomNumber);
-    if (index !== -1) {
-      updatedRooms.data[index].booked = false;
-    }
-    this.store.setRooms(updatedRooms);
+    this.store.patchRoom(room.id, false);
     this.cancel();
   }
 }
