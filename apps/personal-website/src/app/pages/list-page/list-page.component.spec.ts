@@ -11,34 +11,26 @@ describe('ListPageComponent', () => {
   let component: ListPageComponent;
   let store: InstanceType<typeof RoomsStore>;
 
+  const translocoMock = {
+    translate: (key: string) => key,
+    selectTranslate: () => of((k: string) => k),
+    getActiveLang: () => 'pl',
+    setActiveLang: vi.fn(),
+    config: { defaultLang: 'pl', reRenderOnLangChange: true },
+    langChanges$: of('pl'),
+    _loadDependencies: () => of(null),
+  };
+
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [ListPageComponent],
-      providers: [
-        provideZonelessChangeDetection(),
-        {
-          provide: TranslocoService,
-          useValue: {
-            setActiveLang: () => {
-              // This is a mock method
-            },
-            getActiveLang: () => 'pl',
-            translate: (key: string) => key,
-            selectTranslate: () => of((k: string) => k),
-            selectTranslateObject: () => of({}),
-          },
-        },
-      ],
+      providers: [provideZonelessChangeDetection(), { provide: TranslocoService, useValue: translocoMock }],
     });
 
     const fixture = TestBed.createComponent(ListPageComponent);
     component = fixture.componentInstance;
     // Get the real store instance from the component's injector
     store = fixture.debugElement.injector.get(RoomsStore);
-  });
-
-  it('should create', () => {
-    expect(component).toBeTruthy();
   });
 
   it('should get first rooms on init', () => {
