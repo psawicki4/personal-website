@@ -1,13 +1,12 @@
 import { provideZonelessChangeDetection } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TranslocoService } from '@jsverse/transloco';
 import { GridApi, GridReadyEvent, StateUpdatedEvent } from 'ag-grid-community';
 import { of } from 'rxjs';
 import { Mock, describe, expect, it, vi } from 'vitest';
+import { LangService } from '../../services/lang.service';
 import { GridComponent } from './grid.component';
 import { GridService } from './grid.service';
-import { LangService } from '../../services/lang.service';
 
 describe('GridComponent', () => {
   let component: GridComponent;
@@ -25,7 +24,7 @@ describe('GridComponent', () => {
   };
 
   beforeEach(() => {
-    Object.defineProperty(window, 'matchMedia', {
+    Object.defineProperty(globalThis, 'matchMedia', {
       writable: true,
       value: vi.fn().mockImplementation((query) => ({
         matches: false,
@@ -44,7 +43,7 @@ describe('GridComponent', () => {
     };
 
     TestBed.configureTestingModule({
-      imports: [GridComponent, BrowserAnimationsModule],
+      imports: [GridComponent],
       providers: [
         provideZonelessChangeDetection(),
         { provide: GridService, useValue: gridServiceSpy },
