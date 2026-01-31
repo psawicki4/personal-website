@@ -44,10 +44,14 @@ export const formHelpers = {
    */
   setSliderValues(beauty?: number, malice?: number) {
     if (beauty !== undefined) {
-      cy.get('mat-slider input[formControlName="beauty"]').invoke('val', beauty).trigger('input').trigger('change');
+      cy.get('mat-slider input[formControlName="beauty"]').invoke('val', beauty);
+      cy.get('mat-slider input[formControlName="beauty"]').trigger('input');
+      cy.get('mat-slider input[formControlName="beauty"]').trigger('change');
     }
     if (malice !== undefined) {
-      cy.get('mat-slider input[formControlName="malice"]').invoke('val', malice).trigger('input').trigger('change');
+      cy.get('mat-slider input[formControlName="malice"]').invoke('val', malice);
+      cy.get('mat-slider input[formControlName="malice"]').trigger('input');
+      cy.get('mat-slider input[formControlName="malice"]').trigger('change');
     }
   },
 

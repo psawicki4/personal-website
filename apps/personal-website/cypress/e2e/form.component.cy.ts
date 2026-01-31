@@ -42,13 +42,15 @@ describe('Form Component (E2E Flows)', () => {
 
     // 2. Entering data out of range (e.g., age 150 years)
     // We use selectall+backspace to ensure field is empty before typing
-    cy.get('input[formControlName="age"]').type('{selectall}{backspace}150').blur();
+    cy.get('input[formControlName="age"]').type('{selectall}{backspace}150');
+    cy.get('input[formControlName="age"]').blur();
 
     // Specifically check for error in the age field
     cy.get('mat-form-field:has(input[formControlName="age"]) mat-error').should('be.visible');
 
     // 3. Error fix
-    cy.get('input[formControlName="age"]').type('{selectall}{backspace}5').blur();
+    cy.get('input[formControlName="age"]').type('{selectall}{backspace}5');
+    cy.get('input[formControlName="age"]').blur();
 
     // Error for age should disappear
     cy.get('mat-form-field:has(input[formControlName="age"]) mat-error').should('not.exist');
