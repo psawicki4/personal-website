@@ -46,7 +46,7 @@
         "outputPath": "dist/apps/personal-website",
         "index": "apps/personal-website/src/1index1.html",
         "browser": "apps/personal-website/src/main.ts",
-        "polyfills": ["@angular/localize/init"],
+        "polyfills": [],
         "tsConfig": "apps/personal-website/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
         "assets": ["apps/personal-website/src/favicon.ico", "apps/personal-website/src/assets"],

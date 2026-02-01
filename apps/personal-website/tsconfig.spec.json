@@ -2,7 +2,7 @@
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
     "outDir": "../../dist/out-tsc",
-    "types": ["jasmine", "@angular/localize"]
+    "types": ["jasmine"]
   },
   "include": ["src/**/*.spec.ts", "src/**/*.d.ts"]
 }
