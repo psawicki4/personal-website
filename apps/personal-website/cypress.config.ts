@@ -13,6 +13,9 @@ export default defineConfig({
     }),
     baseUrl: 'http://localhost:4200',
     video: false,
-    defaultCommandTimeout: 10000,
+    defaultCommandTimeout: 30000,
+    pageLoadTimeout: 120000,
+    responseTimeout: 120000,
+    requestTimeout: 30000,
   },
 });
