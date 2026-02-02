@@ -2,9 +2,9 @@ import { provideZonelessChangeDetection } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TranslocoService } from '@jsverse/transloco';
 import { of } from 'rxjs';
+import { LangService } from 'utils';
 import { describe, expect, it, vi } from 'vitest';
 import { LangSwitchComponent } from './lang-switch.component';
-import { LangService } from '../../services/lang.service';
 
 describe('LangSwitchComponent', () => {
   let component: LangSwitchComponent;

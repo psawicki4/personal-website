@@ -21,8 +21,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { TranslocoDirective, TranslocoService } from '@jsverse/transloco';
 import dayjs from 'dayjs';
 import { Subject, take, takeUntil } from 'rxjs';
+import { LangService } from 'utils';
 import { CardComponent } from '../../components/card/card.component';
-import { LangService } from '../../services/lang.service';
 import { ageBirthdayValidator } from './age-birthday-validator';
 import { CatOption, DemoForm } from './form.type';
 import { OnlyDigitsDirective } from './only-digits.directive';
@@ -254,14 +254,10 @@ export class FormComponent {
         }
       );
     } else {
-      this.snackBar.open(
-        this.transloco.translate('FORM.invalid-form'),
-        this.transloco.translate('FORM.ok'),
-        {
-          duration: 5000,
-          panelClass: 'error-snackbar',
-        }
-      );
+      this.snackBar.open(this.transloco.translate('FORM.invalid-form'), this.transloco.translate('FORM.ok'), {
+        duration: 5000,
+        panelClass: 'error-snackbar',
+      });
     }
   }
 

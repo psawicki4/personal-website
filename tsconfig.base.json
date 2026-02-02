@@ -17,7 +17,10 @@
     "target": "ES2022",
     "module": "ES2022",
     "useDefineForClassFields": false,
-    "paths": {},
+    "paths": {
+      "personal-website-components": ["libs/personal-website-components/src/index.ts"],
+      "utils": ["libs/utils/src/index.ts"]
+    },
     "baseUrl": ".",
     "rootDir": "."
   },

@@ -25,8 +25,8 @@ import {
   themeQuartz,
 } from 'ag-grid-community';
 import { finalize } from 'rxjs';
+import { LangService } from 'utils';
 import { CardComponent } from '../../components/card/card.component';
-import { LangService } from '../../services/lang.service';
 import { CountriesStore } from './countries.store';
 import { GridService } from './grid.service';
 

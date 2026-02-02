@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { MatButton } from '@angular/material/button';
 import { TranslocoService } from '@jsverse/transloco';
-import { LangService } from '../../services/lang.service';
+import { LangService } from 'utils';
 
 @Component({
   selector: 'psa-lang-switch',

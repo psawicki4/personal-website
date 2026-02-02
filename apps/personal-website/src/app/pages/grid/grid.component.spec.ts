@@ -3,8 +3,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TranslocoService } from '@jsverse/transloco';
 import { GridApi, GridReadyEvent, StateUpdatedEvent } from 'ag-grid-community';
 import { of } from 'rxjs';
+import { LangService } from 'utils';
 import { Mock, describe, expect, it, vi } from 'vitest';
-import { LangService } from '../../services/lang.service';
 import { GridComponent } from './grid.component';
 import { GridService } from './grid.service';
 

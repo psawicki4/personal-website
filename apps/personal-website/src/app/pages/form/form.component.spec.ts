@@ -6,8 +6,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TranslocoService } from '@jsverse/transloco';
 import { Subject, of } from 'rxjs';
+import { LangService } from 'utils';
 import { Mock, describe, expect, it, vi } from 'vitest';
-import { LangService } from '../../services/lang.service';
 import { DogDialog, FormComponent } from './form.component';
 
 describe('FormComponent', () => {

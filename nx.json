@@ -12,7 +12,8 @@
       "!{projectRoot}/**/*.cy.[jt]s?(x)",
       "!{projectRoot}/cypress.config.[jt]s",
       "!{projectRoot}/.eslintrc.json",
-      "!{projectRoot}/eslint.config.mjs"
+      "!{projectRoot}/eslint.config.mjs",
+      "!{projectRoot}/**/?(*.)+(spec|test).[jt]s?(x)?(.snap)"
     ]
   },
   "targetDefaults": {
@@ -24,6 +25,10 @@
     "test": {
       "inputs": ["default", "^production", "{workspaceRoot}/karma.conf.js"],
       "cache": true
+    },
+    "@nx/vitest:test": {
+      "cache": true,
+      "inputs": ["default", "^production"]
     }
   },
   "plugins": [
@@ -43,5 +48,14 @@
       }
     }
   ],
-  "nxCloudId": "6977808e64105c81355d51a6"
+  "nxCloudId": "6977808e64105c81355d51a6",
+  "generators": {
+    "@nx/angular:library": {
+      "linter": "eslint",
+      "unitTestRunner": "vitest-analog"
+    },
+    "@nx/angular:component": {
+      "style": "css"
+    }
+  }
 }

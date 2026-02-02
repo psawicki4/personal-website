@@ -3,7 +3,7 @@ import { MatSidenav, MatSidenavContainer, MatSidenavContent } from '@angular/mat
 import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './components/header/header.component';
 import { MenuComponent } from './components/menu/menu.component';
-import { LangService } from './services/lang.service';
+import { LangService } from 'utils';
 
 @Component({
   selector: 'psa-root',
