@@ -22,7 +22,7 @@ import { TranslocoDirective, TranslocoService } from '@jsverse/transloco';
 import dayjs from 'dayjs';
 import { Subject, take, takeUntil } from 'rxjs';
 import { LangService } from 'utils';
-import { CardComponent } from '../../components/card/card.component';
+import { CardComponent } from 'personal-website-components';
 import { ageBirthdayValidator } from './age-birthday-validator';
 import { CatOption, DemoForm } from './form.type';
 import { OnlyDigitsDirective } from './only-digits.directive';

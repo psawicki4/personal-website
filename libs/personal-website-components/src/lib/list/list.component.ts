@@ -12,10 +12,10 @@ import {
 } from '@angular/core';
 import { MatRipple } from '@angular/material/core';
 import { auditTime, filter, map, pairwise, Subscription } from 'rxjs';
-import { ListItemTemplateDirective } from './list-item-template.directive';
+import { ListItemTemplateDirective } from 'utils';
 
 @Component({
-  selector: 'psa-list',
+  selector: 'lib-list',
   imports: [CdkVirtualScrollViewport, CdkFixedSizeVirtualScroll, CdkVirtualForOf, NgClass, NgTemplateOutlet, MatRipple],
   templateUrl: './list.component.html',
   styleUrl: './list.component.scss',

@@ -1,11 +1,11 @@
-import { Directive, ElementRef, HostListener } from '@angular/core';
+import { Directive, ElementRef, HostListener, inject } from '@angular/core';
 
 @Directive({
-  selector: '[reverseMail]',
+  selector: '[libReverseMail]',
   standalone: true,
 })
 export class ReverseMailDirective {
-  constructor(private readonly el: ElementRef) {}
+  el = inject(ElementRef);
 
   @HostListener('copy', ['$event'])
   copyMail(e: ClipboardEvent) {

@@ -6,9 +6,9 @@ import { CardComponent } from './card.component';
 
 @Component({
   template: `
-    <psa-card>
+    <lib-card>
       <div data-testid="test-content">Test Content</div>
-    </psa-card>
+    </lib-card>
   `,
   imports: [CardComponent],
 })

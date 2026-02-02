@@ -5,7 +5,7 @@ import { TranslocoDirective } from '@jsverse/transloco';
 import { ReverseMailDirective } from './reverse-mail.directive';
 
 @Component({
-  selector: 'psa-contact-dialog',
+  selector: 'lib-contact-dialog',
   imports: [
     MatDialogContent,
     MatDialogTitle,

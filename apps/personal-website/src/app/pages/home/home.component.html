@@ -1,5 +1,5 @@
 <ng-container *transloco="let t; prefix: 'HOME'">
-  <psa-card class="h-full">
+  <lib-card class="h-full">
     <div class="flex flex-col md:flex-row h-full">
       <div class="max-md:max-w-xs md:flex-none">
         <h1 class="text-3xl mb-1">{{ t('hello') }}</h1>
@@ -41,9 +41,9 @@
       </div>
       <div class="min-h-[182px] md:flex-1">
         @defer {
-          <psa-home-three></psa-home-three>
+          <lib-home-three></lib-home-three>
         }
       </div>
     </div>
-  </psa-card>
+  </lib-card>
 </ng-container>

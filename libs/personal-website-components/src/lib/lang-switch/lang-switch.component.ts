@@ -4,7 +4,7 @@ import { TranslocoService } from '@jsverse/transloco';
 import { LangService } from 'utils';
 
 @Component({
-  selector: 'psa-lang-switch',
+  selector: 'lib-lang-switch',
   imports: [MatButton],
   templateUrl: './lang-switch.component.html',
   styleUrl: './lang-switch.component.scss',

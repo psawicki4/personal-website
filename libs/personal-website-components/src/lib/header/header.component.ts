@@ -8,7 +8,7 @@ import { ContactDialogComponent } from '../contact-dialog/contact-dialog.compone
 import { LangSwitchComponent } from '../lang-switch/lang-switch.component';
 
 @Component({
-  selector: 'psa-header',
+  selector: 'lib-header',
   imports: [LangSwitchComponent, MatButton, MatIcon, MatIconButton, MatToolbar, TranslocoDirective],
   templateUrl: './header.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,

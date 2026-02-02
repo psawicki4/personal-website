@@ -4,7 +4,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 import { TranslocoDirective } from '@jsverse/transloco';
 
 @Component({
-  selector: 'psa-menu',
+  selector: 'lib-menu',
   imports: [MatNavList, MatListItem, RouterLink, RouterLinkActive, TranslocoDirective],
   templateUrl: './menu.component.html',
   styleUrl: './menu.component.scss',

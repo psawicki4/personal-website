@@ -5,7 +5,7 @@ import { MeshoptDecoder } from 'three/examples/jsm/libs/meshopt_decoder.module.j
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 
 @Component({
-  selector: 'psa-home-three',
+  selector: 'lib-home-three',
   imports: [],
   templateUrl: './home-three.component.html',
   styleUrl: './home-three.component.scss',

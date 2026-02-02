@@ -1,18 +1,18 @@
 <ng-container *transloco="let t; prefix: 'LIST'">
-  <psa-card>
+  <lib-card>
     <h1 class="text-3xl mb-6">{{ t('header') }}</h1>
     <div class="flex flex-col gap-4 items-center">
       <p class="mb-4">{{ t('component-desc') }}</p>
       <p class="text-lg">{{ t('hello') }}</p>
       <div class="flex flex-col md:flex-row gap-16">
         <div class="psa-list">
-          <psa-list
+          <lib-list
             [data]="store.entities()"
             [itemHeight]="72"
             (fetchMore)="fetchMoreRooms()"
             (selected)="selectRoom($event)"
           >
-            <ng-template listItemTemplate let-dataItem>
+            <ng-template libListItemTemplate let-dataItem>
               <span class="flex flex-row justify-between items-center">
                 <p [ngClass]="dataItem.id === 666 ? 'hell' : ''">{{ t('room-number') }} {{ dataItem.id }}</p>
                 @if (dataItem.booked) {
@@ -20,12 +20,12 @@
                 }
               </span>
             </ng-template>
-          </psa-list>
+          </lib-list>
         </div>
         <div class="flex flex-col gap-4 w-72">
           <p>{{ t('selected-room') }}</p>
           @if (store.selectedRoom(); as selected) {
-            <psa-card>
+            <lib-card>
               <p class="mb-4">{{ t('room-nr') }} {{ selected.id }}</p>
               <span class="flex flex-row gap-4">
                 @if (!selected.booked) {
@@ -38,13 +38,13 @@
                   </button>
                 }
               </span>
-            </psa-card>
+            </lib-card>
           }
         </div>
         <div class="flex flex-col gap-4 w-56">
           <p>{{ t('your-reservations') }}</p>
           @if (store.bookedRooms().length > 0) {
-            <psa-card>
+            <lib-card>
               @for (room of store.bookedRooms(); track room.id) {
                 <div class="flex flex-row items-center">
                   <p class="text-base w-28">{{ t('room-nr') }} {{ room.id }}</p>
@@ -53,10 +53,10 @@
                   </button>
                 </div>
               }
-            </psa-card>
+            </lib-card>
           }
         </div>
       </div>
     </div>
-  </psa-card>
+  </lib-card>
 </ng-container>

@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { MatAnchor } from '@angular/material/button';
 import { TranslocoDirective } from '@jsverse/transloco';
-import { CardComponent } from '../../components/card/card.component';
-import { HomeThreeComponent } from '../../components/home-three/home-three.component';
+import { CardComponent } from 'personal-website-components';
+import { HomeThreeComponent } from 'personal-website-components';
 
 @Component({
   selector: 'psa-home',

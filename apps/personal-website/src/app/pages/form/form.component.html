@@ -1,5 +1,5 @@
 <ng-container *transloco="let t; prefix: 'FORM'">
-  <psa-card>
+  <lib-card>
     <h1 class="text-3xl mb-6">{{ t('header') }}</h1>
     <p class="mb-8 md:hidden">{{ t('component-desc-mobile') }}</p>
     <p class="mb-8 max-md:hidden">{{ t('component-desc-desktop') }}</p>
@@ -139,5 +139,5 @@
         <pre class="wrap-anywhere whitespace-pre-wrap">{{ form.getRawValue() | json }}</pre>
       </div>
     </div>
-  </psa-card>
+  </lib-card>
 </ng-container>

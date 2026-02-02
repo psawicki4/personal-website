@@ -26,7 +26,7 @@ import {
 } from 'ag-grid-community';
 import { finalize } from 'rxjs';
 import { LangService } from 'utils';
-import { CardComponent } from '../../components/card/card.component';
+import { CardComponent } from 'personal-website-components';
 import { CountriesStore } from './countries.store';
 import { GridService } from './grid.service';
 

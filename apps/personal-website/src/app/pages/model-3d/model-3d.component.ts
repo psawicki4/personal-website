@@ -16,7 +16,7 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { MeshoptDecoder } from 'three/examples/jsm/libs/meshopt_decoder.module.js';
-import { CardComponent } from '../../components/card/card.component';
+import { CardComponent } from 'personal-website-components';
 
 @Component({
   selector: 'psa-model-3d',

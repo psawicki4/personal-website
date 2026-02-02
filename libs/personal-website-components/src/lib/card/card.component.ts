@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
-  selector: 'psa-card',
+  selector: 'lib-card',
   imports: [],
   templateUrl: './card.component.html',
   styleUrl: './card.component.scss',
