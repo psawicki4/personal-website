@@ -3,9 +3,8 @@ import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/cor
 import { MatButton, MatIconButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { TranslocoDirective } from '@jsverse/transloco';
-import { CardComponent } from 'personal-website-components';
+import { CardComponent, ListComponent } from 'personal-website-components';
 import { ListItemTemplateDirective } from 'utils';
-import { ListComponent } from 'personal-website-components';
 import { Room } from './room.type';
 import { RoomsStore } from './rooms.store';
 

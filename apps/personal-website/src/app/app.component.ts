@@ -1,8 +1,7 @@
 import { afterNextRender, Component, inject } from '@angular/core';
 import { MatSidenav, MatSidenavContainer, MatSidenavContent } from '@angular/material/sidenav';
 import { RouterOutlet } from '@angular/router';
-import { HeaderComponent } from 'personal-website-components';
-import { MenuComponent } from 'personal-website-components';
+import { HeaderComponent, MenuComponent } from 'personal-website-components';
 import { LangService } from 'utils';
 
 @Component({
