@@ -61,6 +61,7 @@ export class HomeThreeComponent implements AfterViewInit, OnDestroy {
     this.controls.dampingFactor = 0.05;
     this.controls.minDistance = 1.5;
     this.controls.maxDistance = 10;
+    this.controls.enablePan = false;
 
     this.loadModel();
 

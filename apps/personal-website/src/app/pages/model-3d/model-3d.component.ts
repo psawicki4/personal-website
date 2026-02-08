@@ -12,11 +12,11 @@ import { MatButton } from '@angular/material/button';
 import { MatSlideToggle, MatSlideToggleChange } from '@angular/material/slide-toggle';
 import { MatSliderModule } from '@angular/material/slider';
 import { TranslocoDirective, TranslocoService } from '@jsverse/transloco';
+import { CardComponent } from 'personal-website-components';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { MeshoptDecoder } from 'three/examples/jsm/libs/meshopt_decoder.module.js';
-import { CardComponent } from 'personal-website-components';
 
 @Component({
   selector: 'psa-model-3d',
@@ -103,6 +103,7 @@ export class Model3DComponent implements OnDestroy {
     this.controls.dampingFactor = 0.05;
     this.controls.minDistance = 1.5;
     this.controls.maxDistance = 10;
+    this.controls.enablePan = false;
 
     this.loadModel();
 
