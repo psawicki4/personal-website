@@ -38,6 +38,13 @@ jobs:
       - run: npx cypress install
       - uses: nrwl/nx-set-shas@v4
 
+      - name: Inject API Key
+        run: |
+          sed -i "s/TO_REPLACE/${{ secrets.GEMINI_API_KEY }}/g" src/environments/environment.ts
+
+      - name: Build
+        run: npm run build --configuration=production
+
       # Prepend any command with "nx-cloud record --" to record its logs to Nx Cloud
       # - run: npx nx-cloud record -- echo Hello World
       # When you enable task distribution, run the e2e-ci task instead of e2e
