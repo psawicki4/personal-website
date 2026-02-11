@@ -36,11 +36,11 @@ jobs:
       - run: npx cypress install
       - uses: nrwl/nx-set-shas@v4
 
-        env:
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
 
       - name: Build
         run: npm run build --configuration=production
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
 
       # Prepend any command with "nx-cloud record --" to record its logs to Nx Cloud
       # - run: npx nx-cloud record -- echo Hello World
