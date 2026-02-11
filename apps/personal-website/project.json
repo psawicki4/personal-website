@@ -40,8 +40,12 @@
     }
   },
   "targets": {
+    "inject-env": {
+      "command": "node tools/scripts/inject-api-key.mjs"
+    },
     "build": {
       "executor": "@angular/build:application",
+      "dependsOn": ["inject-env"],
       "options": {
         "outputPath": "dist/apps/personal-website",
         "index": "apps/personal-website/src/1index1.html",
@@ -82,14 +86,6 @@
           "optimization": false,
           "extractLicenses": false,
           "sourceMap": true,
-          "fileReplacements": [
-            {
-              "replace": "apps/personal-website/src/environments/environment.ts",
-              "with": "apps/personal-website/src/environments/environment.development.ts"
-            }
-          ]
-        },
-        "e2e": {
           "fileReplacements": [
             {
               "replace": "apps/personal-website/src/environments/environment.ts",

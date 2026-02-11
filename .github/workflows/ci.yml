@@ -5,8 +5,6 @@ env:
 
 on:
   push:
-    branches:
-      - main
   pull_request:
 
 permissions:
@@ -38,9 +36,8 @@ jobs:
       - run: npx cypress install
       - uses: nrwl/nx-set-shas@v4
 
-      - name: Inject API Key
-        run: |
-          sed -i "s/TO_REPLACE/${{ secrets.GEMINI_API_KEY }}/g" src/environments/environment.ts
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
 
       - name: Build
         run: npm run build --configuration=production
