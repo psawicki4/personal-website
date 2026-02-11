@@ -117,6 +117,7 @@
     },
     "test": {
       "executor": "@angular/build:unit-test",
+      "dependsOn": ["inject-env"],
       "options": {
         "tsConfig": "apps/personal-website/tsconfig.spec.json",
         "runner": "vitest",
