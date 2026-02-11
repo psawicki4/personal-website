@@ -38,9 +38,9 @@ jobs:
 
 
       - name: Build
-        run: npm run build --configuration=production
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: npm run build --configuration=production
 
       # Prepend any command with "nx-cloud record --" to record its logs to Nx Cloud
       # - run: npx nx-cloud record -- echo Hello World
