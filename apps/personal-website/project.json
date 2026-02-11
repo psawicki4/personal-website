@@ -88,6 +88,14 @@
               "with": "apps/personal-website/src/environments/environment.development.ts"
             }
           ]
+        },
+        "e2e": {
+          "fileReplacements": [
+            {
+              "replace": "apps/personal-website/src/environments/environment.ts",
+              "with": "apps/personal-website/src/environments/environment.development.ts"
+            }
+          ]
         }
       },
       "defaultConfiguration": "production",

@@ -19,7 +19,8 @@
     "list": "Wirtualna Lista",
     "animations": "Animacje",
     "grid": "Zaawansowana Tabela",
-    "model-3d": "Wizualizacja 3D"
+    "model-3d": "Wizualizacja 3D",
+    "ai-assistant": "Asystent AI"
   },
   "CONTACT": {
     "contact": "Kontakt",
@@ -99,5 +100,9 @@
     "rotation": "Rotacja",
     "lighting": "Oświetlenie",
     "model-animation": "Animacja modelu"
+  },
+  "AI_ASSISTANT": {
+    "header": "Asystent AI",
+    "component-desc": "Interaktywny asystent AI wykorzystujący model Whisper do rozpoznawania mowy i ChatGPT do generowania odpowiedzi. Po kliknięciu przycisku mikrofonu, asystent zacznie nasłuchiwać Twojej wypowiedzi, a następnie przetworzy ją i odpowie w formie tekstowej."
   }
 }

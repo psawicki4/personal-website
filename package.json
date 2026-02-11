@@ -10,7 +10,7 @@
     "test": "nx test personal-website",
     "cy:open": "nx open-cypress personal-website",
     "server": "node dist/apps/personal-website/server/server.mjs",
-    "e2e:prod": "nx build personal-website && start-server-and-test server http://localhost:4200 \"npx cypress run --project apps/personal-website\"",
+    "e2e:prod": "nx build personal-website --configuration e2e && start-server-and-test server http://localhost:4200 \"npx cypress run --project apps/personal-website\"",
     "prepare": "husky"
   },
   "private": true,
@@ -30,6 +30,7 @@
     "@angular/router": "^21.1.0",
     "@angular/ssr": "^21.1.0",
     "@ctrl/tinycolor": "^4.2.0",
+    "@google/genai": "^1.40.0",
     "@jsverse/transloco": "^8.2.0",
     "@ngrx/signals": "^21.0.1",
     "@tailwindcss/postcss": "^4.1.18",
