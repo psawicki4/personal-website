@@ -100,5 +100,10 @@
     "rotation": "Rotation",
     "lighting": "Lighting",
     "model-animation": "Model animation"
+  },
+  "AI_ASSISTANT": {
+    "header": "AI Assistant",
+    "component-desc": "An interactive AI assistant leveraging the Whisper model for speech recognition and ChatGPT for generating responses. Upon clicking the microphone button, the assistant will start listening to your speech, then process it and respond in text form.",
+    "prompt": "You are an assistant for a visually impaired person. Briefly and naturally describe what is in the photo. Provide only a direct answer, without introductions and conclusions."
   }
 }

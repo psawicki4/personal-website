@@ -1,27 +1,22 @@
-import {
-  afterNextRender,
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  Component,
-  ElementRef,
-  inject,
-  viewChild,
-} from '@angular/core';
+import { afterNextRender, ChangeDetectionStrategy, Component, ElementRef, inject, viewChild } from '@angular/core';
 import { MatButton } from '@angular/material/button';
 import { TranslocoDirective } from '@jsverse/transloco';
+import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
 import { CardComponent } from 'personal-website-components';
 import { GeminiService } from './gemini.service';
 
 @Component({
   selector: 'psa-ai-assistant',
-  imports: [CardComponent, TranslocoDirective, MatButton],
+  imports: [CardComponent, TranslocoDirective, MatButton, NgxSpinnerModule],
   templateUrl: './ai-assistant.component.html',
   styleUrl: './ai-assistant.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AiAssistantComponent {
   videoRef = viewChild.required<ElementRef<HTMLVideoElement>>('video');
+  audioPlayerRef = viewChild.required<ElementRef<HTMLAudioElement>>('audioPlayer');
   geminiService = inject(GeminiService);
+  spinner = inject(NgxSpinnerService);
 
   constructor() {
     afterNextRender(() => {
@@ -39,8 +34,18 @@ export class AiAssistantComponent {
   }
 
   onCapture() {
-    this.geminiService.generateContent('asdasd').then((response) => {
-      console.log('Generated content:', response);
+    const canvas = document.createElement('canvas');
+    canvas.width = this.videoRef().nativeElement.videoWidth;
+    canvas.height = this.videoRef().nativeElement.videoHeight;
+
+    const ctx = canvas.getContext('2d');
+    ctx?.drawImage(this.videoRef().nativeElement, 0, 0);
+
+    const dataUrl = canvas.toDataURL('image/jpeg');
+    const base64Data = dataUrl.split(',')[1];
+    this.geminiService.generateContent(base64Data).then((response) => {
+      this.audioPlayerRef().nativeElement.src = `data:audio/wav;base64,${response}`;
+      this.audioPlayerRef().nativeElement.play();
     });
   }
 }

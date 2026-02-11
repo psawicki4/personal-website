@@ -1,4 +1,6 @@
 <ng-container *transloco="let t; prefix: 'AI_ASSISTANT'">
+  <ngx-spinner type="ball-scale-multiple" [showSpinner]="geminiService.isLoading()"></ngx-spinner>
+  <audio #audioPlayer></audio>
   <lib-card class="h-full">
     <div class="flex flex-col h-full">
       <h1 class="text-3xl mb-6">{{ t('header') }}</h1>

@@ -103,6 +103,7 @@
   },
   "AI_ASSISTANT": {
     "header": "Asystent AI",
-    "component-desc": "Interaktywny asystent AI wykorzystujący model Whisper do rozpoznawania mowy i ChatGPT do generowania odpowiedzi. Po kliknięciu przycisku mikrofonu, asystent zacznie nasłuchiwać Twojej wypowiedzi, a następnie przetworzy ją i odpowie w formie tekstowej."
+    "component-desc": "Interaktywny asystent AI wykorzystujący model Whisper do rozpoznawania mowy i ChatGPT do generowania odpowiedzi. Po kliknięciu przycisku mikrofonu, asystent zacznie nasłuchiwać Twojej wypowiedzi, a następnie przetworzy ją i odpowie w formie tekstowej.",
+    "prompt": "Jesteś asystentem osoby niedowidzącej. Opisz zwięźle i naturalnie co znajduje się na zdjęciu. Podaj tylko bezpośrednią odpowiedź, bez wstępów i zakończeń."
   }
 }
