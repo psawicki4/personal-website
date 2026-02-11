@@ -27,7 +27,7 @@ export class AiAssistantComponent {
 
   async getCameraStream() {
     try {
-      const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+      const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } });
       this.videoRef().nativeElement.srcObject = stream;
     } catch (error) {
       console.error('Error accessing camera:', error);
