@@ -4,6 +4,7 @@ import { TranslocoDirective } from '@jsverse/transloco';
 import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
 import { CardComponent } from 'personal-website-components';
 import { GeminiService } from './gemini.service';
+import { LangService } from 'utils';
 
 @Component({
   selector: 'psa-ai-assistant',
@@ -14,9 +15,9 @@ import { GeminiService } from './gemini.service';
 })
 export class AiAssistantComponent {
   videoRef = viewChild.required<ElementRef<HTMLVideoElement>>('video');
-  audioPlayerRef = viewChild.required<ElementRef<HTMLAudioElement>>('audioPlayer');
   geminiService = inject(GeminiService);
   spinner = inject(NgxSpinnerService);
+  langService = inject(LangService);
 
   constructor() {
     afterNextRender(() => {
@@ -41,11 +42,16 @@ export class AiAssistantComponent {
     const ctx = canvas.getContext('2d');
     ctx?.drawImage(this.videoRef().nativeElement, 0, 0);
 
-    const dataUrl = canvas.toDataURL('image/jpeg');
+    const dataUrl = canvas.toDataURL('image/jpeg', 0.8);
     const base64Data = dataUrl.split(',')[1];
-    this.geminiService.generateContent(base64Data).then((response) => {
-      this.audioPlayerRef().nativeElement.src = `data:audio/wav;base64,${response}`;
-      this.audioPlayerRef().nativeElement.play();
+    this.geminiService.generateContent(base64Data).then((text) => {
+      this.speak(text);
     });
+  }
+
+  speak(text: string) {
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = this.langService.lang();
+    window.speechSynthesis.speak(utterance);
   }
 }

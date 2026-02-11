@@ -103,7 +103,10 @@
   },
   "AI_ASSISTANT": {
     "header": "AI Assistant",
-    "component-desc": "An interactive AI assistant leveraging the Whisper model for speech recognition and ChatGPT for generating responses. Upon clicking the microphone button, the assistant will start listening to your speech, then process it and respond in text form.",
-    "prompt": "You are an assistant for a visually impaired person. Briefly and naturally describe what is in the photo. Provide only a direct answer, without introductions and conclusions."
+    "component-desc": "An advanced AI assistant integrating the Gemini multimodal model for real-time image analysis. The component utilizes the Web Camera API to capture surroundings and provides instant audio feedback through Speech Synthesis, demonstrating the capabilities of modern AI in enhancing web accessibility.",
+    "prompt": "You are an assistant for a visually impaired person. Briefly and naturally describe what is in the photo. Provide only a direct answer, without introductions and conclusions.",
+    "capture": "Describe what you see",
+    "loading": "Processing the image, please wait...",
+    "content-error": "Sorry, an error occurred while generating the description."
   }
 }

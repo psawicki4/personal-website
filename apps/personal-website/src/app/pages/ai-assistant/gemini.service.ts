@@ -11,12 +11,12 @@ export class GeminiService {
   isLoading = signal<boolean>(false);
   transloco = inject(TranslocoService);
 
-  async generateContent(base64Image: string) {
+  async generateContent(base64Image: string): Promise<string> {
     this.isLoading.set(true);
     const prompt = this.transloco.translate('AI_ASSISTANT.prompt');
     try {
       const response = await this.ai.models.generateContent({
-        model: 'gemini-2.5-flash',
+        model: 'gemini-3-flash-preview',
         contents: [
           { text: prompt },
           {
@@ -27,24 +27,10 @@ export class GeminiService {
           },
         ],
       });
-      const ttsResponse = await this.ai.models.generateContent({
-        model: 'gemini-2.5-flash-preview-tts',
-        contents: [{ parts: [{ text: response.text }] }],
-        config: {
-          responseModalities: ['AUDIO'],
-          speechConfig: {
-            voiceConfig: {
-              prebuiltVoiceConfig: { voiceName: 'Kore' },
-            },
-          },
-        },
-      });
-
-      const data = ttsResponse.candidates?.[0]?.content?.parts?.[0]?.inlineData?.data;
-      return data;
+      return response.text || this.transloco.translate('AI_ASSISTANT.content-error');
     } catch (error) {
       console.error('Error generating content:', error);
-      return 'Przepraszam, wystąpił błąd podczas generowania opisu.';
+      return this.transloco.translate('AI_ASSISTANT.content-error');
     } finally {
       this.isLoading.set(false);
     }
