@@ -1,14 +1,13 @@
 import { afterNextRender, ChangeDetectionStrategy, Component, ElementRef, inject, viewChild } from '@angular/core';
 import { MatButton } from '@angular/material/button';
 import { TranslocoDirective } from '@jsverse/transloco';
-import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
-import { CardComponent } from 'personal-website-components';
-import { GeminiService } from './gemini.service';
+import { CardComponent, SpinnerOverlayComponent } from 'personal-website-components';
 import { LangService } from 'utils';
+import { GeminiService } from './gemini.service';
 
 @Component({
   selector: 'psa-ai-assistant',
-  imports: [CardComponent, TranslocoDirective, MatButton, NgxSpinnerModule],
+  imports: [CardComponent, TranslocoDirective, MatButton, SpinnerOverlayComponent],
   templateUrl: './ai-assistant.component.html',
   styleUrl: './ai-assistant.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -16,7 +15,6 @@ import { LangService } from 'utils';
 export class AiAssistantComponent {
   videoRef = viewChild.required<ElementRef<HTMLVideoElement>>('video');
   geminiService = inject(GeminiService);
-  spinner = inject(NgxSpinnerService);
   langService = inject(LangService);
 
   constructor() {
@@ -27,7 +25,13 @@ export class AiAssistantComponent {
 
   async getCameraStream() {
     try {
-      const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } });
+      const stream = await navigator.mediaDevices.getUserMedia({
+        video: {
+          facingMode: 'environment',
+          width: { ideal: 1920 },
+          height: { ideal: 1080 },
+        },
+      });
       this.videoRef().nativeElement.srcObject = stream;
     } catch (error) {
       console.error('Error accessing camera:', error);

@@ -54,10 +54,7 @@
         "tsConfig": "apps/personal-website/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
         "assets": ["apps/personal-website/src/favicon.ico", "apps/personal-website/src/assets"],
-        "styles": [
-          "apps/personal-website/src/styles.scss",
-          "node_modules/ngx-spinner/animations/ball-scale-multiple.css"
-        ],
+        "styles": ["apps/personal-website/src/styles.scss"],
         "stylePreprocessorOptions": {
           "includePaths": ["apps/personal-website/src/styles"]
         },

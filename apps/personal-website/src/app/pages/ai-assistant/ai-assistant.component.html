@@ -1,5 +1,5 @@
 <ng-container *transloco="let t; prefix: 'AI_ASSISTANT'">
-  <ngx-spinner type="ball-scale-multiple" [showSpinner]="geminiService.isLoading()">{{ t('loading') }}</ngx-spinner>
+  <lib-spinner-overlay [show]="geminiService.isLoading()">{{ t('loading') }}</lib-spinner-overlay>
   <lib-card class="h-full">
     <div class="flex flex-col gap-4 h-full">
       <h1 class="text-3xl mb-6">{{ t('header') }}</h1>
