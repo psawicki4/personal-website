@@ -1,14 +1,13 @@
 import { afterNextRender, ChangeDetectionStrategy, Component, ElementRef, inject, viewChild } from '@angular/core';
 import { MatButton } from '@angular/material/button';
 import { TranslocoDirective } from '@jsverse/transloco';
-import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
-import { CardComponent } from 'personal-website-components';
-import { GeminiService } from './gemini.service';
+import { CardComponent, SpinnerOverlayComponent } from 'personal-website-components';
 import { LangService } from 'utils';
+import { GeminiService } from './gemini.service';
 
 @Component({
   selector: 'psa-ai-assistant',
-  imports: [CardComponent, TranslocoDirective, MatButton, NgxSpinnerModule],
+  imports: [CardComponent, TranslocoDirective, MatButton, SpinnerOverlayComponent],
   templateUrl: './ai-assistant.component.html',
   styleUrl: './ai-assistant.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -16,7 +15,6 @@ import { LangService } from 'utils';
 export class AiAssistantComponent {
   videoRef = viewChild.required<ElementRef<HTMLVideoElement>>('video');
   geminiService = inject(GeminiService);
-  spinner = inject(NgxSpinnerService);
   langService = inject(LangService);
 
   constructor() {
@@ -27,7 +25,13 @@ export class AiAssistantComponent {
 
   async getCameraStream() {
     try {
-      const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } });
+      const stream = await navigator.mediaDevices.getUserMedia({
+        video: {
+          facingMode: 'environment',
+          width: { ideal: 1280 },
+          height: { ideal: 720 },
+        },
+      });
       this.videoRef().nativeElement.srcObject = stream;
     } catch (error) {
       console.error('Error accessing camera:', error);
@@ -35,6 +39,7 @@ export class AiAssistantComponent {
   }
 
   onCapture() {
+    this.videoRef().nativeElement.pause();
     const canvas = document.createElement('canvas');
     canvas.width = this.videoRef().nativeElement.videoWidth;
     canvas.height = this.videoRef().nativeElement.videoHeight;
@@ -46,12 +51,13 @@ export class AiAssistantComponent {
     const base64Data = dataUrl.split(',')[1];
     this.geminiService.generateContent(base64Data).then((text) => {
       this.speak(text);
+      this.videoRef().nativeElement.play();
     });
   }
 
   speak(text: string) {
     const utterance = new SpeechSynthesisUtterance(text);
     utterance.lang = this.langService.lang();
-    window.speechSynthesis.speak(utterance);
+    globalThis.speechSynthesis.speak(utterance);
   }
 }

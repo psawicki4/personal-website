@@ -1,5 +1,5 @@
-import { readFileSync, writeFileSync } from 'fs';
-import { join } from 'path';
+import { readFileSync, writeFileSync } from 'node:fs';
+import { join } from 'node:path';
 
 const envFilePath = join(process.cwd(), 'apps/personal-website/src/environments/environment.ts');
 const apiKey = process.env.GEMINI_API_KEY;

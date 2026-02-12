@@ -103,7 +103,7 @@
   },
   "AI_ASSISTANT": {
     "header": "Asystent AI",
-    "component-desc": "Zaawansowany asystent AI integrujący multimodalny model Gemini do analizy obrazu w czasie rzeczywistym. Komponent wykorzystuje Web Camera API do przechwytywania otoczenia i zapewnia natychmiastową informację głosową poprzez Speech Synthesis, demonstrując możliwości nowoczesnej sztucznej inteligencji w zwiększaniu dostępności cyfrowej.",
+    "component-desc": "Zaawansowany asystent AI integrujący multimodalny model Gemini do analizy obrazu w czasie rzeczywistym. Komponent wykorzystuje Web Camera API do przechwytywania otoczenia i zapewnia informację głosową poprzez Speech Synthesis, demonstrując możliwości nowoczesnej sztucznej inteligencji w zwiększaniu dostępności cyfrowej.",
     "prompt": "Jesteś asystentem osoby niedowidzącej. Opisz zwięźle i naturalnie co znajduje się na zdjęciu. Podaj tylko bezpośrednią odpowiedź, bez wstępów i zakończeń.",
     "capture": "Opisz co widzisz",
     "loading": "Przetwarzanie obrazu...",
