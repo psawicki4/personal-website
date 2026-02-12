@@ -40,5 +40,13 @@
       (click)="onClick()"
       >{{ t('model-3d') }}</a
     >
+    <a
+      mat-list-item
+      routerLink="/ai-assistant"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+      (click)="onClick()"
+      >{{ t('ai-assistant') }}</a
+    >
   </mat-nav-list>
 </ng-container>

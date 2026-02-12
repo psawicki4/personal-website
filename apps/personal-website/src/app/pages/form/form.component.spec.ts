@@ -3,7 +3,6 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TranslocoService } from '@jsverse/transloco';
 import { Subject, of } from 'rxjs';
 import { LangService } from 'utils';
@@ -34,7 +33,7 @@ describe('FormComponent', () => {
     snackBarSpy = { open: vi.fn() };
 
     TestBed.configureTestingModule({
-      imports: [FormComponent, BrowserAnimationsModule],
+      imports: [FormComponent],
       providers: [
         provideZonelessChangeDetection(),
         { provide: MatDialog, useValue: dialogSpy },

@@ -21,4 +21,8 @@ export const routes: Routes = [
     path: 'model-3d',
     loadComponent: () => import('./pages/model-3d/model-3d.component').then((mod) => mod.Model3DComponent),
   },
+  {
+    path: 'ai-assistant',
+    loadComponent: () => import('./pages/ai-assistant/ai-assistant.component').then((mod) => mod.AiAssistantComponent),
+  },
 ];

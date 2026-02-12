@@ -40,8 +40,12 @@
     }
   },
   "targets": {
+    "inject-env": {
+      "command": "node tools/scripts/inject-api-key.mjs"
+    },
     "build": {
       "executor": "@angular/build:application",
+      "dependsOn": ["inject-env"],
       "options": {
         "outputPath": "dist/apps/personal-website",
         "index": "apps/personal-website/src/1index1.html",

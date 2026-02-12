@@ -2,11 +2,10 @@ name: CI
 
 env:
   NX_CLOUD_ACCESS_TOKEN: ${{ secrets.NX_CLOUD_ACCESS_TOKEN }}
+  GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
 
 on:
   push:
-    branches:
-      - main
   pull_request:
 
 permissions:
@@ -38,9 +37,6 @@ jobs:
       - run: npx cypress install
       - uses: nrwl/nx-set-shas@v4
 
-      # Prepend any command with "nx-cloud record --" to record its logs to Nx Cloud
-      # - run: npx nx-cloud record -- echo Hello World
-      # When you enable task distribution, run the e2e-ci task instead of e2e
       - run: npx nx affected -t lint test build
       - name: E2E on Production Server
         run: |
