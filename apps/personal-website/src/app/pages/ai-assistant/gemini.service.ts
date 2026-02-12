@@ -7,7 +7,7 @@ import { environment } from '../../../environments/environment';
   providedIn: 'root',
 })
 export class GeminiService {
-  private ai = new GoogleGenAI({ apiKey: environment.geminiApiKey });
+  private readonly ai = new GoogleGenAI({ apiKey: environment.geminiApiKey });
   isLoading = signal<boolean>(false);
   transloco = inject(TranslocoService);
 

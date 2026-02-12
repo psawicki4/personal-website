@@ -56,6 +56,6 @@ export class AiAssistantComponent {
   speak(text: string) {
     const utterance = new SpeechSynthesisUtterance(text);
     utterance.lang = this.langService.lang();
-    window.speechSynthesis.speak(utterance);
+    globalThis.speechSynthesis.speak(utterance);
   }
 }
