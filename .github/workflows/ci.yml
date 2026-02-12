@@ -37,10 +37,6 @@ jobs:
       - run: npx cypress install
       - uses: nrwl/nx-set-shas@v4
 
-
-      - name: Build
-        run: npm run build --configuration=production
-
       - run: npx nx affected -t lint test build
       - name: E2E on Production Server
         run: |

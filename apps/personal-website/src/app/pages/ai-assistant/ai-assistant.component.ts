@@ -28,8 +28,8 @@ export class AiAssistantComponent {
       const stream = await navigator.mediaDevices.getUserMedia({
         video: {
           facingMode: 'environment',
-          width: { ideal: 1920 },
-          height: { ideal: 1080 },
+          width: { ideal: 1280 },
+          height: { ideal: 720 },
         },
       });
       this.videoRef().nativeElement.srcObject = stream;
@@ -39,6 +39,7 @@ export class AiAssistantComponent {
   }
 
   onCapture() {
+    this.videoRef().nativeElement.pause();
     const canvas = document.createElement('canvas');
     canvas.width = this.videoRef().nativeElement.videoWidth;
     canvas.height = this.videoRef().nativeElement.videoHeight;
@@ -50,12 +51,13 @@ export class AiAssistantComponent {
     const base64Data = dataUrl.split(',')[1];
     this.geminiService.generateContent(base64Data).then((text) => {
       this.speak(text);
+      this.videoRef().nativeElement.play();
     });
   }
 
   speak(text: string) {
     const utterance = new SpeechSynthesisUtterance(text);
     utterance.lang = this.langService.lang();
-    window.speechSynthesis.speak(utterance);
+    globalThis.speechSynthesis.speak(utterance);
   }
 }
