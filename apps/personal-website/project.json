@@ -43,6 +43,10 @@
     "inject-env": {
       "command": "node tools/scripts/inject-api-key.mjs"
     },
+    "build-clean": {
+      "dependsOn": ["build"],
+      "command": "node tools/scripts/cleanup-api-key.mjs"
+    },
     "build": {
       "executor": "@angular/build:application",
       "dependsOn": ["inject-env"],

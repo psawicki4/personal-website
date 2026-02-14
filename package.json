@@ -6,11 +6,12 @@
     "ng": "ng",
     "start": "nx serve personal-website",
     "build": "nx build personal-website",
+    "build-clean": "nx build-clean personal-website",
     "watch": "nx build personal-website --watch --configuration development",
     "test": "nx test personal-website",
     "cy:open": "nx open-cypress personal-website",
     "server": "node dist/apps/personal-website/server/server.mjs",
-    "e2e:prod": "nx build personal-website && start-server-and-test server http://localhost:4200 \"npx cypress run --project apps/personal-website\"",
+    "e2e:prod": "nx build-clean personal-website && start-server-and-test server http://localhost:4200 \"npx cypress run --project apps/personal-website\"",
     "prepare": "husky"
   },
   "private": true,
