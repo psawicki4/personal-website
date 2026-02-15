@@ -1,11 +1,11 @@
-import { provideZonelessChangeDetection } from '@angular/core';
+import { provideZonelessChangeDetection, signal } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { TranslocoService } from '@jsverse/transloco';
-import { Subject, of } from 'rxjs';
-import { LangService } from 'utils';
+import { Subject } from 'rxjs';
+import { LangService, createTranslocoMock } from 'utils';
 import { Mock, describe, expect, it, vi } from 'vitest';
 import { DogDialog, FormComponent } from './form.component';
 
@@ -15,14 +15,10 @@ describe('FormComponent', () => {
   let dialogSpy: { open: Mock; afterAllClosed: Subject<void> };
   let snackBarSpy: { open: Mock };
 
-  const translocoMock = {
-    translate: (key: string) => key,
-    selectTranslate: () => of((k: string) => k),
-    getActiveLang: () => 'pl',
-    setActiveLang: vi.fn(),
-    config: { defaultLang: 'pl', reRenderOnLangChange: true },
-    langChanges$: of('pl'),
-    _loadDependencies: () => of(null),
+  const translocoMock = createTranslocoMock();
+
+  const langServiceMock = {
+    lang: signal('pl'),
   };
 
   beforeEach(() => {
@@ -39,7 +35,7 @@ describe('FormComponent', () => {
         { provide: MatDialog, useValue: dialogSpy },
         { provide: MatSnackBar, useValue: snackBarSpy },
         { provide: TranslocoService, useValue: translocoMock },
-        LangService,
+        { provide: LangService, useValue: langServiceMock },
       ],
     });
 

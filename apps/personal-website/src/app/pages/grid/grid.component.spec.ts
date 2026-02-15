@@ -3,8 +3,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TranslocoService } from '@jsverse/transloco';
 import { GridApi, GridReadyEvent, StateUpdatedEvent } from 'ag-grid-community';
 import { of } from 'rxjs';
-import { LangService } from 'utils';
-import { Mock, describe, expect, it, vi } from 'vitest';
+import { createTranslocoMock, LangService } from 'utils';
+import { describe, expect, it, Mock, vi } from 'vitest';
 import { GridComponent } from './grid.component';
 import { GridService } from './grid.service';
 
@@ -13,15 +13,7 @@ describe('GridComponent', () => {
   let fixture: ComponentFixture<GridComponent>;
   let gridServiceSpy: { getCountries: Mock };
 
-  const translocoMock = {
-    translate: (key: string) => key,
-    selectTranslate: () => of((k: string) => k),
-    getActiveLang: () => 'pl',
-    setActiveLang: vi.fn(),
-    config: { defaultLang: 'pl', reRenderOnLangChange: true },
-    langChanges$: of('pl'),
-    _loadDependencies: () => of(null),
-  };
+  const translocoMock = createTranslocoMock();
 
   beforeEach(() => {
     Object.defineProperty(globalThis, 'matchMedia', {

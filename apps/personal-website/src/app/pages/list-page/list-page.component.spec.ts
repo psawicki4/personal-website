@@ -1,7 +1,7 @@
 import { provideZonelessChangeDetection } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { TranslocoService } from '@jsverse/transloco';
-import { of } from 'rxjs';
+import { createTranslocoMock } from 'utils';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { ListPageComponent } from './list-page.component';
 import { Room } from './room.type';
@@ -11,15 +11,7 @@ describe('ListPageComponent', () => {
   let component: ListPageComponent;
   let store: InstanceType<typeof RoomsStore>;
 
-  const translocoMock = {
-    translate: (key: string) => key,
-    selectTranslate: () => of((k: string) => k),
-    getActiveLang: () => 'pl',
-    setActiveLang: vi.fn(),
-    config: { defaultLang: 'pl', reRenderOnLangChange: true },
-    langChanges$: of('pl'),
-    _loadDependencies: () => of(null),
-  };
+  const translocoMock = createTranslocoMock();
 
   beforeEach(() => {
     TestBed.configureTestingModule({

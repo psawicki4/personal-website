@@ -30,4 +30,11 @@ export default [
     // Override or add rules here
     rules: {},
   },
+  {
+    files: ['**/*.spec.ts', '**/*.cy.ts', '**/test-setup.ts'],
+    rules: {
+      '@typescript-eslint/no-explicit-any': 'off',
+      '@typescript-eslint/no-empty-function': 'off',
+    },
+  },
 ];
