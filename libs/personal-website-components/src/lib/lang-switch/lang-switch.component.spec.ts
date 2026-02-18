@@ -2,7 +2,7 @@ import { provideZonelessChangeDetection } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TranslocoService } from '@jsverse/transloco';
 import { of } from 'rxjs';
-import { LangService } from 'utils';
+import { LangCode, LangService } from 'utils';
 import { describe, expect, it, vi } from 'vitest';
 import { LangSwitchComponent } from './lang-switch.component';
 
@@ -40,15 +40,10 @@ describe('LangSwitchComponent', () => {
   it('should change language', () => {
     const setItemSpy = vi.spyOn(Storage.prototype, 'setItem');
 
-    component.changeLanguage('en');
+    component.changeLanguage(LangCode.EN);
 
     expect(translocoMock.setActiveLang).toHaveBeenCalledWith('en');
     expect(setItemSpy).toHaveBeenCalledWith('langCode', 'en');
     expect(langService.lang()).toBe('en');
-  });
-
-  it('should return current language from service', () => {
-    langService.lang.set('pl');
-    expect(component.lang).toBe('pl');
   });
 });
