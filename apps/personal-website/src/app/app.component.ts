@@ -18,7 +18,7 @@ export class AppComponent {
 
   constructor() {
     afterNextRender(() => {
-      this.langService.setLanguage();
+      this.langService.initLanguage();
       injectAnalytics();
       injectSpeedInsights();
     });

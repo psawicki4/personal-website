@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { MatButton } from '@angular/material/button';
 import { TranslocoService } from '@jsverse/transloco';
-import { LangService } from 'utils';
+import { LangCode, LangService } from 'utils';
 
 @Component({
   selector: 'lib-lang-switch',
@@ -13,14 +13,9 @@ import { LangService } from 'utils';
 export class LangSwitchComponent {
   transloco = inject(TranslocoService);
   langService = inject(LangService);
+  LangCode = LangCode;
 
-  changeLanguage(langCode: string) {
-    this.transloco.setActiveLang(langCode);
-    localStorage.setItem('langCode', langCode);
-    this.langService.lang.set(langCode);
-  }
-
-  get lang() {
-    return this.langService.lang();
+  changeLanguage(langCode: LangCode) {
+    this.langService.setLanguage(langCode);
   }
 }
