@@ -21,10 +21,6 @@ export class ReverseMailDirective {
   }
 
   private revertText(text: string) {
-    let reversedText = '';
-    for (const i of text) {
-      reversedText = i + reversedText;
-    }
-    return reversedText;
+    return text.split('').reverse().join('');
   }
 }
