@@ -32,4 +32,5 @@ The live website is available at [psawicki.dev](https://psawicki.dev).
 - **Tests**: Cypress, Vitest
 - **3D**: three.js
 - **Data grid**: AG Grid
+- **AI**: Google Gen AI SDK
 - **Date/Time**: Day.js, Luxon (Material adapter)
