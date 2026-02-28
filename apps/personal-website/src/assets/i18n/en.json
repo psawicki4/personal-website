@@ -3,8 +3,8 @@
   "HOME": {
     "hello": "Hi there!",
     "my-name-is": "I'm",
-    "my-webpage": "I'm an Angular Developer. This platform serves as a technical playground showcasing modern web engineering patterns.",
-    "philosophy": "I specialize in building scalable Enterprise applications with a focus on clean architecture and high performance.",
+    "my-webpage": "As an Angular Developer, I build scalable enterprise-grade applications.",
+    "philosophy": "This site serves as a platform to implement and showcase the latest web standards, which I combine with a focus on clean architecture and peak code performance.",
     "repository": "Explore the codebase on GitHub:",
     "tools": "The tech stack behind this project:",
     "including": "including Signals, Standalone, SSR and Zone-less",
@@ -17,7 +17,6 @@
     "home": "Home",
     "form": "Dynamic Form",
     "list": "Virtual List",
-    "animations": "Animations",
     "grid": "Enterprise Grid",
     "model-3d": "3D Visualization",
     "ai-assistant": "AI Assistant"

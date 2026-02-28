@@ -3,8 +3,8 @@
   "HOME": {
     "hello": "Cześć!",
     "my-name-is": "Nazywam się",
-    "my-webpage": "Jestem programistą Angular, a to portfolio to poligon doświadczalny, na którym wdrażam najnowsze standardy webowe.",
-    "philosophy": "Tworzę skalowalne aplikacje Enterprise, dbając o czystą architekturę i maksymalną wydajność.",
+    "my-webpage": "Jako programista Angular buduję skalowalne aplikacje klasy Enterprise.",
+    "philosophy": "Niniejsza strona służy mi do implementacji i prezentacji najnowszych rozwiązań technologicznych, które łączę z dbałością o architekturę oraz maksymalną wydajność kodu.",
     "repository": "Kod źródłowy znajdziesz tutaj:",
     "tools": "Stack technologiczny tej aplikacji:",
     "including": "w tym Signals, Standalone, SSR i Zone-less",
@@ -17,7 +17,6 @@
     "home": "Start",
     "form": "Dynamiczny Formularz",
     "list": "Wirtualna Lista",
-    "animations": "Animacje",
     "grid": "Zaawansowana Tabela",
     "model-3d": "Wizualizacja 3D",
     "ai-assistant": "Asystent AI"
