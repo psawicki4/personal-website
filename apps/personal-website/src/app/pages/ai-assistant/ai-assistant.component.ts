@@ -1,4 +1,12 @@
-import { afterNextRender, ChangeDetectionStrategy, Component, ElementRef, inject, viewChild } from '@angular/core';
+import {
+  afterNextRender,
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  inject,
+  signal,
+  viewChild,
+} from '@angular/core';
 import { MatButton } from '@angular/material/button';
 import { TranslocoDirective } from '@jsverse/transloco';
 import { CardComponent, SpinnerOverlayComponent } from 'personal-website-components';
@@ -16,6 +24,7 @@ export class AiAssistantComponent {
   videoRef = viewChild.required<ElementRef<HTMLVideoElement>>('video');
   geminiService = inject(GeminiService);
   langService = inject(LangService);
+  cameraEnabled = signal(false);
 
   constructor() {
     afterNextRender(() => {
@@ -33,6 +42,7 @@ export class AiAssistantComponent {
         },
       });
       this.videoRef().nativeElement.srcObject = stream;
+      this.cameraEnabled.set(true);
     } catch (error) {
       console.error('Error accessing camera:', error);
     }
