@@ -11,11 +11,12 @@ export class LangService {
   transloco = inject(TranslocoService);
 
   initLanguage() {
-    this.transloco.setDefaultLang(LangCode.PL);
     const lang = localStorage.getItem('langCode') ?? globalThis.navigator?.language?.slice(0, 2);
     if (lang === LangCode.PL || lang === LangCode.EN) {
-      this.transloco.setActiveLang(lang);
-      this._lang.set(lang);
+      this.transloco.load(lang).subscribe(() => {
+        this.transloco.setActiveLang(lang);
+        this._lang.set(lang);
+      });
     } else {
       this._lang.set(LangCode.PL);
     }

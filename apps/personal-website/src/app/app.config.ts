@@ -21,6 +21,10 @@ export const appConfig: ApplicationConfig = {
       config: {
         availableLangs: ['pl', 'en'],
         defaultLang: 'pl',
+        fallbackLang: 'pl',
+        missingHandler: {
+          useFallbackTranslation: true,
+        },
         reRenderOnLangChange: true,
         prodMode: !isDevMode(),
       },
