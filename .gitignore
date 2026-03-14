@@ -53,3 +53,4 @@ vitest.config.*.timestamp*
 # Environment variables
 .env
 .env.local
+.nx/polygraph
