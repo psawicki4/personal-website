@@ -68,6 +68,9 @@
         "outputMode": "server",
         "ssr": {
           "entry": "apps/personal-website/src/server.ts"
+        },
+        "security": {
+          "allowedHosts": ["psawicki.dev", "localhost"]
         }
       },
       "configurations": {

@@ -10,7 +10,7 @@
       "executor": "@nx/vitest:test",
       "outputs": ["{options.reportsDirectory}"],
       "options": {
-        "reportsDirectory": "../../coverage/libs/personal-website-components"
+        "reportsDirectory": "{projectRoot}/../../coverage/libs/personal-website-components"
       }
     },
     "lint": {

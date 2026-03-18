@@ -53,3 +53,5 @@ vitest.config.*.timestamp*
 # Environment variables
 .env
 .env.local
+.claude/worktrees
+.claude/settings.local.json
