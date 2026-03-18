@@ -70,7 +70,7 @@
           "entry": "apps/personal-website/src/server.ts"
         },
         "security": {
-          "allowedHosts": ["psawicki.dev", "localhost"]
+          "allowedHosts": ["psawicki.dev", "www.psawicki.dev", "localhost"]
         }
       },
       "configurations": {
