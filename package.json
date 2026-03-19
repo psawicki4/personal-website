@@ -11,9 +11,8 @@
     "test": "nx test personal-website",
     "cy:open": "nx open-cypress personal-website",
     "server": "node dist/apps/personal-website/server/server.mjs",
-    "e2e:prod": "nx build-clean personal-website && start-server-and-test server http://localhost:4200 \"pnpx cypress run --project apps/personal-website\"",
-    "prepare": "husky",
-    "preinstall": "npx only-allow pnpm"
+    "e2e:prod": "nx build-clean personal-website && start-server-and-test server http://localhost:4200 \"pnpm exec cypress run --project apps/personal-website\"",
+    "prepare": "husky"
   },
   "private": true,
   "dependencies": {
