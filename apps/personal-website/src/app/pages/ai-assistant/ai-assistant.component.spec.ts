@@ -1,9 +1,8 @@
-import { signal } from '@angular/core';
+import { provideZonelessChangeDetection, signal } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { provideZonelessChangeDetection } from '@angular/core';
 import { TranslocoService } from '@jsverse/transloco';
 import { createTranslocoMock, LangService } from 'utils';
-import { describe, expect, it, vi, beforeEach, beforeAll } from 'vitest';
+import { beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
 import { AiAssistantComponent } from './ai-assistant.component';
 import { GeminiService } from './gemini.service';
 
@@ -19,19 +18,19 @@ describe('AiAssistantComponent', () => {
 
   beforeAll(() => {
     // Mock navigator.mediaDevices
-    if (typeof navigator !== 'undefined') {
+    if (typeof navigator === 'undefined') {
+      vi.stubGlobal('navigator', {
+        mediaDevices: {
+          getUserMedia: getUserMediaMock,
+        },
+      });
+    } else {
       Object.defineProperty(navigator, 'mediaDevices', {
         value: {
           getUserMedia: getUserMediaMock,
         },
         configurable: true,
         writable: true,
-      });
-    } else {
-      vi.stubGlobal('navigator', {
-        mediaDevices: {
-          getUserMedia: getUserMediaMock,
-        },
       });
     }
 
