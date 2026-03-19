@@ -11,8 +11,9 @@
     "test": "nx test personal-website",
     "cy:open": "nx open-cypress personal-website",
     "server": "node dist/apps/personal-website/server/server.mjs",
-    "e2e:prod": "nx build-clean personal-website && start-server-and-test server http://localhost:4200 \"npx cypress run --project apps/personal-website\"",
-    "prepare": "husky"
+    "e2e:prod": "nx build-clean personal-website && start-server-and-test server http://localhost:4200 \"pnpx cypress run --project apps/personal-website\"",
+    "prepare": "husky",
+    "preinstall": "npx only-allow pnpm"
   },
   "private": true,
   "dependencies": {
@@ -39,6 +40,7 @@
     "@vercel/analytics": "^2.0.1",
     "@vercel/speed-insights": "^2.0.0",
     "ag-grid-angular": "^35.1.0",
+    "ag-grid-community": "^35.1.0",
     "dayjs": "^1.11.20",
     "express": "^5.2.1",
     "husky": "^9.1.7",
@@ -66,8 +68,8 @@
     "@nx/workspace": "22.6.0",
     "@schematics/angular": "^21.2.3",
     "@swc-node/register": "1.11.1",
-    "@swc/core": "1.15.18",
-    "@swc/helpers": "0.5.19",
+    "@swc/core": "^1.15.18",
+    "@swc/helpers": "^0.5.19",
     "@types/express": "^5.0.6",
     "@types/jasmine": "~6.0.0",
     "@types/node": "^25.5.0",
