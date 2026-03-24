@@ -19,7 +19,8 @@
     "list": "Virtual List",
     "grid": "Enterprise Grid",
     "model-3d": "3D Visualization",
-    "ai-assistant": "AI Assistant"
+    "ai-assistant": "AI Assistant",
+    "diagram": "Diagram"
   },
   "CONTACT": {
     "contact": "Contact",
