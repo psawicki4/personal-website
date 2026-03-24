@@ -107,6 +107,6 @@
     "capture": "Describe what you see",
     "loading": "Processing the image...",
     "content-error": "Sorry, an error occurred while generating the description.",
-    "sound-reminder": "Remember to turn on the sound to hear the description."
+    "sound-reminder": "Remember to allow camera access and turn on sound."
   }
 }
