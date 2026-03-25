@@ -13,9 +13,12 @@ html {
 
   @include mat.dialog-overrides(
     (
-      container-color: var.$background-7,
+      container-color: var.$surface,
       supporting-text-size: 1rem,
-      with-actions-content-padding: 0 24px 1px,
+      with-actions-content-padding: 0 32px 1px,
+      content-padding: 20px 32px,
+      actions-padding: 16px 32px,
+      headline-padding: 16px 32px,
     )
   );
 
@@ -49,4 +52,10 @@ html {
       )
     );
   }
+
+  @include mat.form-field-overrides(
+    (
+      filled-container-color: var.$surface-transparent-variant,
+    )
+  );
 }
