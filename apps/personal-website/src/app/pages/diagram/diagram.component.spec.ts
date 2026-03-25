@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { DiagramComponent } from './diagram.component';
+import { TranslocoService } from '@jsverse/transloco';
 import { createTranslocoMock } from 'utils';
+import { DiagramComponent } from './diagram.component';
 
 describe('DiagramComponent', () => {
   let component: DiagramComponent;
@@ -10,6 +11,7 @@ describe('DiagramComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [DiagramComponent],
+      providers: [{ provide: TranslocoService, useValue: translocoMock }],
     }).compileComponents();
 
     fixture = TestBed.createComponent(DiagramComponent);
