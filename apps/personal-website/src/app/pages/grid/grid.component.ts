@@ -49,7 +49,7 @@ export class GridComponent {
   contentRef = viewChild.required('content', { read: TemplateRef<unknown> });
   theme = themeQuartz.withParams({
     backgroundColor: '#242424',
-    headerBackgroundColor: '#004f4f',
+    headerBackgroundColor: '#102f2f',
     foregroundColor: '#e0e3e2',
     accentColor: '#00dddd',
     fontFamily: ['Open Sans', 'Open Sans fallback', 'sans-serif'],
