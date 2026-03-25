@@ -6,7 +6,7 @@
       <p class="mb-8">{{ t('component-desc') }}</p>
       <p class="md:text-center">{{ t('sound-reminder') }}</p>
       <div class="flex flex-row justify-center grow md:h-0">
-        <video class="max-h-full" #video autoPlay muted poster="https://example.com/poster.jpg"></video>
+        <video class="max-h-full" #video autoPlay muted></video>
       </div>
       <div class="flex flex-row justify-center gap-4">
         <button matButton="outlined" [disabled]="!cameraEnabled()" (click)="onCapture()">{{ t('capture') }}</button>

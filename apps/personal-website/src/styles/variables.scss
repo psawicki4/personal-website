@@ -1,16 +1,19 @@
 @use 'sass:color';
 
 $background: #131313;
-$background-7: color.mix(#fff, $background, 7%);
-$background-9: color.mix(#fff, $background, 9%);
-$background-11: color.mix(#fff, $background, 11%);
-$background-14: color.mix(#fff, $background, 14%);
-$background-16: color.mix(#fff, $background, 16%);
-
 $text-color: #e0e3e2;
 $primary: #00dddd;
-$primary-dark: #004f4f;
+$primary-dark: #102f2f;
 $success-color: #2e7d32;
 $error-color: #dc3545;
 $error-container: #93000a;
 $font-family: 'Open Sans', 'Open Sans fallback', sans-serif;
+
+$surface-lowest: color.mix($primary, $background, 2%);
+$surface-low: color.mix($primary, $background, 4%);
+$surface: color.mix($primary, $background, 7%);
+$surface-high: color.mix($primary, $background, 10%);
+$surface-highest: color.mix($primary, $background, 14%);
+$surface-variant: color.mix($primary, $background, 20%);
+$surface-transparent: color.adjust($surface, $alpha: -0.7);
+$surface-transparent-variant: color.adjust($surface-variant, $alpha: -0.7);
