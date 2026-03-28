@@ -1,0 +1,19 @@
+<div class="palette-container">
+  <div class="palette-item">
+    <ng-diagram-palette-item [item]="{ type: 'action', data: { label: 'Action' } }">
+      <div class="node-preview action">Action Node</div>
+      <ng-template ngDiagramPaletteItemPreview>
+        <div class="dragging-preview">Adding Action...</div>
+      </ng-template>
+    </ng-diagram-palette-item>
+  </div>
+
+  <div class="palette-item">
+    <ng-diagram-palette-item [item]="{ type: 'decision', data: { label: '?' } }">
+      <div class="node-preview decision">Decision Node</div>
+      <ng-template ngDiagramPaletteItemPreview>
+        <div class="dragging-preview">Adding Decision...</div>
+      </ng-template>
+    </ng-diagram-palette-item>
+  </div>
+</div>

@@ -7,6 +7,10 @@
     "chrome-devtools": {
       "command": "npx",
       "args": ["chrome-devtools-mcp@latest"]
+    },
+    "ng-diagram-docs": {
+      "command": "cmd",
+      "args": ["/c", "npx", "-y", "@ng-diagram/mcp"]
     }
   }
 }
