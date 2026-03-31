@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, computed, effect, inject } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ChangeDetectionStrategy, Component, computed, inject, linkedSignal, Signal } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
+import { form, FormField, FormRoot, required, submit } from '@angular/forms/signals';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
@@ -21,53 +22,40 @@ import { CardComponent } from '../../card/card.component';
     MatIconModule,
     TranslocoDirective,
     CardComponent,
+    FormField,
+    FormRoot,
   ],
   templateUrl: './diagram-sidebar.component.html',
   styleUrl: './diagram-sidebar.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DiagramSidebarComponent {
-  private fb = inject(FormBuilder);
   private readonly selectionService = inject(NgDiagramSelectionService);
   private readonly modelService = inject(NgDiagramModelService);
 
-  form = this.fb.group({
-    label: ['', Validators.required],
-    x: [0, [Validators.required, Validators.min(0)]],
-    y: [0, [Validators.required, Validators.min(0)]],
+  nodeModel = linkedSignal(() => {
+    return {
+      id: this.selectedNode().id,
+      position: { x: this.selectedNode().position.x, y: this.selectedNode().position.y },
+      data: { label: this.selectedNode().data.label || '' },
+    };
   });
 
-  selectedNode = computed(() => this.selectionService.selection().nodes[0] ?? null);
-
-  constructor() {
-    effect(() => {
-      const node: Node<{ label?: string }> = this.selectedNode();
-      if (node) {
-        this.form.setValue({
-          label: node?.data?.label || '',
-          x: node.position.x,
-          y: node.position.y,
-        });
-      }
-    });
-  }
-
-  updateNode() {
-    const node = this.selectedNode();
-    if (node && this.form.valid) {
-      const formValue = this.form.getRawValue();
-      const updatedNode: Node = {
-        ...node,
-        position: {
-          x: Number(formValue.x),
-          y: Number(formValue.y),
-        },
-        data: {
-          ...node.data,
-          label: formValue.label,
-        },
-      };
-      this.modelService.updateNode(updatedNode.id, updatedNode);
+  nodeForm = form(
+    this.nodeModel,
+    (schemaPath) => {
+      required(schemaPath.data.label);
+    },
+    {
+      submission: {
+        action: async () => this.onSubmit(),
+      },
     }
+  );
+
+  selectedNode: Signal<Node<{ label?: string }>> = computed(() => this.selectionService.selection().nodes[0] ?? null);
+
+  onSubmit() {
+    this.modelService.updateNode(this.nodeModel().id, this.nodeModel());
   }
 }
