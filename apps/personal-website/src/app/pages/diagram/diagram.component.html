@@ -9,14 +9,16 @@
         </div>
       } @else {
         <p>{{ t('component-desc') }}</p>
-        <div class="grow flex gap-4">
-          <lib-diagram-palette />
-          @defer {
+        @defer {
+          <div class="grow flex gap-4 relative">
             <ng-diagram [model]="model" [config]="config" [nodeTemplateMap]="nodeTemplates">
               <ng-diagram-background />
             </ng-diagram>
-          }
-        </div>
+
+            <lib-diagram-palette class="palette" />
+            <lib-diagram-sidebar class="sidebar" />
+          </div>
+        }
       }
     </div>
   </lib-card>

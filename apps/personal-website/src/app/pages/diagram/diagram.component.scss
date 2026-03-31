@@ -5,3 +5,15 @@ ng-diagram {
   border: solid 1px rgba(255, 255, 255, 0.12);
   border-radius: 8px;
 }
+
+.palette {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+}
+
+.sidebar {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}

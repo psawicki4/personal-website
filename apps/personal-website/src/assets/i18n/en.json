@@ -109,5 +109,13 @@
     "loading": "Processing the image...",
     "content-error": "Sorry, an error occurred while generating the description.",
     "sound-reminder": "Remember to allow camera access and turn on sound."
+  },
+  "DIAGRAM_SIDEBAR": {
+    "properties": "Properties",
+    "no-selection": "No selection",
+    "label": "Label",
+    "required-field": "Required field",
+    "update": "Update",
+    "select-node-hint": "Select a node on the diagram to edit its properties."
   }
 }

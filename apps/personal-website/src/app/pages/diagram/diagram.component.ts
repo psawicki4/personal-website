@@ -8,7 +8,12 @@ import {
   NgDiagramConfig,
   provideNgDiagram,
 } from 'ng-diagram';
-import { CardComponent, DIAGRAM_NODE_TEMPLATES, DiagramPaletteComponent } from 'personal-website-components';
+import {
+  CardComponent,
+  DIAGRAM_NODE_TEMPLATES,
+  DiagramPaletteComponent,
+  DiagramSidebarComponent,
+} from 'personal-website-components';
 import { PortraitService } from 'utils';
 
 @Component({
@@ -19,6 +24,7 @@ import { PortraitService } from 'utils';
     CardComponent,
     TranslocoDirective,
     DiagramPaletteComponent,
+    DiagramSidebarComponent,
     NgDiagramBackgroundComponent,
   ],
   providers: [provideNgDiagram()],
@@ -31,6 +37,14 @@ export class DiagramComponent {
 
   config: NgDiagramConfig = {
     hideWatermark: true,
+    snapping: {
+      shouldSnapDragForNode: () => true,
+      computeSnapForNodeDrag: () => ({ width: 1, height: 1 }),
+      defaultDragSnap: { width: 1, height: 1 },
+      shouldSnapResizeForNode: () => true,
+      computeSnapForNodeSize: () => ({ width: 1, height: 1 }),
+      defaultResizeSnap: { width: 1, height: 1 },
+    },
   };
 
   nodeTemplates = DIAGRAM_NODE_TEMPLATES;
@@ -39,14 +53,12 @@ export class DiagramComponent {
     nodes: [
       {
         id: 'node-1',
-        type: 'action',
-        position: { x: 100, y: 100 },
+        position: { x: 300, y: 200 },
         data: { label: 'Initial Action' },
       },
       {
         id: 'node-2',
-        type: 'decision',
-        position: { x: 350, y: 85 },
+        position: { x: 550, y: 185 },
         data: { label: 'Proceed?' },
       },
     ],

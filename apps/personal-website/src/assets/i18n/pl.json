@@ -108,6 +108,14 @@
     "capture": "Opisz co widzisz",
     "loading": "Przetwarzanie obrazu...",
     "content-error": "Przepraszam, wystąpił błąd podczas generowania opisu.",
-    "sound-reminder": "Pamiętaj o udostępnieniu kamery i włączeniu dzwięku."
+    "sound-reminder": "Pamiętaj o udostępnieniu kamery i włączeniu dźwięku."
+  },
+  "DIAGRAM_SIDEBAR": {
+    "properties": "Właściwości",
+    "no-selection": "Brak zaznaczenia",
+    "label": "Etykieta",
+    "required-field": "Pole wymagane",
+    "update": "Aktualizuj",
+    "select-node-hint": "Zaznacz węzeł na diagramie, aby edytować jego właściwości."
   }
 }
