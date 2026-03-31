@@ -1,8 +1,4 @@
 import { NgDiagramNodeTemplateMap } from 'ng-diagram';
-import { ActionNodeComponent } from './nodes/action-node/action-node.component';
-import { DecisionNodeComponent } from './nodes/decision-node/decision-node.component';
+import { NoteNodeComponent } from './nodes/note-node/note-node.component';
 
-export const DIAGRAM_NODE_TEMPLATES: NgDiagramNodeTemplateMap = new Map([
-  ['action', ActionNodeComponent],
-  ['decision', DecisionNodeComponent],
-]);
+export const DIAGRAM_NODE_TEMPLATES: NgDiagramNodeTemplateMap = new Map([['note', NoteNodeComponent]]);

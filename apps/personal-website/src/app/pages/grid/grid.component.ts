@@ -5,7 +5,6 @@ import {
   Component,
   effect,
   inject,
-  signal,
   TemplateRef,
   viewChild,
   ViewContainerRef,
@@ -26,7 +25,7 @@ import {
 } from 'ag-grid-community';
 import { CardComponent } from 'personal-website-components';
 import { finalize } from 'rxjs';
-import { LangService } from 'utils';
+import { LangService, PortraitService } from 'utils';
 import { CountriesStore } from './countries.store';
 import { GridService } from './grid.service';
 
@@ -45,6 +44,7 @@ export class GridComponent {
   transloco = inject(TranslocoService);
   lang = inject(LangService);
   store = inject(CountriesStore);
+  portraitService = inject(PortraitService);
   outletRef = viewChild('outlet', { read: ViewContainerRef });
   contentRef = viewChild.required('content', { read: TemplateRef<unknown> });
   theme = themeQuartz.withParams({
@@ -59,7 +59,6 @@ export class GridComponent {
   localeText: typeof AG_GRID_LOCALE_PL | typeof AG_GRID_LOCALE_EN = AG_GRID_LOCALE_PL;
   gridApi!: GridApi;
   initialState: GridState = {};
-  portrait = signal(false);
   loading = true;
   colDefs: ColDef[] = [
     {
@@ -111,11 +110,6 @@ export class GridComponent {
   constructor() {
     this.getCountries();
     afterNextRender(() => {
-      const mql = globalThis.matchMedia('(orientation: portrait)');
-      this.portrait.set(mql.matches);
-      mql.addEventListener('change', (e) => {
-        this.portrait.set(e.matches);
-      });
       this.initialState = JSON.parse(localStorage.getItem('gridState') ?? '{}');
     });
     effect(() => {
@@ -156,5 +150,9 @@ export class GridComponent {
     this.initialState = {};
     this.outletRef()?.clear();
     this.outletRef()?.createEmbeddedView(this.contentRef());
+  }
+
+  get portrait() {
+    return this.portraitService.portrait;
   }
 }

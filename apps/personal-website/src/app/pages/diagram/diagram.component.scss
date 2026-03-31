@@ -1,0 +1,7 @@
+@use 'variables' as var;
+
+ng-diagram {
+  background: var.$surface-transparent;
+  border: solid 1px rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+}

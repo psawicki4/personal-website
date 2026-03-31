@@ -1,13 +1,26 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
 import { TranslocoDirective } from '@jsverse/transloco';
-import { initializeModel, NgDiagramComponent, NgDiagramConfig, provideNgDiagram } from 'ng-diagram';
+import {
+  initializeModel,
+  NgDiagramBackgroundComponent,
+  NgDiagramComponent,
+  NgDiagramConfig,
+  provideNgDiagram,
+} from 'ng-diagram';
 import { CardComponent, DIAGRAM_NODE_TEMPLATES, DiagramPaletteComponent } from 'personal-website-components';
 import { PortraitService } from 'utils';
 
 @Component({
   selector: 'psa-diagram',
-  imports: [NgDiagramComponent, MatIcon, CardComponent, TranslocoDirective, DiagramPaletteComponent],
+  imports: [
+    NgDiagramComponent,
+    MatIcon,
+    CardComponent,
+    TranslocoDirective,
+    DiagramPaletteComponent,
+    NgDiagramBackgroundComponent,
+  ],
   providers: [provideNgDiagram()],
   templateUrl: './diagram.component.html',
   styleUrl: './diagram.component.scss',

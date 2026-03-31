@@ -1,19 +1,22 @@
-<div class="palette-container">
-  <div class="palette-item">
-    <ng-diagram-palette-item [item]="{ type: 'action', data: { label: 'Action' } }">
-      <div class="node-preview action">Action Node</div>
-      <ng-template ngDiagramPaletteItemPreview>
-        <div class="dragging-preview">Adding Action...</div>
-      </ng-template>
+<lib-card>
+  <div class="flex flex-col gap-4 min-w-[200px]">
+    <ng-diagram-palette-item [item]="{ data: { label: 'basic node' }, rotatable: true, resizable: true }">
+      <div class="node-preview">basic node</div>
+      <ng-diagram-palette-item-preview>
+        <div class="node-preview">basic node</div>
+      </ng-diagram-palette-item-preview>
+    </ng-diagram-palette-item>
+    <ng-diagram-palette-item [item]="{ data: { label: 'basic group' }, resizable: true, isGroup: true }">
+      <div class="node-preview">basic group</div>
+      <ng-diagram-palette-item-preview>
+        <div class="node-preview">basic group</div>
+      </ng-diagram-palette-item-preview>
+    </ng-diagram-palette-item>
+    <ng-diagram-palette-item [item]="{ type: 'note', data: { label: 'note node' } }">
+      <div class="node-preview">Note node</div>
+      <ng-diagram-palette-item-preview>
+        <lib-note-node [node]="dummyNode"></lib-note-node>
+      </ng-diagram-palette-item-preview>
     </ng-diagram-palette-item>
   </div>
-
-  <div class="palette-item">
-    <ng-diagram-palette-item [item]="{ type: 'decision', data: { label: '?' } }">
-      <div class="node-preview decision">Decision Node</div>
-      <ng-template ngDiagramPaletteItemPreview>
-        <div class="dragging-preview">Adding Decision...</div>
-      </ng-template>
-    </ng-diagram-palette-item>
-  </div>
-</div>
+</lib-card>
