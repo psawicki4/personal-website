@@ -20,7 +20,7 @@
     "grid": "Zaawansowana Tabela",
     "model-3d": "Wizualizacja 3D",
     "ai-assistant": "Asystent AI",
-    "diagram": "Diagram"
+    "diagram": "Kreator Diagramów"
   },
   "CONTACT": {
     "contact": "Kontakt",
@@ -110,12 +110,22 @@
     "content-error": "Przepraszam, wystąpił błąd podczas generowania opisu.",
     "sound-reminder": "Pamiętaj o udostępnieniu kamery i włączeniu dźwięku."
   },
+  "DIAGRAM": {
+    "header": "Kreator Diagramów",
+    "component-desc": "Interaktywny kreator diagramów z dynamiczną edycją właściwości węzłów. Wybierz węzeł, aby dostosować jego etykietę i pozycję. Zmiany są natychmiast odzwierciedlane na diagramie, umożliwiając intuicyjną personalizację i organizację elementów wizualnych."
+  },
   "DIAGRAM_SIDEBAR": {
     "properties": "Właściwości",
     "no-selection": "Brak zaznaczenia",
     "label": "Etykieta",
+    "note": "Notatka",
     "required-field": "Pole wymagane",
     "update": "Aktualizuj",
     "select-node-hint": "Zaznacz węzeł na diagramie, aby edytować jego właściwości."
+  },
+  "DIAGRAM_PALETTE": {
+    "basic-node": "Prosty Węzeł",
+    "group": "Grupa",
+    "note": "Notatka"
   }
 }

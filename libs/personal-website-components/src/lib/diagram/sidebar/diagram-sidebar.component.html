@@ -7,13 +7,29 @@
 
     @if (selectedNode()) {
       <form [formRoot]="nodeForm" class="flex flex-col gap-2">
-        <mat-form-field appearance="outline" class="w-full">
-          <mat-label>{{ t('label') }}</mat-label>
-          <input matInput [formField]="nodeForm.data.label" />
-          @if (nodeForm.data.label().invalid()) {
-            <mat-error>{{ t('required-field') }}</mat-error>
-          }
-        </mat-form-field>
+        @for (item of nodeModel().data | keyvalue; track item.key) {
+          <p>{{ item.key }}</p>
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-label>{{ t(item.key) }}</mat-label>
+            @switch (item.key) {
+              @case ('note') {
+                <textarea
+                  matInput
+                  cdkTextareaAutosize
+                  [formField]="nodeForm.data[item.key]"
+                  rows="2"
+                  cdkAutosizeMaxRows="6"
+                ></textarea>
+              }
+              @default {
+                <input matInput [formField]="nodeForm.data[item.key]" />
+              }
+            }
+            @if (nodeForm.data[item.key]().invalid()) {
+              <mat-error>{{ t('required-field') }}</mat-error>
+            }
+          </mat-form-field>
+        }
 
         <div class="flex gap-2">
           <mat-form-field appearance="outline" class="w-full">

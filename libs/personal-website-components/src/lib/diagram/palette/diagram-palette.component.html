@@ -1,19 +1,19 @@
-<lib-card>
+<lib-card *transloco="let t; prefix: 'DIAGRAM_PALETTE'">
   <div class="flex flex-col gap-4 min-w-[200px]">
-    <ng-diagram-palette-item [item]="{ data: { label: 'basic node' }, rotatable: true, resizable: true }">
-      <div class="node-preview">basic node</div>
+    <ng-diagram-palette-item [item]="{ data: { label: t('basic-node') }, rotatable: true, resizable: true }">
+      <div class="node-preview">{{ t('basic-node') }}</div>
       <ng-diagram-palette-item-preview>
-        <div class="node-preview">basic node</div>
+        <div class="node-preview">{{ t('basic-node') }}</div>
       </ng-diagram-palette-item-preview>
     </ng-diagram-palette-item>
-    <ng-diagram-palette-item [item]="{ data: { label: 'basic group' }, resizable: true, isGroup: true }">
-      <div class="node-preview">basic group</div>
+    <ng-diagram-palette-item [item]="{ data: { label: t('group') }, resizable: true, isGroup: true }">
+      <div class="node-preview">{{ t('group') }}</div>
       <ng-diagram-palette-item-preview>
-        <div class="node-preview">basic group</div>
+        <div class="node-preview">{{ t('group') }}</div>
       </ng-diagram-palette-item-preview>
     </ng-diagram-palette-item>
-    <ng-diagram-palette-item [item]="{ type: 'note', data: { label: 'note node' } }">
-      <div class="node-preview">Note node</div>
+    <ng-diagram-palette-item [item]="paletteModel[0]">
+      <div class="node-preview">{{ t('note') }}</div>
       <ng-diagram-palette-item-preview>
         <lib-note-node [node]="dummyNode"></lib-note-node>
       </ng-diagram-palette-item-preview>

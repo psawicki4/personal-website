@@ -20,7 +20,7 @@
     "grid": "Enterprise Grid",
     "model-3d": "3D Visualization",
     "ai-assistant": "AI Assistant",
-    "diagram": "Diagram"
+    "diagram": "Diagram Builder"
   },
   "CONTACT": {
     "contact": "Contact",
@@ -110,10 +110,15 @@
     "content-error": "Sorry, an error occurred while generating the description.",
     "sound-reminder": "Remember to allow camera access and turn on sound."
   },
+  "DIAGRAM": {
+    "header": "Diagram Builder",
+    "component-desc": "An interactive diagram builder with dynamic node property editing. Select a node to customize its label and position. Changes are immediately reflected on the diagram, allowing for intuitive personalization and organization of visual elements."
+  },
   "DIAGRAM_SIDEBAR": {
     "properties": "Properties",
     "no-selection": "No selection",
     "label": "Label",
+    "note": "Note",
     "required-field": "Required field",
     "update": "Update",
     "select-node-hint": "Select a node on the diagram to edit its properties."

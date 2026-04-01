@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, inject, linkedSignal, Signal } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { form, FormField, FormRoot, required, submit } from '@angular/forms/signals';
+import { form, FormField, FormRoot, required } from '@angular/forms/signals';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
@@ -32,19 +32,18 @@ import { CardComponent } from '../../card/card.component';
 export class DiagramSidebarComponent {
   private readonly selectionService = inject(NgDiagramSelectionService);
   private readonly modelService = inject(NgDiagramModelService);
+  selectedNode: Signal<Node<{ [key: string]: any }>> = computed(
+    () => this.selectionService.selection().nodes[0] ?? null
+  );
 
   nodeModel = linkedSignal(() => {
-    return {
-      id: this.selectedNode().id,
-      position: { x: this.selectedNode().position.x, y: this.selectedNode().position.y },
-      data: { label: this.selectedNode().data.label || '' },
-    };
+    return this.selectedNode();
   });
 
   nodeForm = form(
     this.nodeModel,
     (schemaPath) => {
-      required(schemaPath.data.label);
+      required(schemaPath.data['label']);
     },
     {
       submission: {
@@ -52,8 +51,6 @@ export class DiagramSidebarComponent {
       },
     }
   );
-
-  selectedNode: Signal<Node<{ label?: string }>> = computed(() => this.selectionService.selection().nodes[0] ?? null);
 
   onSubmit() {
     this.modelService.updateNode(this.nodeModel().id, this.nodeModel());
