@@ -121,6 +121,12 @@
     "note": "Note",
     "required-field": "Required field",
     "update": "Update",
-    "select-node-hint": "Select a node on the diagram to edit its properties."
+    "select-node-hint": "Select a node on the diagram to edit its properties.",
+    "color": "Color"
+  },
+  "DIAGRAM_PALETTE": {
+    "basic-node": "Basic Node",
+    "group": "Group",
+    "note": "Note"
   }
 }

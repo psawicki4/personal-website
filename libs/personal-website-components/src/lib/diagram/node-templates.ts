@@ -1,4 +1,10 @@
 import { NgDiagramNodeTemplateMap } from 'ng-diagram';
-import { NoteNodeComponent } from './nodes/note-node/note-node.component';
+import { BasicNodeComponent, NoteNodeComponent } from './node-templates';
 
-export const DIAGRAM_NODE_TEMPLATES: NgDiagramNodeTemplateMap = new Map([['note', NoteNodeComponent]]);
+export const DIAGRAM_NODE_TEMPLATES: NgDiagramNodeTemplateMap = new Map<
+  string,
+  typeof NoteNodeComponent | typeof BasicNodeComponent
+>([
+  ['note', NoteNodeComponent],
+  ['basic', BasicNodeComponent],
+]);

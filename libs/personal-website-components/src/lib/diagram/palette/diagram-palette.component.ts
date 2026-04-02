@@ -25,7 +25,22 @@ import { NoteNodeComponent } from '../nodes/note-node/note-node.component';
 })
 export class DiagramPaletteComponent {
   paletteModel: NgDiagramPaletteItem<{ label: string; note?: string; color?: string }>[] = [
-    { type: 'note', data: { label: 'Notatka', note: 'To jest przykładowa notatka' }, resizable: true, rotatable: true },
+    {
+      type: 'note',
+      data: { label: 'Nagłówek', note: 'Dodaj notatkę' },
+      size: { width: 150, height: 93 },
+      autoSize: false,
+      resizable: true,
+      rotatable: true,
+    },
+    {
+      type: 'basic',
+      data: { label: 'Nagłówek', color: '#27282b' },
+      size: { width: 150, height: 42 },
+      autoSize: false,
+      resizable: true,
+      rotatable: true,
+    },
   ];
 
   dummyNode: Node = {

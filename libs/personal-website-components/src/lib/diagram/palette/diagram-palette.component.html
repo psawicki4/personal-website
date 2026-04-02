@@ -1,6 +1,6 @@
 <lib-card *transloco="let t; prefix: 'DIAGRAM_PALETTE'">
   <div class="flex flex-col gap-4 min-w-[200px]">
-    <ng-diagram-palette-item [item]="{ data: { label: t('basic-node') }, rotatable: true, resizable: true }">
+    <ng-diagram-palette-item [item]="paletteModel[1]">
       <div class="node-preview">{{ t('basic-node') }}</div>
       <ng-diagram-palette-item-preview>
         <div class="node-preview">{{ t('basic-node') }}</div>

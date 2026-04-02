@@ -7,11 +7,19 @@
 
     @if (selectedNode()) {
       <form [formRoot]="nodeForm" class="flex flex-col gap-2">
-        @for (item of nodeModel().data | keyvalue; track item.key) {
-          <p>{{ item.key }}</p>
+        @for (item of selectedNode().data | keyvalue:() => 0; track item.key) {
           <mat-form-field appearance="outline" class="w-full">
             <mat-label>{{ t(item.key) }}</mat-label>
             @switch (item.key) {
+              @case ('color') {
+                <input
+                  matInput
+                  [colorPicker]="color"
+                  (colorPickerChange)="onColorPickerChange($event)"
+                  [style.background-color]="color"
+                  [formField]="nodeForm.data[item.key]"
+                />
+              }
               @case ('note') {
                 <textarea
                   matInput

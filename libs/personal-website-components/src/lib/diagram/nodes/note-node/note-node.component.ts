@@ -21,9 +21,13 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NoteNodeComponent implements NgDiagramNodeTemplate {
-  node = input.required<Node<{ note?: string }>>();
+  node = input.required<Node<{ note?: string; label?: string }>>();
 
   get note(): string {
     return this.node().data.note || 'Dodaj notatkę';
+  }
+
+  get label(): string {
+    return this.node().data.label || 'Nagłówek';
   }
 }

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, computed, inject, linkedSignal, Signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, linkedSignal, WritableSignal } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { form, FormField, FormRoot, required } from '@angular/forms/signals';
 import { MatButtonModule } from '@angular/material/button';
@@ -8,6 +8,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { TranslocoDirective } from '@jsverse/transloco';
 import { NgDiagramModelService, NgDiagramSelectionService, type Node } from 'ng-diagram';
+import { ColorPickerDirective } from 'ngx-color-picker';
 import { CardComponent } from '../../card/card.component';
 
 @Component({
@@ -24,6 +25,7 @@ import { CardComponent } from '../../card/card.component';
     CardComponent,
     FormField,
     FormRoot,
+    ColorPickerDirective,
   ],
   templateUrl: './diagram-sidebar.component.html',
   styleUrl: './diagram-sidebar.component.scss',
@@ -32,16 +34,12 @@ import { CardComponent } from '../../card/card.component';
 export class DiagramSidebarComponent {
   private readonly selectionService = inject(NgDiagramSelectionService);
   private readonly modelService = inject(NgDiagramModelService);
-  selectedNode: Signal<Node<{ [key: string]: any }>> = computed(
+  selectedNode: WritableSignal<Node<{ [key: string]: any }>> = linkedSignal(
     () => this.selectionService.selection().nodes[0] ?? null
   );
 
-  nodeModel = linkedSignal(() => {
-    return this.selectedNode();
-  });
-
   nodeForm = form(
-    this.nodeModel,
+    this.selectedNode,
     (schemaPath) => {
       required(schemaPath.data['label']);
     },
@@ -53,6 +51,14 @@ export class DiagramSidebarComponent {
   );
 
   onSubmit() {
-    this.modelService.updateNode(this.nodeModel().id, this.nodeModel());
+    this.modelService.updateNode(this.selectedNode().id, this.selectedNode());
+  }
+
+  onColorPickerChange(color: string) {
+    this.nodeForm.data['color']().value.set(color);
+  }
+
+  get color(): string {
+    return this.selectedNode()?.data['color'] || 'inherit';
   }
 }

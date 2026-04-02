@@ -121,7 +121,8 @@
     "note": "Notatka",
     "required-field": "Pole wymagane",
     "update": "Aktualizuj",
-    "select-node-hint": "Zaznacz węzeł na diagramie, aby edytować jego właściwości."
+    "select-node-hint": "Zaznacz węzeł na diagramie, aby edytować jego właściwości.",
+    "color": "Kolor"
   },
   "DIAGRAM_PALETTE": {
     "basic-node": "Prosty Węzeł",
