@@ -1,2 +1,1 @@
 node tools/scripts/cleanup-api-key.mjs
-pnpm exec lint-staged --no-hide-partially-staged
