@@ -1,15 +1,5 @@
 @use 'variables' as var;
 
-input.number::-webkit-outer-spin-button,
-input.number::-webkit-inner-spin-button {
-  display: none;
-}
-
-input.number {
-  appearance: textfield;
-  -moz-appearance: textfield;
-}
-
 .divider {
   width: 1px;
   background-color: var.$primary-dark;

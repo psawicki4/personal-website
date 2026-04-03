@@ -1,8 +1,8 @@
-<lib-card class="w-80 h-fit" *transloco="let t; prefix: 'DIAGRAM_SIDEBAR'">
+<lib-card class="w-72" *transloco="let t; prefix: 'DIAGRAM_SIDEBAR'">
   <div class="flex flex-col gap-4">
     <div class="flex items-center gap-2 mb-2">
       <mat-icon>settings</mat-icon>
-      <h2 class="text-xl font-semibold">{{ selectedNode() ? t('properties') : t('no-selection') }}</h2>
+      <h2 class="text-xl font-semibold">{{ t('properties') }}</h2>
     </div>
 
     @if (selectedNode()) {
@@ -15,9 +15,12 @@
                 <input
                   matInput
                   [colorPicker]="color"
-                  (colorPickerChange)="onColorPickerChange($event)"
-                  [style.background-color]="color"
+                  cpAlphaChannel="disabled"
+                  cpPosition="top"
+                  cpPresetLabel="{{ t('preset-colors') }}"
+                  [cpPresetColors]="['#27282b', '#122b61', '#0a4023', '#4a154b', '#5e1919', '#004b52']"
                   [formField]="nodeForm.data[item.key]"
+                  (colorPickerChange)="onColorPickerChange($event)"
                 />
               }
               @case ('note') {
@@ -34,7 +37,7 @@
               }
             }
             @if (nodeForm.data[item.key]().invalid()) {
-              <mat-error>{{ t('required-field') }}</mat-error>
+              <mat-error>{{ t(nodeForm.data[item.key]().errors()[0].message) }}</mat-error>
             }
           </mat-form-field>
         }
@@ -42,16 +45,22 @@
         <div class="flex gap-2">
           <mat-form-field appearance="outline" class="w-full">
             <mat-label>X</mat-label>
-            <input matInput type="number" [formField]="nodeForm.position.x" />
+            <input matInput type="number" class="number" [formField]="nodeForm.position.x" />
+            @if (nodeForm.position.x().invalid()) {
+              <mat-error>{{ t('required-field') }}</mat-error>
+            }
           </mat-form-field>
 
           <mat-form-field appearance="outline" class="w-full">
             <mat-label>Y</mat-label>
-            <input matInput type="number" [formField]="nodeForm.position.y" />
+            <input matInput type="number" class="number" [formField]="nodeForm.position.y" />
+            @if (nodeForm.position.y().invalid()) {
+              <mat-error>{{ t('required-field') }}</mat-error>
+            }
           </mat-form-field>
         </div>
 
-        <button mat-flat-button color="primary" type="submit" [disabled]="nodeForm().invalid()">
+        <button matButton="outlined" color="primary" type="submit" [disabled]="nodeForm().invalid()">
           {{ t('update') }}
         </button>
       </form>

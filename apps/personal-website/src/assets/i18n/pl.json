@@ -119,13 +119,15 @@
     "no-selection": "Brak zaznaczenia",
     "label": "Etykieta",
     "note": "Notatka",
-    "required-field": "Pole wymagane",
+    "required-field": "Wymagane",
     "update": "Aktualizuj",
     "select-node-hint": "Zaznacz węzeł na diagramie, aby edytować jego właściwości.",
-    "color": "Kolor"
+    "color": "Kolor",
+    "preset-colors": "Predefiniowane kolory",
+    "invalid-color-format": "Nieprawidłowy format koloru"
   },
   "DIAGRAM_PALETTE": {
-    "basic-node": "Prosty Węzeł",
+    "basic-node": "Węzeł",
     "group": "Grupa",
     "note": "Notatka"
   }

@@ -54,6 +54,16 @@ body {
   z-index: -1;
 }
 
+input.number::-webkit-outer-spin-button,
+input.number::-webkit-inner-spin-button {
+  display: none;
+}
+
+input.number {
+  appearance: textfield;
+  -moz-appearance: textfield;
+}
+
 @media only screen and (max-width: 640px) {
   .bg-fixed {
     background-image: url('assets/mobile.webp');

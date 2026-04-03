@@ -119,13 +119,15 @@
     "no-selection": "No selection",
     "label": "Label",
     "note": "Note",
-    "required-field": "Required field",
+    "required-field": "Required",
     "update": "Update",
     "select-node-hint": "Select a node on the diagram to edit its properties.",
-    "color": "Color"
+    "color": "Color",
+    "preset-colors": "Preset colors",
+    "invalid-color-format": "Invalid color format"
   },
   "DIAGRAM_PALETTE": {
-    "basic-node": "Basic Node",
+    "basic-node": "Node",
     "group": "Group",
     "note": "Note"
   }

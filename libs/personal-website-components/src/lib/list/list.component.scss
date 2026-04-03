@@ -20,6 +20,6 @@
 
   &__selected {
     @extend .card;
-    background-color: var.$surface-high;
+    background-color: var.$surface-variant;
   }
 }

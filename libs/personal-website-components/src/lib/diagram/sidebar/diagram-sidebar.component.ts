@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject, linkedSignal, WritableSignal } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { form, FormField, FormRoot, required } from '@angular/forms/signals';
+import { form, FormField, FormRoot, pattern, required } from '@angular/forms/signals';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
@@ -41,7 +41,11 @@ export class DiagramSidebarComponent {
   nodeForm = form(
     this.selectedNode,
     (schemaPath) => {
-      required(schemaPath.data['label']);
+      required(schemaPath.data['label'], { message: 'required-field' });
+      required(schemaPath.data['color'], { message: 'required-field' });
+      required(schemaPath.position.x, { message: 'required-field' });
+      required(schemaPath.position.y, { message: 'required-field' });
+      pattern(schemaPath.data['color'], /^#([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/, { message: 'invalid-color-format' });
     },
     {
       submission: {
