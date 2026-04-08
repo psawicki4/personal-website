@@ -3,6 +3,7 @@ export * from './lib/contact-dialog/contact-dialog.component';
 export * from './lib/diagram/node-templates';
 export * from './lib/diagram/nodes/note-node/note-node.component';
 export * from './lib/diagram/nodes/basic-node/basic-node.component';
+export * from './lib/diagram/nodes/group/group.component';
 export * from './lib/diagram/palette/diagram-palette.component';
 export * from './lib/diagram/sidebar/diagram-sidebar.component';
 export * from './lib/header/header.component';

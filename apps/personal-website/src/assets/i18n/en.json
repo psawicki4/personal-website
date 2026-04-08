@@ -112,6 +112,8 @@
   },
   "DIAGRAM": {
     "header": "Diagram Builder",
+    "default-label": "Header",
+    "add-note": "Add note",
     "component-desc": "An interactive diagram builder with dynamic node property editing. Select a node to customize its label and position. Changes are immediately reflected on the diagram, allowing for intuitive personalization and organization of visual elements."
   },
   "DIAGRAM_SIDEBAR": {
@@ -127,7 +129,7 @@
     "invalid-color-format": "Invalid color format"
   },
   "DIAGRAM_PALETTE": {
-    "basic-node": "Node",
+    "process": "Process",
     "group": "Group",
     "note": "Note"
   }

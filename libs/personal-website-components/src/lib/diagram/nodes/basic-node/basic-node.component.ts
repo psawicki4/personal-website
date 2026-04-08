@@ -1,10 +1,23 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
-import { NgDiagramBaseNodeTemplateComponent, NgDiagramNodeTemplate, Node } from 'ng-diagram';
+import {
+  NgDiagramNodeResizeAdornmentComponent,
+  NgDiagramNodeRotateAdornmentComponent,
+  NgDiagramNodeSelectedDirective,
+  NgDiagramNodeTemplate,
+  NgDiagramPortComponent,
+  Node,
+} from 'ng-diagram';
 
 @Component({
   selector: 'lib-basic-node',
-  imports: [NgDiagramBaseNodeTemplateComponent, CommonModule],
+  imports: [
+    CommonModule,
+    NgDiagramPortComponent,
+    NgDiagramNodeResizeAdornmentComponent,
+    NgDiagramNodeRotateAdornmentComponent,
+  ],
+  hostDirectives: [{ directive: NgDiagramNodeSelectedDirective, inputs: ['node'] }],
   templateUrl: './basic-node.component.html',
   styleUrl: './basic-node.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -17,6 +30,6 @@ export class BasicNodeComponent implements NgDiagramNodeTemplate {
   }
 
   get label(): string {
-    return this.node().data.label || 'Nagłówek';
+    return this.node().data.label || '';
   }
 }

@@ -24,10 +24,10 @@ export class NoteNodeComponent implements NgDiagramNodeTemplate {
   node = input.required<Node<{ note?: string; label?: string }>>();
 
   get note(): string {
-    return this.node().data.note || 'Dodaj notatkę';
+    return this.node().data.note || '';
   }
 
   get label(): string {
-    return this.node().data.label || 'Nagłówek';
+    return this.node().data.label || '';
   }
 }

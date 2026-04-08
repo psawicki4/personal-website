@@ -1,3 +1,10 @@
-<ng-diagram-base-node-template [node]="node()" [ngStyle]="{ '--ngd-node-bg-primary-default': color }">
-  <div>{{ node().data.label }}</div>
-</ng-diagram-base-node-template>
+<ng-diagram-node-rotate-adornment />
+<ng-diagram-node-resize-adornment>
+  <div class="custom-node" [ngStyle]="{ '--custom-node-color': color }">
+    <div>{{ label }}</div>
+  </div>
+  <!-- Left port for connections -->
+  <ng-diagram-port [side]="'left'" [type]="'both'" [id]="'port-left'" />
+  <!-- Right port for connections -->
+  <ng-diagram-port [side]="'right'" [type]="'both'" [id]="'port-right'" />
+</ng-diagram-node-resize-adornment>

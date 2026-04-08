@@ -112,6 +112,7 @@
   },
   "DIAGRAM": {
     "header": "Kreator Diagramów",
+    "add-note": "Dodaj notatkę",
     "component-desc": "Interaktywny kreator diagramów z dynamiczną edycją właściwości węzłów. Wybierz węzeł, aby dostosować jego etykietę i pozycję. Zmiany są natychmiast odzwierciedlane na diagramie, umożliwiając intuicyjną personalizację i organizację elementów wizualnych."
   },
   "DIAGRAM_SIDEBAR": {
@@ -127,7 +128,7 @@
     "invalid-color-format": "Nieprawidłowy format koloru"
   },
   "DIAGRAM_PALETTE": {
-    "basic-node": "Węzeł",
+    "process": "Proces",
     "group": "Grupa",
     "note": "Notatka"
   }

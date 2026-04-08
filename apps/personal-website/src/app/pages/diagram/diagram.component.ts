@@ -45,6 +45,11 @@ export class DiagramComponent {
       computeSnapForNodeSize: () => ({ width: 1, height: 1 }),
       defaultResizeSnap: { width: 1, height: 1 },
     },
+    resize: {
+      getMinNodeSize: (_: Node) => {
+        return { width: 100, height: 42 };
+      },
+    },
   };
 
   nodeTemplates = DIAGRAM_NODE_TEMPLATES;
@@ -53,13 +58,15 @@ export class DiagramComponent {
     nodes: [
       {
         id: 'node-1',
+        type: 'basic',
         position: { x: 300, y: 200 },
-        data: { label: 'Initial Action' },
+        data: { label: 'Initial Action', color: '#1a3d8a' },
       },
       {
         id: 'node-2',
+        type: 'basic',
         position: { x: 550, y: 185 },
-        data: { label: 'Proceed?' },
+        data: { label: 'Proceed?', color: '#a65100' },
       },
     ],
     edges: [
@@ -67,8 +74,8 @@ export class DiagramComponent {
         id: 'edge-1',
         source: 'node-1',
         target: 'node-2',
-        sourcePort: 'out',
-        targetPort: 'in',
+        sourcePort: 'port-right',
+        targetPort: 'port-left',
         data: {},
       },
     ],
