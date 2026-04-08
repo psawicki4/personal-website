@@ -1,5 +1,4 @@
 import { NgDiagramNodeTemplateMap } from 'ng-diagram';
-
 import { BasicNodeComponent } from './nodes/basic-node/basic-node.component';
 import { GroupComponent } from './nodes/group/group.component';
 import { NoteNodeComponent } from './nodes/note-node/note-node.component';

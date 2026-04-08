@@ -1,5 +1,13 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, inject, linkedSignal, WritableSignal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  inject,
+  linkedSignal,
+  Signal,
+  WritableSignal,
+} from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { form, FormField, FormRoot, pattern, required } from '@angular/forms/signals';
 import { MatButtonModule } from '@angular/material/button';
@@ -7,7 +15,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { TranslocoDirective } from '@jsverse/transloco';
-import { NgDiagramModelService, NgDiagramSelectionService, type Node } from 'ng-diagram';
+import { Edge, NgDiagramModelService, NgDiagramSelectionService, type Node } from 'ng-diagram';
 import { ColorPickerDirective } from 'ngx-color-picker';
 import { CardComponent } from '../../card/card.component';
 
@@ -37,6 +45,9 @@ export class DiagramSidebarComponent {
   selectedNode: WritableSignal<Node<{ [key: string]: any }>> = linkedSignal(
     () => this.selectionService.selection().nodes[0] ?? null
   );
+  selectedEdge: Signal<Edge<{ [key: string]: any }>> = computed(
+    () => this.selectionService.selection().edges[0] ?? null
+  );
 
   nodeForm = form(
     this.selectedNode,
@@ -49,13 +60,25 @@ export class DiagramSidebarComponent {
     },
     {
       submission: {
-        action: async () => this.onSubmit(),
+        action: async () => this.onNodeSubmit(),
       },
     }
   );
 
-  onSubmit() {
+  edgeModel = linkedSignal(() => ({ label: this.selectedEdge()?.data['label'] || '' }));
+
+  edgeForm = form(this.edgeModel, {
+    submission: {
+      action: async () => this.onEdgeSubmit(),
+    },
+  });
+
+  onNodeSubmit() {
     this.modelService.updateNode(this.selectedNode().id, this.selectedNode());
+  }
+
+  onEdgeSubmit() {
+    this.modelService.updateEdge(this.selectedEdge().id, { data: { label: this.edgeModel().label } });
   }
 
   onColorPickerChange(color: string) {

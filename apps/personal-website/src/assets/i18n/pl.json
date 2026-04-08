@@ -122,7 +122,7 @@
     "note": "Notatka",
     "required-field": "Wymagane",
     "update": "Aktualizuj",
-    "select-node-hint": "Zaznacz węzeł na diagramie, aby edytować jego właściwości.",
+    "select-node-hint": "Zaznacz element na diagramie, aby edytować jego właściwości.",
     "color": "Kolor",
     "preset-colors": "Predefiniowane kolory",
     "invalid-color-format": "Nieprawidłowy format koloru"
