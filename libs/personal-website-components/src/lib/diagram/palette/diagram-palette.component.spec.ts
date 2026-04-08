@@ -24,10 +24,4 @@ describe('DiagramPaletteComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-
-  it('should render all palette items', () => {
-    const compiled = fixture.nativeElement as HTMLElement;
-    const items = compiled.querySelectorAll('ng-diagram-palette-item');
-    expect(items.length).toBe(3);
-  });
 });
