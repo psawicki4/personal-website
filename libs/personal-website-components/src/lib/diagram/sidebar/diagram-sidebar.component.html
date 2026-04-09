@@ -14,12 +14,12 @@
               @case ('color') {
                 <input
                   matInput
+                  [formField]="nodeForm.data[item.key]"
                   [colorPicker]="color"
                   cpAlphaChannel="disabled"
-                  cpPosition="top"
+                  cpPosition="top-left"
                   cpPresetLabel="{{ t('preset-colors') }}"
                   [cpPresetColors]="['#27282b', '#691e6b', '#1a3d8a', '#0f6135', '#a65100', '#852323']"
-                  [formField]="nodeForm.data[item.key]"
                   (colorPickerChange)="onColorPickerChange($event)"
                 />
               }

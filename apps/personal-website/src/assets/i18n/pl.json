@@ -129,6 +129,7 @@
   },
   "DIAGRAM_PALETTE": {
     "process": "Proces",
+    "decision": "Decyzja",
     "group": "Grupa",
     "note": "Notatka"
   }

@@ -130,6 +130,7 @@
   },
   "DIAGRAM_PALETTE": {
     "process": "Process",
+    "decision": "Decision",
     "group": "Group",
     "note": "Note"
   }

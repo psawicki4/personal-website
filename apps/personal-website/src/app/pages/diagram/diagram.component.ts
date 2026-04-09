@@ -58,13 +58,13 @@ export class DiagramComponent {
     nodes: [
       {
         id: 'node-1',
-        type: 'basic',
+        type: 'process',
         position: { x: 300, y: 200 },
         data: { label: 'Initial Action', color: '#1a3d8a' },
       },
       {
         id: 'node-2',
-        type: 'basic',
+        type: 'process',
         position: { x: 550, y: 185 },
         data: { label: 'Proceed?', color: '#a65100' },
       },
@@ -77,6 +77,7 @@ export class DiagramComponent {
         sourcePort: 'port-right',
         targetPort: 'port-left',
         data: {},
+        targetArrowhead: 'ng-diagram-arrow',
       },
     ],
   });

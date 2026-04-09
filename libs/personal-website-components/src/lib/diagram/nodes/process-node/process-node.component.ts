@@ -10,7 +10,7 @@ import {
 } from 'ng-diagram';
 
 @Component({
-  selector: 'lib-basic-node',
+  selector: 'lib-process-node',
   imports: [
     CommonModule,
     NgDiagramPortComponent,
@@ -18,11 +18,11 @@ import {
     NgDiagramNodeRotateAdornmentComponent,
   ],
   hostDirectives: [{ directive: NgDiagramNodeSelectedDirective, inputs: ['node'] }],
-  templateUrl: './basic-node.component.html',
-  styleUrl: './basic-node.component.scss',
+  templateUrl: './process-node.component.html',
+  styleUrl: './process-node.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class BasicNodeComponent implements NgDiagramNodeTemplate {
+export class ProcessNodeComponent implements NgDiagramNodeTemplate {
   node = input.required<Node<{ label?: string; color?: string }>>();
 
   get color(): string {

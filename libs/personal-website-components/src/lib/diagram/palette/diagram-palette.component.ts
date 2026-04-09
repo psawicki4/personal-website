@@ -9,9 +9,10 @@ import {
 } from 'ng-diagram';
 import { LangService } from 'utils';
 import { CardComponent } from '../../card/card.component';
-import { BasicNodeComponent } from '../nodes/basic-node/basic-node.component';
+import { DecisionNodeComponent } from '../nodes/decision-node/decision-node.component';
 import { GroupComponent } from '../nodes/group/group.component';
 import { NoteNodeComponent } from '../nodes/note-node/note-node.component';
+import { ProcessNodeComponent } from '../nodes/process-node/process-node.component';
 
 @Component({
   selector: 'lib-diagram-palette',
@@ -23,7 +24,8 @@ import { NoteNodeComponent } from '../nodes/note-node/note-node.component';
     NoteNodeComponent,
     TranslocoDirective,
     GroupComponent,
-    BasicNodeComponent,
+    ProcessNodeComponent,
+    DecisionNodeComponent,
   ],
   templateUrl: './diagram-palette.component.html',
   styleUrl: './diagram-palette.component.scss',
@@ -32,18 +34,27 @@ import { NoteNodeComponent } from '../nodes/note-node/note-node.component';
 export class DiagramPaletteComponent {
   lang = inject(LangService);
   processLabel = translateSignal('DIAGRAM_PALETTE.process');
+  decisionLabel = translateSignal('DIAGRAM_PALETTE.decision');
   groupNodeLabel = translateSignal('DIAGRAM_PALETTE.group');
   noteNodeLabel = translateSignal('DIAGRAM_PALETTE.note');
   addNoteLabel = translateSignal('DIAGRAM.add-note');
 
   paletteModel: NgDiagramPaletteItem<{ label: string; note?: string; color?: string }>[] = [
     {
-      type: 'basic',
+      type: 'process',
       data: { label: this.processLabel(), color: '#27282b' },
       size: { width: 150, height: 55 },
       autoSize: false,
       resizable: true,
       rotatable: true,
+    },
+    {
+      type: 'decision',
+      data: { label: this.decisionLabel(), color: '#27282b' },
+      size: { width: 100, height: 100 },
+      autoSize: false,
+      resizable: true,
+      rotatable: false,
     },
     {
       type: 'group',
@@ -67,7 +78,12 @@ export class DiagramPaletteComponent {
   dummyNode: Node = {
     id: '',
     position: { x: 1, y: 1 },
-    data: { label: this.processLabel(), note: this.addNoteLabel(), color: '#27282b' },
+    data: { label: this.processLabel(), color: '#27282b' },
+  };
+  dummyDecisionNode: Node = {
+    id: '',
+    position: { x: 1, y: 1 },
+    data: { label: this.decisionLabel(), color: '#27282b' },
   };
   dummyGroupNode: GroupNode = {
     id: '',

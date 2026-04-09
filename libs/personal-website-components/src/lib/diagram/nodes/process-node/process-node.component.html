@@ -3,8 +3,6 @@
   <div class="custom-node" [ngStyle]="{ '--custom-node-color': color }">
     <div>{{ label }}</div>
   </div>
-  <!-- Left port for connections -->
   <ng-diagram-port [side]="'left'" [type]="'both'" [id]="'port-left'" />
-  <!-- Right port for connections -->
   <ng-diagram-port [side]="'right'" [type]="'both'" [id]="'port-right'" />
 </ng-diagram-node-resize-adornment>
