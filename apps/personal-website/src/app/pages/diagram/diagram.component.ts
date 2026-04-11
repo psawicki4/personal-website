@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
 import { TranslocoDirective } from '@jsverse/transloco';
 import {
+  Edge,
   initializeModel,
   NgDiagramBackgroundComponent,
   NgDiagramComponent,
@@ -10,6 +11,7 @@ import {
 } from 'ng-diagram';
 import {
   CardComponent,
+  DIAGRAM_EDGE_TEMPLATES,
   DIAGRAM_NODE_TEMPLATES,
   DiagramPaletteComponent,
   DiagramSidebarComponent,
@@ -45,14 +47,19 @@ export class DiagramComponent {
       computeSnapForNodeSize: () => ({ width: 1, height: 1 }),
       defaultResizeSnap: { width: 1, height: 1 },
     },
-    resize: {
-      getMinNodeSize: (_: Node) => {
-        return { width: 100, height: 42 };
-      },
+    linking: {
+      finalEdgeDataBuilder: (edge: Edge<{ [key: string]: any }>) => ({
+        id: edge.id,
+        source: edge.source,
+        target: edge.target,
+        type: 'custom',
+        data: { label: '', color: '#3498db', width: 2 },
+      }),
     },
   };
 
   nodeTemplates = DIAGRAM_NODE_TEMPLATES;
+  edgeTemplates = DIAGRAM_EDGE_TEMPLATES;
 
   model = initializeModel({
     nodes: [
@@ -72,11 +79,17 @@ export class DiagramComponent {
     edges: [
       {
         id: 'edge-1',
+        type: 'custom',
         source: 'node-1',
         target: 'node-2',
         sourcePort: 'port-right',
         targetPort: 'port-left',
-        data: {},
+        data: {
+          label: 'Tak',
+          color: '#3498db',
+          width: 2,
+          dashArray: '5 5',
+        },
         targetArrowhead: 'ng-diagram-arrow',
       },
     ],

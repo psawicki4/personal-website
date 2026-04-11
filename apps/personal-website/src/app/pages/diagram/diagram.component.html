@@ -11,7 +11,12 @@
         <p>{{ t('component-desc') }}</p>
         @defer {
           <div class="grow flex gap-4 relative">
-            <ng-diagram [model]="model" [config]="config" [nodeTemplateMap]="nodeTemplates">
+            <ng-diagram
+              [model]="model"
+              [config]="config"
+              [nodeTemplateMap]="nodeTemplates"
+              [edgeTemplateMap]="edgeTemplates"
+            >
               <ng-diagram-background />
             </ng-diagram>
 

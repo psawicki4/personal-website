@@ -1,19 +1,12 @@
 import { CommonModule } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  inject,
-  linkedSignal,
-  Signal,
-  WritableSignal,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, linkedSignal, WritableSignal } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { form, FormField, FormRoot, pattern, required } from '@angular/forms/signals';
+import { form, FormField, FormRoot, min, pattern, required } from '@angular/forms/signals';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
 import { TranslocoDirective } from '@jsverse/transloco';
 import { Edge, NgDiagramModelService, NgDiagramSelectionService, type Node } from 'ng-diagram';
 import { ColorPickerDirective } from 'ngx-color-picker';
@@ -33,6 +26,7 @@ import { CardComponent } from '../../card/card.component';
     CardComponent,
     FormField,
     FormRoot,
+    MatSelectModule,
     ColorPickerDirective,
   ],
   templateUrl: './diagram-sidebar.component.html',
@@ -45,9 +39,15 @@ export class DiagramSidebarComponent {
   selectedNode: WritableSignal<Node<{ [key: string]: any }>> = linkedSignal(
     () => this.selectionService.selection().nodes[0] ?? null
   );
-  selectedEdge: Signal<Edge<{ [key: string]: any }>> = computed(
+  selectedEdge: WritableSignal<Edge<{ [key: string]: any }>> = linkedSignal(
     () => this.selectionService.selection().edges[0] ?? null
   );
+
+  lines = [
+    { value: '', viewValue: 'solid' },
+    { value: '5 5', viewValue: 'dashed' },
+    { value: '2 5', viewValue: 'dotted' },
+  ];
 
   nodeForm = form(
     this.selectedNode,
@@ -65,27 +65,32 @@ export class DiagramSidebarComponent {
     }
   );
 
-  edgeModel = linkedSignal(() => ({ label: this.selectedEdge()?.data['label'] || '' }));
-
-  edgeForm = form(this.edgeModel, {
-    submission: {
-      action: async () => this.onEdgeSubmit(),
+  edgeForm = form(
+    this.selectedEdge,
+    (schemaPath) => {
+      required(schemaPath.data['width'], { message: 'required-field' });
+      min(schemaPath.data['width'], 1, { message: 'min-1' });
     },
-  });
+    {
+      submission: {
+        action: async () => this.onEdgeSubmit(),
+      },
+    }
+  );
 
   onNodeSubmit() {
     this.modelService.updateNode(this.selectedNode().id, this.selectedNode());
   }
 
   onEdgeSubmit() {
-    this.modelService.updateEdge(this.selectedEdge().id, { data: { label: this.edgeModel().label } });
+    this.modelService.updateEdge(this.selectedEdge().id, this.selectedEdge());
   }
 
-  onColorPickerChange(color: string) {
+  onColorPickerNodeChange(color: string) {
     this.nodeForm.data['color']().value.set(color);
   }
 
-  get color(): string {
-    return this.selectedNode()?.data['color'] || 'inherit';
+  onColorPickerEdgeChange(color: string) {
+    this.edgeForm.data['color']().value.set(color);
   }
 }

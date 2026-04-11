@@ -15,12 +15,12 @@
                 <input
                   matInput
                   [formField]="nodeForm.data[item.key]"
-                  [colorPicker]="color"
+                  [colorPicker]="selectedNode().data['color']"
                   cpAlphaChannel="disabled"
                   cpPosition="top-left"
                   cpPresetLabel="{{ t('preset-colors') }}"
                   [cpPresetColors]="['#27282b', '#691e6b', '#1a3d8a', '#0f6135', '#a65100', '#852323']"
-                  (colorPickerChange)="onColorPickerChange($event)"
+                  (colorPickerChange)="onColorPickerNodeChange($event)"
                 />
               }
               @case ('note') {
@@ -66,10 +66,41 @@
       </form>
     } @else if (selectedEdge()) {
       <form [formRoot]="edgeForm" class="flex flex-col gap-2">
-        <mat-form-field appearance="outline" class="w-full">
-          <mat-label>{{ t('label') }}</mat-label>
-          <input matInput [formField]="edgeForm.label" />
-        </mat-form-field>
+        @for (item of selectedEdge().data | keyvalue:() => 0; track item.key) {
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-label>{{ t(item.key) }}</mat-label>
+            @switch (item.key) {
+              @case ('color') {
+                <input
+                  matInput
+                  [formField]="edgeForm.data[item.key]"
+                  [colorPicker]="selectedEdge().data['color']"
+                  cpAlphaChannel="disabled"
+                  cpPosition="top-left"
+                  cpPresetLabel="{{ t('preset-colors') }}"
+                  [cpPresetColors]="['#6f7480', '#3498db', '#2ecc71', '#9b59b6', '#e74c3c', '#f39c12']"
+                  (colorPickerChange)="onColorPickerEdgeChange($event)"
+                />
+              }
+              @case ('width') {
+                <input matInput type="number" class="number" [formField]="edgeForm.data[item.key]" />
+              }
+              @case ('dashArray') {
+                <mat-select [formField]="edgeForm.data[item.key]">
+                  @for (line of lines; track line) {
+                    <mat-option [value]="line.value">{{ t(line.viewValue) }}</mat-option>
+                  }
+                </mat-select>
+              }
+              @default {
+                <input matInput [formField]="edgeForm.data[item.key]" />
+              }
+            }
+            @if (edgeForm.data[item.key]().invalid()) {
+              <mat-error>{{ t(edgeForm.data[item.key]().errors()[0].message) }}</mat-error>
+            }
+          </mat-form-field>
+        }
 
         <button matButton="outlined" color="primary" type="submit" [disabled]="edgeForm().invalid()">
           {{ t('update') }}

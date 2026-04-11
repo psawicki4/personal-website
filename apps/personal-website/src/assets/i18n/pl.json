@@ -125,11 +125,18 @@
     "select-node-hint": "Zaznacz element na diagramie, aby edytować jego właściwości.",
     "color": "Kolor",
     "preset-colors": "Predefiniowane kolory",
-    "invalid-color-format": "Nieprawidłowy format koloru"
+    "invalid-color-format": "Nieprawidłowy format koloru",
+    "width": "Szerokość linii",
+    "dashArray": "Styl kreskowania",
+    "min-1": "Minimalna wartość to 1",
+    "solid": "Ciągła",
+    "dashed": "Kreskowana",
+    "dotted": "Kropkowana"
   },
   "DIAGRAM_PALETTE": {
     "process": "Proces",
     "decision": "Decyzja",
+    "in-out": "Wejście/wyjście",
     "group": "Grupa",
     "note": "Notatka"
   }

@@ -126,11 +126,18 @@
     "select-node-hint": "Select an element on the diagram to edit its properties.",
     "color": "Color",
     "preset-colors": "Preset colors",
-    "invalid-color-format": "Invalid color format"
+    "invalid-color-format": "Invalid color format",
+    "width": "Line width",
+    "dashArray": "Dash style",
+    "min-1": "Minimum value is 1",
+    "solid": "Solid",
+    "dashed": "Dashed",
+    "dotted": "Dotted"
   },
   "DIAGRAM_PALETTE": {
     "process": "Process",
     "decision": "Decision",
+    "in-out": "In-out",
     "group": "Group",
     "note": "Note"
   }

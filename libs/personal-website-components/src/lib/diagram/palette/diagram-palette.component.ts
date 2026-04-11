@@ -11,6 +11,7 @@ import { LangService } from 'utils';
 import { CardComponent } from '../../card/card.component';
 import { DecisionNodeComponent } from '../nodes/decision-node/decision-node.component';
 import { GroupComponent } from '../nodes/group/group.component';
+import { InOutNodeComponent } from '../nodes/in-out-node/in-out-node.component';
 import { NoteNodeComponent } from '../nodes/note-node/note-node.component';
 import { ProcessNodeComponent } from '../nodes/process-node/process-node.component';
 
@@ -26,6 +27,7 @@ import { ProcessNodeComponent } from '../nodes/process-node/process-node.compone
     GroupComponent,
     ProcessNodeComponent,
     DecisionNodeComponent,
+    InOutNodeComponent,
   ],
   templateUrl: './diagram-palette.component.html',
   styleUrl: './diagram-palette.component.scss',
@@ -38,6 +40,7 @@ export class DiagramPaletteComponent {
   groupNodeLabel = translateSignal('DIAGRAM_PALETTE.group');
   noteNodeLabel = translateSignal('DIAGRAM_PALETTE.note');
   addNoteLabel = translateSignal('DIAGRAM.add-note');
+  inOutNodeLabel = translateSignal('DIAGRAM_PALETTE.in-out');
 
   paletteModel: NgDiagramPaletteItem<{ label: string; note?: string; color?: string }>[] = [
     {
@@ -54,6 +57,13 @@ export class DiagramPaletteComponent {
       size: { width: 100, height: 100 },
       autoSize: false,
       resizable: true,
+      rotatable: false,
+    },
+    {
+      type: 'in-out',
+      data: { label: this.inOutNodeLabel(), color: '#852323' },
+      autoSize: false,
+      resizable: false,
       rotatable: false,
     },
     {
@@ -84,6 +94,11 @@ export class DiagramPaletteComponent {
     id: '',
     position: { x: 1, y: 1 },
     data: { label: this.decisionLabel(), color: '#27282b' },
+  };
+  dummyInOutNode: Node = {
+    id: '',
+    position: { x: 1, y: 1 },
+    data: { label: this.inOutNodeLabel(), color: '#852323' },
   };
   dummyGroupNode: GroupNode = {
     id: '',
