@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { DecisionNodeComponent } from './decision-node.component';
 import { Node, provideNgDiagram } from 'ng-diagram';
-import { describe, it, expect, beforeEach } from 'vitest';
+import { beforeEach, describe, expect, it } from 'vitest';
+import { DecisionNodeComponent } from './decision-node.component';
 
 describe('DecisionNodeComponent', () => {
   let component: DecisionNodeComponent;

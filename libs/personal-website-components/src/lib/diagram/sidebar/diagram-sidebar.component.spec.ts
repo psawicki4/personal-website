@@ -1,10 +1,10 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { DiagramSidebarComponent } from './diagram-sidebar.component';
-import { NgDiagramModelService, NgDiagramSelectionService } from 'ng-diagram';
-import { TranslocoService } from '@jsverse/transloco';
-import { createTranslocoMock } from 'utils';
 import { signal } from '@angular/core';
-import { describe, it, expect, beforeEach, vi } from 'vitest';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { TranslocoService } from '@jsverse/transloco';
+import { NgDiagramModelService, NgDiagramSelectionService } from 'ng-diagram';
+import { createTranslocoMock } from 'utils';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { DiagramSidebarComponent } from './diagram-sidebar.component';
 
 describe('DiagramSidebarComponent', () => {
   let component: DiagramSidebarComponent;

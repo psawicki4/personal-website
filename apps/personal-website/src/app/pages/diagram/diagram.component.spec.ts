@@ -1,10 +1,10 @@
+import { signal } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { DiagramComponent } from './diagram.component';
-import { PortraitService, createTranslocoMock } from 'utils';
 import { TranslocoService } from '@jsverse/transloco';
 import { provideNgDiagram } from 'ng-diagram';
-import { signal } from '@angular/core';
-import { describe, it, expect, beforeEach, vi } from 'vitest';
+import { PortraitService, createTranslocoMock } from 'utils';
+import { beforeEach, describe, expect, it } from 'vitest';
+import { DiagramComponent } from './diagram.component';
 
 describe('DiagramComponent', () => {
   let component: DiagramComponent;

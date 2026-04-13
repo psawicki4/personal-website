@@ -1,10 +1,10 @@
+import { signal } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { DiagramPaletteComponent } from './diagram-palette.component';
-import { LangService, createTranslocoMock } from 'utils';
 import { TranslocoService } from '@jsverse/transloco';
 import { provideNgDiagram } from 'ng-diagram';
-import { signal } from '@angular/core';
-import { describe, it, expect, beforeEach } from 'vitest';
+import { LangService, createTranslocoMock } from 'utils';
+import { beforeEach, describe, expect, it } from 'vitest';
+import { DiagramPaletteComponent } from './diagram-palette.component';
 
 describe('DiagramPaletteComponent', () => {
   let component: DiagramPaletteComponent;

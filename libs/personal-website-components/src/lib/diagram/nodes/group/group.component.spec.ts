@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { GroupComponent } from './group.component';
 import { GroupNode, provideNgDiagram } from 'ng-diagram';
-import { describe, it, expect, beforeEach } from 'vitest';
+import { beforeEach, describe, expect, it } from 'vitest';
+import { GroupComponent } from './group.component';
 
 describe('GroupComponent', () => {
   let component: GroupComponent;

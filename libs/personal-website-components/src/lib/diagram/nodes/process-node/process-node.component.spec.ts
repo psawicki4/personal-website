@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ProcessNodeComponent } from './process-node.component';
 import { Node, provideNgDiagram } from 'ng-diagram';
-import { describe, it, expect, beforeEach } from 'vitest';
+import { beforeEach, describe, expect, it } from 'vitest';
+import { ProcessNodeComponent } from './process-node.component';
 
 describe('ProcessNodeComponent', () => {
   let component: ProcessNodeComponent;

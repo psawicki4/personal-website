@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { InOutNodeComponent } from './in-out-node.component';
 import { Node, provideNgDiagram } from 'ng-diagram';
-import { describe, it, expect, beforeEach } from 'vitest';
+import { beforeEach, describe, expect, it } from 'vitest';
+import { InOutNodeComponent } from './in-out-node.component';
 
 describe('InOutNodeComponent', () => {
   let component: InOutNodeComponent;
