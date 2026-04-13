@@ -114,7 +114,8 @@
     "header": "Diagram Builder",
     "default-label": "Header",
     "add-note": "Add note",
-    "component-desc": "An interactive diagram builder with dynamic node property editing. Select a node to customize its label and position. Changes are immediately reflected on the diagram, allowing for intuitive personalization and organization of visual elements."
+    "landscape": "Switch to landscape mode",
+    "component-desc": "An interactive diagram builder with drag-and-drop functionality, built using the ngDiagram library. The component includes a palette of diagram elements and the ability to configure their properties in a sidebar."
   },
   "DIAGRAM_SIDEBAR": {
     "properties": "Properties",

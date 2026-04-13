@@ -113,7 +113,8 @@
   "DIAGRAM": {
     "header": "Kreator Diagramów",
     "add-note": "Dodaj notatkę",
-    "component-desc": "Interaktywny kreator diagramów z dynamiczną edycją właściwości węzłów. Wybierz węzeł, aby dostosować jego etykietę i pozycję. Zmiany są natychmiast odzwierciedlane na diagramie, umożliwiając intuicyjną personalizację i organizację elementów wizualnych."
+    "landscape": "Przełącz na tryb poziomy",
+    "component-desc": "Interaktywny kreator diagramów z funkcją przeciągnij i upuść, zbudowany z użyciem  biblioteki ngDiagram. Komponent zawiera paletę z elementami diagramu oraz możliwość konfigurowania ich właściwości w panelu bocznym."
   },
   "DIAGRAM_SIDEBAR": {
     "properties": "Właściwości",
