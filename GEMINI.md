@@ -12,6 +12,7 @@
 - **Framework**: Always use **Vitest** for unit testing.
 - **Mocking Transloco**: If a component or service uses `TranslocoService` or `TranslocoDirective`, always use `createTranslocoMock()` from the `utils` library.
   - Example: `import { createTranslocoMock } from 'utils';` and then `{ provide: TranslocoService, useValue: createTranslocoMock() }` in providers.
+- **Test Quality**: Avoid creating generic boilerplate tests like `it('should create', ...)`. Instead, focus on verifying specific behaviors, inputs, and outputs of the component or service.
 - **Test Location**: Keep `.spec.ts` files in the same directory as the file being tested.
 - **Verification**: When adding new features, try to add or update corresponding unit tests and ensure they pass using `pnpm exec nx test <project-name>`.
 
