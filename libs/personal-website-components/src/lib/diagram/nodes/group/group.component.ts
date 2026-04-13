@@ -30,4 +30,8 @@ export class GroupComponent implements NgDiagramGroupNodeTemplate {
   get color(): string {
     return this.node().data.color || '';
   }
+
+  get size(): { width: number; height: number } {
+    return this.node().size || { width: 250, height: 200 };
+  }
 }

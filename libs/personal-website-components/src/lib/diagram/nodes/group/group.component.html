@@ -1,7 +1,11 @@
 <ng-diagram-node-resize-adornment>
   <div
     class="custom-group"
-    [ngStyle]="{ '--custom-node-color': color }"
+    [ngStyle]="{
+      '--custom-node-color': color,
+      '--custom-node-width': size.width + 'px',
+      '--custom-node-height': size.height + 'px',
+    }"
     ngDiagramGroupHighlighted
     ngDiagramNodeSelected
     [node]="node()"

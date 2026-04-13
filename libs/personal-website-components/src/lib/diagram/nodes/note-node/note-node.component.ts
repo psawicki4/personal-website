@@ -1,3 +1,4 @@
+import { NgStyle } from '@angular/common';
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import {
   NgDiagramNodeResizeAdornmentComponent,
@@ -9,7 +10,7 @@ import {
 @Component({
   selector: 'lib-note-node',
   standalone: true,
-  imports: [NgDiagramNodeResizeAdornmentComponent],
+  imports: [NgDiagramNodeResizeAdornmentComponent, NgStyle],
   hostDirectives: [
     {
       directive: NgDiagramNodeSelectedDirective,
@@ -29,5 +30,9 @@ export class NoteNodeComponent implements NgDiagramNodeTemplate {
 
   get label(): string {
     return this.node().data.label || '';
+  }
+
+  get size(): { width: number; height: number } {
+    return this.node().size || { width: 250, height: 200 };
   }
 }
