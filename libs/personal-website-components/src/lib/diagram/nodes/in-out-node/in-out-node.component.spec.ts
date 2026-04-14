@@ -3,26 +3,28 @@ import { beforeEach, describe, expect, it } from 'vitest';
 import { createMockNode, setupNodeTemplateTest } from '../node-test.helpers';
 import { InOutNodeComponent } from './in-out-node.component';
 
-describe('InOutNodeComponent', () => {
-  let component: InOutNodeComponent;
+describe('InOutNodeComponent (Entry/Exit)', () => {
+  let instance: InOutNodeComponent;
   let fixture: ComponentFixture<InOutNodeComponent>;
 
   beforeEach(async () => {
-    ({ fixture, component } = await setupNodeTemplateTest<InOutNodeComponent>(InOutNodeComponent));
+    const result = await setupNodeTemplateTest<InOutNodeComponent>(InOutNodeComponent);
+    instance = result.component;
+    fixture = result.fixture;
   });
 
-  it('should create', () => {
-    const mockNode = createMockNode({ label: 'Test Label', color: '#ff0000' });
-    fixture.componentRef.setInput('node', mockNode);
+  it('should confirm entry/exit point initialization', () => {
+    const ioNode = createMockNode({ label: 'Terminal Start', color: '#27ae60' });
+    fixture.componentRef.setInput('node', ioNode);
     fixture.detectChanges();
-    expect(component).toBeTruthy();
+    expect(instance).not.toBeNull();
   });
 
-  it('should return color and label from node data', () => {
-    const mockNode = createMockNode({ label: 'Test Label', color: '#ff0000' });
-    fixture.componentRef.setInput('node', mockNode);
+  it('should map terminal node properties correctly from data source', () => {
+    const greenNode = createMockNode({ label: 'Data Sink', color: '#2ecc71' });
+    fixture.componentRef.setInput('node', greenNode);
     fixture.detectChanges();
-    expect(component.color).toBe('#ff0000');
-    expect(component.label).toBe('Test Label');
+    expect(instance.label).toBe('Data Sink');
+    expect(instance.color).toBe('#2ecc71');
   });
 });

@@ -55,65 +55,48 @@ export const DEFAULT_DIAGRAM_NODES: Node[] = [
   },
 ];
 
+function createDiagramEdge(
+  id: string,
+  source: string,
+  target: string,
+  label: string,
+  options: {
+    color?: string;
+    width?: number;
+    dashArray?: string;
+    sourcePort?: string;
+    targetPort?: string;
+  } = {}
+): Edge {
+  return {
+    id,
+    source,
+    target,
+    type: 'custom',
+    sourcePort: options.sourcePort || 'port-right',
+    targetPort: options.targetPort || 'port-left',
+    targetArrowhead: 'ng-diagram-arrow',
+    data: {
+      label,
+      color: options.color || '#3498db',
+      width: options.width || 2,
+      dashArray: options.dashArray || '',
+    },
+  };
+}
+
 export const DEFAULT_DIAGRAM_EDGES: Edge[] = [
-  {
-    id: 'e1',
-    type: 'custom',
-    source: 'start',
-    target: 'verification',
-    sourcePort: 'port-right',
-    targetPort: 'port-left',
-    data: { label: 'Złożono', color: '#3498db', width: 2, dashArray: '' },
-    targetArrowhead: 'ng-diagram-arrow',
-  },
-  {
-    id: 'e2',
-    type: 'custom',
-    source: 'verification',
-    target: 'is-valid',
-    sourcePort: 'port-right',
-    targetPort: 'port-left',
-    data: { label: 'Sprawdzono', color: '#3498db', width: 2, dashArray: '' },
-    targetArrowhead: 'ng-diagram-arrow',
-  },
-  {
-    id: 'e3',
-    type: 'custom',
-    source: 'is-valid',
-    target: 'expert-opinion',
-    sourcePort: 'port-right',
-    targetPort: 'port-left',
-    data: { label: 'TAK', color: '#2ecc71', width: 2, dashArray: '' },
-    targetArrowhead: 'ng-diagram-arrow',
-  },
-  {
-    id: 'e4',
-    type: 'custom',
-    source: 'is-valid',
-    target: 'rejection',
+  createDiagramEdge('e1', 'start', 'verification', 'Złożono'),
+  createDiagramEdge('e2', 'verification', 'is-valid', 'Sprawdzono'),
+  createDiagramEdge('e3', 'is-valid', 'expert-opinion', 'TAK', { color: '#2ecc71' }),
+  createDiagramEdge('e4', 'is-valid', 'rejection', 'NIE', {
+    color: '#e74c3c',
+    dashArray: '5 5',
     sourcePort: 'port-bottom',
-    targetPort: 'port-left',
-    data: { label: 'NIE', color: '#e74c3c', width: 2, dashArray: '5 5' },
-    targetArrowhead: 'ng-diagram-arrow',
-  },
-  {
-    id: 'e5',
-    type: 'custom',
-    source: 'expert-opinion',
-    target: 'final-decision',
-    sourcePort: 'port-right',
-    targetPort: 'port-left',
-    data: { label: 'Zakończono', color: '#2ecc71', width: 3, dashArray: '' },
-    targetArrowhead: 'ng-diagram-arrow',
-  },
-  {
-    id: 'e6',
-    type: 'custom',
-    source: 'rejection',
-    target: 'final-decision',
-    sourcePort: 'port-right',
-    targetPort: 'port-left',
-    data: { label: 'Zamknięto', color: '#3498db', width: 2, dashArray: '' },
-    targetArrowhead: 'ng-diagram-arrow',
-  },
+  }),
+  createDiagramEdge('e5', 'expert-opinion', 'final-decision', 'Zakończono', {
+    color: '#2ecc71',
+    width: 3,
+  }),
+  createDiagramEdge('e6', 'rejection', 'final-decision', 'Zamknięto'),
 ];
