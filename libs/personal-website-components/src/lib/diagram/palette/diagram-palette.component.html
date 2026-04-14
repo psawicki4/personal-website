@@ -1,0 +1,34 @@
+<lib-card *transloco="let t; prefix: 'DIAGRAM_PALETTE'">
+  <div class="flex flex-col gap-4 min-w-[150px]">
+    <ng-diagram-palette-item [item]="paletteModel[0]">
+      <div class="node-preview">{{ t('process') }}</div>
+      <ng-diagram-palette-item-preview>
+        <lib-process-node [node]="dummyNode"></lib-process-node>
+      </ng-diagram-palette-item-preview>
+    </ng-diagram-palette-item>
+    <ng-diagram-palette-item [item]="paletteModel[1]">
+      <div class="node-preview">{{ t('decision') }}</div>
+      <ng-diagram-palette-item-preview>
+        <lib-decision-node [node]="dummyDecisionNode"></lib-decision-node>
+      </ng-diagram-palette-item-preview>
+    </ng-diagram-palette-item>
+    <ng-diagram-palette-item [item]="paletteModel[2]">
+      <div class="node-preview">{{ t('in-out') }}</div>
+      <ng-diagram-palette-item-preview>
+        <lib-in-out-node [node]="dummyInOutNode"></lib-in-out-node>
+      </ng-diagram-palette-item-preview>
+    </ng-diagram-palette-item>
+    <ng-diagram-palette-item [item]="paletteModel[3]">
+      <div class="node-preview">{{ t('group') }}</div>
+      <ng-diagram-palette-item-preview>
+        <lib-group-node [node]="dummyGroupNode"></lib-group-node>
+      </ng-diagram-palette-item-preview>
+    </ng-diagram-palette-item>
+    <ng-diagram-palette-item [item]="paletteModel[4]">
+      <div class="node-preview">{{ t('note') }}</div>
+      <ng-diagram-palette-item-preview>
+        <lib-note-node [node]="dummyNoteNode"></lib-note-node>
+      </ng-diagram-palette-item-preview>
+    </ng-diagram-palette-item>
+  </div>
+</lib-card>

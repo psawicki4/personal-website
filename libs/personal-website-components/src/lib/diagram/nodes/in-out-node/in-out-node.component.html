@@ -1,0 +1,6 @@
+<div class="flex items-center justify-center h-full">
+  <div class="label">{{ label }}</div>
+  <div class="custom-node" [ngStyle]="{ '--custom-node-color': color }"></div>
+</div>
+<ng-diagram-port [side]="'right'" [type]="'source'" [id]="'port-right'" />
+<ng-diagram-port [side]="'left'" [type]="'target'" [id]="'port-left'" />

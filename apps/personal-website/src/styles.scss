@@ -1,6 +1,7 @@
 @use 'styles/custom-theme';
 @use 'styles/variables' as var;
 @use 'tailwindcss';
+@import 'ng-diagram/styles.css';
 
 html {
   line-height: 1.5;
@@ -51,6 +52,16 @@ body {
   background-position: center;
   background-size: cover;
   z-index: -1;
+}
+
+input.number::-webkit-outer-spin-button,
+input.number::-webkit-inner-spin-button {
+  display: none;
+}
+
+input.number {
+  appearance: textfield;
+  -moz-appearance: textfield;
 }
 
 @media only screen and (max-width: 640px) {

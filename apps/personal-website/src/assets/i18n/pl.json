@@ -19,7 +19,8 @@
     "list": "Wirtualna Lista",
     "grid": "Zaawansowana Tabela",
     "model-3d": "Wizualizacja 3D",
-    "ai-assistant": "Asystent AI"
+    "ai-assistant": "Asystent AI",
+    "diagram": "Kreator Diagramów"
   },
   "CONTACT": {
     "contact": "Kontakt",
@@ -107,6 +108,37 @@
     "capture": "Opisz co widzisz",
     "loading": "Przetwarzanie obrazu...",
     "content-error": "Przepraszam, wystąpił błąd podczas generowania opisu.",
-    "sound-reminder": "Pamiętaj o udostępnieniu kamery i włączeniu dzwięku."
+    "sound-reminder": "Pamiętaj o udostępnieniu kamery i włączeniu dźwięku."
+  },
+  "DIAGRAM": {
+    "header": "Kreator Diagramów",
+    "add-note": "Dodaj notatkę",
+    "landscape": "Przełącz na tryb poziomy",
+    "component-desc": "Interaktywny kreator diagramów z funkcją przeciągnij i upuść, zbudowany z użyciem  biblioteki ngDiagram. Komponent zawiera paletę z elementami diagramu oraz możliwość konfigurowania ich właściwości w panelu bocznym."
+  },
+  "DIAGRAM_SIDEBAR": {
+    "properties": "Właściwości",
+    "no-selection": "Brak zaznaczenia",
+    "label": "Etykieta",
+    "note": "Notatka",
+    "required-field": "Wymagane",
+    "update": "Aktualizuj",
+    "select-node-hint": "Zaznacz element na diagramie, aby edytować jego właściwości.",
+    "color": "Kolor",
+    "preset-colors": "Predefiniowane kolory",
+    "invalid-color-format": "Nieprawidłowy format koloru",
+    "width": "Szerokość linii",
+    "dashArray": "Styl kreskowania",
+    "min-1": "Minimalna wartość to 1",
+    "solid": "Ciągła",
+    "dashed": "Kreskowana",
+    "dotted": "Kropkowana"
+  },
+  "DIAGRAM_PALETTE": {
+    "process": "Proces",
+    "decision": "Decyzja",
+    "in-out": "Wejście/wyjście",
+    "group": "Grupa",
+    "note": "Notatka"
   }
 }

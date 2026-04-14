@@ -1,0 +1,113 @@
+<lib-card class="w-72" *transloco="let t; prefix: 'DIAGRAM_SIDEBAR'">
+  <div class="flex flex-col gap-4">
+    <div class="flex items-center gap-2 mb-2">
+      <mat-icon>settings</mat-icon>
+      <h2 class="text-xl font-semibold">{{ t('properties') }}</h2>
+    </div>
+
+    @if (selectedNode()) {
+      <form [formRoot]="nodeForm" class="flex flex-col gap-2">
+        @for (item of selectedNode().data | keyvalue:() => 0; track item.key) {
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-label>{{ t(item.key) }}</mat-label>
+            @switch (item.key) {
+              @case ('color') {
+                <input
+                  matInput
+                  [formField]="nodeForm.data[item.key]"
+                  [colorPicker]="selectedNode().data['color']"
+                  cpAlphaChannel="disabled"
+                  cpPosition="top-left"
+                  cpPresetLabel="{{ t('preset-colors') }}"
+                  [cpPresetColors]="['#27282b', '#691e6b', '#1a3d8a', '#0f6135', '#a65100', '#852323']"
+                  (colorPickerChange)="onColorPickerNodeChange($event)"
+                />
+              }
+              @case ('note') {
+                <textarea
+                  matInput
+                  cdkTextareaAutosize
+                  [formField]="nodeForm.data[item.key]"
+                  rows="2"
+                  cdkAutosizeMaxRows="6"
+                ></textarea>
+              }
+              @default {
+                <input matInput [formField]="nodeForm.data[item.key]" />
+              }
+            }
+            @if (nodeForm.data[item.key]().invalid()) {
+              <mat-error>{{ t(nodeForm.data[item.key]().errors()[0].message) }}</mat-error>
+            }
+          </mat-form-field>
+        }
+
+        <div class="flex gap-2">
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-label>X</mat-label>
+            <input matInput type="number" class="number" [formField]="nodeForm.position.x" />
+            @if (nodeForm.position.x().invalid()) {
+              <mat-error>{{ t('required-field') }}</mat-error>
+            }
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-label>Y</mat-label>
+            <input matInput type="number" class="number" [formField]="nodeForm.position.y" />
+            @if (nodeForm.position.y().invalid()) {
+              <mat-error>{{ t('required-field') }}</mat-error>
+            }
+          </mat-form-field>
+        </div>
+
+        <button matButton="outlined" color="primary" type="submit" [disabled]="nodeForm().invalid()">
+          {{ t('update') }}
+        </button>
+      </form>
+    } @else if (selectedEdge()) {
+      <form [formRoot]="edgeForm" class="flex flex-col gap-2">
+        @for (item of selectedEdge().data | keyvalue:() => 0; track item.key) {
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-label>{{ t(item.key) }}</mat-label>
+            @switch (item.key) {
+              @case ('color') {
+                <input
+                  matInput
+                  [formField]="edgeForm.data[item.key]"
+                  [colorPicker]="selectedEdge().data['color']"
+                  cpAlphaChannel="disabled"
+                  cpPosition="top-left"
+                  cpPresetLabel="{{ t('preset-colors') }}"
+                  [cpPresetColors]="['#6f7480', '#3498db', '#2ecc71', '#9b59b6', '#e74c3c', '#f39c12']"
+                  (colorPickerChange)="onColorPickerEdgeChange($event)"
+                />
+              }
+              @case ('width') {
+                <input matInput type="number" class="number" [formField]="edgeForm.data[item.key]" />
+              }
+              @case ('dashArray') {
+                <mat-select [formField]="edgeForm.data[item.key]">
+                  @for (line of lines; track line) {
+                    <mat-option [value]="line.value">{{ t(line.viewValue) }}</mat-option>
+                  }
+                </mat-select>
+              }
+              @default {
+                <input matInput [formField]="edgeForm.data[item.key]" />
+              }
+            }
+            @if (edgeForm.data[item.key]().invalid()) {
+              <mat-error>{{ t(edgeForm.data[item.key]().errors()[0].message) }}</mat-error>
+            }
+          </mat-form-field>
+        }
+
+        <button matButton="outlined" color="primary" type="submit" [disabled]="edgeForm().invalid()">
+          {{ t('update') }}
+        </button>
+      </form>
+    } @else {
+      <p class="text-sm text-gray-400">{{ t('select-node-hint') }}</p>
+    }
+  </div>
+</lib-card>

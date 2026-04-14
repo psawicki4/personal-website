@@ -10,30 +10,6 @@
     >
     <a
       mat-list-item
-      routerLink="/form"
-      routerLinkActive="active"
-      [routerLinkActiveOptions]="{ exact: true }"
-      (click)="onClick()"
-      >{{ t('form') }}</a
-    >
-    <a
-      mat-list-item
-      routerLink="/list"
-      routerLinkActive="active"
-      [routerLinkActiveOptions]="{ exact: true }"
-      (click)="onClick()"
-      >{{ t('list') }}</a
-    >
-    <a
-      mat-list-item
-      routerLink="/grid"
-      routerLinkActive="active"
-      [routerLinkActiveOptions]="{ exact: true }"
-      (click)="onClick()"
-      >{{ t('grid') }}</a
-    >
-    <a
-      mat-list-item
       routerLink="/model-3d"
       routerLinkActive="active"
       [routerLinkActiveOptions]="{ exact: true }"
@@ -47,6 +23,38 @@
       [routerLinkActiveOptions]="{ exact: true }"
       (click)="onClick()"
       >{{ t('ai-assistant') }}</a
+    >
+    <a
+      mat-list-item
+      routerLink="/diagram"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+      (click)="onClick()"
+      >{{ t('diagram') }}</a
+    >
+    <a
+      mat-list-item
+      routerLink="/form"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+      (click)="onClick()"
+      >{{ t('form') }}</a
+    >
+    <a
+      mat-list-item
+      routerLink="/grid"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+      (click)="onClick()"
+      >{{ t('grid') }}</a
+    >
+    <a
+      mat-list-item
+      routerLink="/list"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+      (click)="onClick()"
+      >{{ t('list') }}</a
     >
   </mat-nav-list>
 </ng-container>

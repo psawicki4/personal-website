@@ -1,0 +1,11 @@
+@use 'variables' as var;
+
+.node-preview {
+  display: flex;
+  justify-content: center;
+  background-color: var.$surface-variant;
+  border: var(--ngd-node-border-size) solid var(--ngd-node-border-color);
+  border-radius: 0.75rem;
+  padding: 0.5rem;
+  cursor: pointer;
+}

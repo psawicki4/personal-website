@@ -16,4 +16,4 @@ $surface-high: color.mix($primary, $background, 10%);
 $surface-highest: color.mix($primary, $background, 14%);
 $surface-variant: color.mix($primary, $background, 20%);
 $surface-transparent: color.adjust($surface, $alpha: -0.7);
-$surface-transparent-variant: color.adjust($surface-variant, $alpha: -0.7);
+$surface-transparent-variant: color.adjust($surface-variant, $alpha: -0.5);

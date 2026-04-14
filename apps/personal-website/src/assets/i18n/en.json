@@ -19,7 +19,8 @@
     "list": "Virtual List",
     "grid": "Enterprise Grid",
     "model-3d": "3D Visualization",
-    "ai-assistant": "AI Assistant"
+    "ai-assistant": "AI Assistant",
+    "diagram": "Diagram Builder"
   },
   "CONTACT": {
     "contact": "Contact",
@@ -108,5 +109,37 @@
     "loading": "Processing the image...",
     "content-error": "Sorry, an error occurred while generating the description.",
     "sound-reminder": "Remember to allow camera access and turn on sound."
+  },
+  "DIAGRAM": {
+    "header": "Diagram Builder",
+    "default-label": "Header",
+    "add-note": "Add note",
+    "landscape": "Switch to landscape mode",
+    "component-desc": "An interactive diagram builder with drag-and-drop functionality, built using the ngDiagram library. The component includes a palette of diagram elements and the ability to configure their properties in a sidebar."
+  },
+  "DIAGRAM_SIDEBAR": {
+    "properties": "Properties",
+    "no-selection": "No selection",
+    "label": "Label",
+    "note": "Note",
+    "required-field": "Required",
+    "update": "Update",
+    "select-node-hint": "Select an element on the diagram to edit its properties.",
+    "color": "Color",
+    "preset-colors": "Preset colors",
+    "invalid-color-format": "Invalid color format",
+    "width": "Line width",
+    "dashArray": "Dash style",
+    "min-1": "Minimum value is 1",
+    "solid": "Solid",
+    "dashed": "Dashed",
+    "dotted": "Dotted"
+  },
+  "DIAGRAM_PALETTE": {
+    "process": "Process",
+    "decision": "Decision",
+    "in-out": "In-out",
+    "group": "Group",
+    "note": "Note"
   }
 }
