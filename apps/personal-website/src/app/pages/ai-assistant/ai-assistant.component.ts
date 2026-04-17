@@ -8,6 +8,7 @@ import {
   viewChild,
 } from '@angular/core';
 import { MatButton } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
 import { TranslocoDirective } from '@jsverse/transloco';
 import { CardComponent, SpinnerOverlayComponent } from 'personal-website-components';
 import { LangService } from 'utils';
@@ -15,7 +16,7 @@ import { GeminiService } from './gemini.service';
 
 @Component({
   selector: 'psa-ai-assistant',
-  imports: [CardComponent, TranslocoDirective, MatButton, SpinnerOverlayComponent],
+  imports: [CardComponent, TranslocoDirective, MatButton, SpinnerOverlayComponent, MatIcon],
   templateUrl: './ai-assistant.component.html',
   styleUrl: './ai-assistant.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -41,8 +42,10 @@ export class AiAssistantComponent {
           height: { ideal: 720 },
         },
       });
-      this.videoRef().nativeElement.srcObject = stream;
       this.cameraEnabled.set(true);
+      setTimeout(() => {
+        this.videoRef().nativeElement.srcObject = stream;
+      }, 0);
     } catch (error) {
       console.error('Error accessing camera:', error);
     }

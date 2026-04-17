@@ -108,7 +108,8 @@
     "capture": "Opisz co widzisz",
     "loading": "Przetwarzanie obrazu...",
     "content-error": "Przepraszam, wystąpił błąd podczas generowania opisu.",
-    "sound-reminder": "Pamiętaj o udostępnieniu kamery i włączeniu dźwięku."
+    "sound-reminder": "Pamiętaj o udostępnieniu kamery i włączeniu dźwięku.",
+    "camera-off": "Dostęp do kamery nie jest włączony."
   },
   "DIAGRAM": {
     "header": "Kreator Diagramów",

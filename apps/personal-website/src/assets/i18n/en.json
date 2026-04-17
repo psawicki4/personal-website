@@ -108,7 +108,8 @@
     "capture": "Describe what you see",
     "loading": "Processing the image...",
     "content-error": "Sorry, an error occurred while generating the description.",
-    "sound-reminder": "Remember to allow camera access and turn on sound."
+    "sound-reminder": "Remember to allow camera access and turn on sound.",
+    "camera-off": "Camera access is turned off."
   },
   "DIAGRAM": {
     "header": "Diagram Builder",
