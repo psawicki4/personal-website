@@ -1,6 +1,8 @@
 import { afterNextRender, Component, inject } from '@angular/core';
 import { MatSidenav, MatSidenavContainer, MatSidenavContent } from '@angular/material/sidenav';
 import { RouterOutlet } from '@angular/router';
+import { inject as injectAnalytics } from '@vercel/analytics';
+import { injectSpeedInsights } from '@vercel/speed-insights';
 import { HeaderComponent, MenuComponent } from 'personal-website-components';
 import { LangService } from 'utils';
 
@@ -17,8 +19,8 @@ export class AppComponent {
   constructor() {
     afterNextRender(() => {
       this.langService.initLanguage();
-      // injectAnalytics();
-      // injectSpeedInsights();
+      injectAnalytics();
+      injectSpeedInsights();
     });
   }
 }
