@@ -6,7 +6,7 @@ An Angular-based personal website that serves as my portfolio and includes a set
 ![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript&logoColor=white)
 ![TailwindCSS](https://img.shields.io/badge/TailwindCSS-4-06B6D4?logo=tailwindcss&logoColor=white)
 ![Angular Material](https://img.shields.io/badge/Angular%20Material-21-3f51b5?logo=angular&logoColor=white)
-![three.js](https://img.shields.io/badge/three.js-0.182-000000?logo=threedotjs&logoColor=white)
+![three.js](https://img.shields.io/badge/three.js-0.184-000000?logo=threedotjs&logoColor=white)
 ![Cypress](https://img.shields.io/badge/Cypress-15-17202C?logo=cypress&logoColor=white)
 ![Transloco](https://img.shields.io/badge/Transloco-8-05ccfa?logo=transloco&logoColor=white)
 ![Nx](https://img.shields.io/badge/Nx-22-00384C?logo=nx&logoColor=white)

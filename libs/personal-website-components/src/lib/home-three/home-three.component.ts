@@ -23,7 +23,7 @@ export class HomeThreeComponent implements AfterViewInit, OnDestroy {
   controls = new OrbitControls(this.camera, this.threeRenderer.domElement);
   model?: THREE.Group;
   mixer?: THREE.AnimationMixer;
-  clock = new THREE.Clock();
+  clock = new THREE.Timer();
   loader = new GLTFLoader();
 
   ngAfterViewInit(): void {

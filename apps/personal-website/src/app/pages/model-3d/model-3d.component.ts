@@ -42,7 +42,7 @@ export class Model3DComponent implements OnDestroy {
     ['sea_turtle', 1],
   ]);
   mixer?: THREE.AnimationMixer;
-  clock = new THREE.Clock();
+  clock = new THREE.Timer();
   loader = new GLTFLoader();
 
   loading = false;
