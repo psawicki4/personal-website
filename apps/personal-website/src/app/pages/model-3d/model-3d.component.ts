@@ -146,6 +146,7 @@ export class Model3DComponent implements OnDestroy {
   }
 
   animate() {
+    this.clock.update();
     const delta = this.clock.getDelta();
     if (this.mixer?.getRoot()) {
       this.mixer.update(delta);
