@@ -49,7 +49,7 @@ export class DiagramComponent {
       defaultResizeSnap: { width: 1, height: 1 },
     },
     linking: {
-      finalEdgeDataBuilder: (edge: Edge<{ [key: string]: any }>) => ({
+      finalEdgeDataBuilder: (edge: Edge<{ [key: string]: object }>) => ({
         id: edge.id,
         source: edge.source,
         target: edge.target,
