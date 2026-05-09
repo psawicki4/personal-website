@@ -1,7 +1,7 @@
 {
   "version": 2,
   "public": true,
-  "outputDirectory": "dummy",
+  "outputDirectory": "dist/apps/personal-website/server",
   "rewrites": [
     {
       "source": "/(.*)",
