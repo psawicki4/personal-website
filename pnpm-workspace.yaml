@@ -9,5 +9,10 @@ allowBuilds:
   nx: true
   protobufjs: true
 overrides:
-  undici@>=7.0.0 <7.24.0: '>=7.24.0'
-  undici@>=7.17.0 <7.24.0: '>=7.24.0'
+  '@babel/plugin-transform-modules-systemjs@>=7.12.0 <=7.29.3': '>=7.29.4'
+  axios@>=1.0.0 <1.15.1: '>=1.15.1'
+  axios@>=1.0.0 <1.15.2: '>=1.15.2'
+  brace-expansion@>=4.0.0 <5.0.5: '>=5.0.5'
+  follow-redirects@<=1.15.11: '>=1.16.0'
+  ip-address@<=10.1.0: '>=10.1.1'
+  yaml@>=2.0.0 <2.8.3: '>=2.8.3'
