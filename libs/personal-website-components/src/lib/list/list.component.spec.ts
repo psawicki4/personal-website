@@ -32,9 +32,9 @@ describe('ListComponent', () => {
   });
 
   it('should update focusable index', () => {
-    // Mock document.getElementById
-    const focusSpy = vi.fn();
-    vi.spyOn(document, 'getElementById').mockReturnValue({ focus: focusSpy } as unknown as HTMLElement);
+    const dummyElement = document.createElement('div');
+    const focusSpy = vi.spyOn(dummyElement, 'focus');
+    vi.spyOn(document, 'getElementById').mockReturnValue(dummyElement);
 
     component.changeFocus(5);
 
