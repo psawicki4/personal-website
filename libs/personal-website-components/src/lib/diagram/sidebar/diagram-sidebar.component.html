@@ -7,9 +7,9 @@
 
     @if (selectedNode()) {
       <form [formRoot]="nodeForm" class="flex flex-col gap-2">
-        @for (item of selectedNode().data | keyvalue:() => 0; track item.key) {
+        @for (item of selectedNode().data | keyvalue: () => 0; track item.key) {
           <mat-form-field appearance="outline" class="w-full">
-            <mat-label>{{ t(item.key) }}</mat-label>
+            <mat-label id="{{ 'label-' + item.key }}">{{ t(item.key) }}</mat-label>
             @switch (item.key) {
               @case ('color') {
                 <input
@@ -21,6 +21,7 @@
                   cpPresetLabel="{{ t('preset-colors') }}"
                   [cpPresetColors]="['#27282b', '#691e6b', '#1a3d8a', '#0f6135', '#a65100', '#852323']"
                   (colorPickerChange)="onColorPickerNodeChange($event)"
+                  aria-labelledby="{{ 'label-' + item.key }}"
                 />
               }
               @case ('note') {
@@ -30,10 +31,11 @@
                   [formField]="nodeForm.data[item.key]"
                   rows="2"
                   cdkAutosizeMaxRows="6"
+                  aria-labelledby="{{ 'label-' + item.key }}"
                 ></textarea>
               }
               @default {
-                <input matInput [formField]="nodeForm.data[item.key]" />
+                <input matInput [formField]="nodeForm.data[item.key]" aria-labelledby="{{ 'label-' + item.key }}" />
               }
             }
             @if (nodeForm.data[item.key]().invalid()) {
@@ -44,16 +46,28 @@
 
         <div class="flex gap-2">
           <mat-form-field appearance="outline" class="w-full">
-            <mat-label>X</mat-label>
-            <input matInput type="number" class="number" [formField]="nodeForm.position.x" />
+            <mat-label id="label-position-x">X</mat-label>
+            <input
+              matInput
+              type="number"
+              class="number"
+              [formField]="nodeForm.position.x"
+              aria-labelledby="label-position-x"
+            />
             @if (nodeForm.position.x().invalid()) {
               <mat-error>{{ t('required-field') }}</mat-error>
             }
           </mat-form-field>
 
           <mat-form-field appearance="outline" class="w-full">
-            <mat-label>Y</mat-label>
-            <input matInput type="number" class="number" [formField]="nodeForm.position.y" />
+            <mat-label id="label-position-y">Y</mat-label>
+            <input
+              matInput
+              type="number"
+              class="number"
+              [formField]="nodeForm.position.y"
+              aria-labelledby="label-position-y"
+            />
             @if (nodeForm.position.y().invalid()) {
               <mat-error>{{ t('required-field') }}</mat-error>
             }
@@ -66,9 +80,9 @@
       </form>
     } @else if (selectedEdge()) {
       <form [formRoot]="edgeForm" class="flex flex-col gap-2">
-        @for (item of selectedEdge().data | keyvalue:() => 0; track item.key) {
+        @for (item of selectedEdge().data | keyvalue: () => 0; track item.key) {
           <mat-form-field appearance="outline" class="w-full">
-            <mat-label>{{ t(item.key) }}</mat-label>
+            <mat-label id="{{ 'label-' + item.key }}">{{ t(item.key) }}</mat-label>
             @switch (item.key) {
               @case ('color') {
                 <input
@@ -83,17 +97,23 @@
                 />
               }
               @case ('width') {
-                <input matInput type="number" class="number" [formField]="edgeForm.data[item.key]" />
+                <input
+                  matInput
+                  type="number"
+                  class="number"
+                  [formField]="edgeForm.data[item.key]"
+                  aria-labelledby="{{ 'label-' + item.key }}"
+                />
               }
               @case ('dashArray') {
-                <mat-select [formField]="edgeForm.data[item.key]">
+                <mat-select [formField]="edgeForm.data[item.key]" aria-labelledby="{{ 'label-' + item.key }}">
                   @for (line of lines; track line) {
                     <mat-option [value]="line.value">{{ t(line.viewValue) }}</mat-option>
                   }
                 </mat-select>
               }
               @default {
-                <input matInput [formField]="edgeForm.data[item.key]" />
+                <input matInput [formField]="edgeForm.data[item.key]" aria-labelledby="{{ 'label-' + item.key }}" />
               }
             }
             @if (edgeForm.data[item.key]().invalid()) {
