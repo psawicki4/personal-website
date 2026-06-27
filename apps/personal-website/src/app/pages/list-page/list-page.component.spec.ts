@@ -35,7 +35,7 @@ describe('ListPageComponent', () => {
     const spy = vi.spyOn(store, 'setRooms');
     component.getFirstRooms();
     expect(spy).toHaveBeenCalledWith({ total: 9999, data: component.allRooms.slice(0, 50) });
-    expect(store.entities().length).toBe(50);
+    expect(store.entities()).toHaveLength(50);
   });
 
   it('should fetch more rooms', () => {
@@ -50,7 +50,7 @@ describe('ListPageComponent', () => {
     expect(component.skip).toBe(50);
     expect(spy).toHaveBeenCalled();
     // Verify state changed
-    expect(store.entities().length).toBe(50);
+    expect(store.entities()).toHaveLength(50);
   });
 
   it('should not fetch more rooms if all are loaded', () => {
