@@ -14,22 +14,22 @@
           @if (cat) {
             <ng-container formGroupName="cat">
               <mat-form-field class="w-80">
-                <mat-label for="cat-name">{{ t('name') }}</mat-label>
-                <input matInput formControlName="name" id="cat-name" />
+                <mat-label id="cat-name">{{ t('name') }}</mat-label>
+                <input matInput formControlName="name" aria-labelledby="cat-name" />
                 @if (name?.hasError('required')) {
                   <mat-error>{{ t('required-field') }}</mat-error>
                 }
               </mat-form-field>
               <div class="relative">
                 <mat-form-field class="w-80">
-                  <mat-label for="cat-birthday">{{ t('birthday') }}</mat-label>
+                  <mat-label id="cat-birthday">{{ t('birthday') }}</mat-label>
                   <input
                     matInput
                     [matDatepicker]="picker"
                     [max]="maxDate"
                     placeholder="YYYY-MM-DD"
                     formControlName="birthday"
-                    id="cat-birthday"
+                    aria-labelledby="cat-birthday"
                   />
                   <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
                   <mat-datepicker #picker startView="multi-year"></mat-datepicker>
@@ -42,8 +42,15 @@
                 }
               </div>
               <mat-form-field class="w-80 mb-4">
-                <mat-label for="cat-age">{{ t('age') }}</mat-label>
-                <input matInput type="number" class="number" psaOnlyDigits formControlName="age" id="cat-age" />
+                <mat-label id="cat-age">{{ t('age') }}</mat-label>
+                <input
+                  matInput
+                  type="number"
+                  class="number"
+                  psaOnlyDigits
+                  formControlName="age"
+                  aria-labelledby="cat-age"
+                />
                 <mat-hint>{{ t('age-hint') }}</mat-hint>
                 @if (age?.hasError('required')) {
                   <mat-error>{{ t('required-field') }}</mat-error>
@@ -52,7 +59,7 @@
                 }
               </mat-form-field>
               <mat-form-field class="w-80">
-                <mat-label for="cat-description">{{ t('description') }}</mat-label>
+                <mat-label id="cat-description">{{ t('description') }}</mat-label>
                 <textarea
                   matInput
                   cdkTextareaAutosize
@@ -60,7 +67,7 @@
                   formControlName="description"
                   rows="2"
                   cdkAutosizeMaxRows="6"
-                  id="cat-description"
+                  aria-labelledby="cat-description"
                 ></textarea>
                 <mat-hint [align]="'end'">{{ descriptionVal?.length }}/200</mat-hint>
               </mat-form-field>
@@ -69,7 +76,7 @@
               </mat-checkbox>
               @if (cat.get('purebred')?.value === true) {
                 <mat-form-field class="w-80">
-                  <mat-label for="cat-breed">{{ t('breed') }}</mat-label>
+                  <mat-label id="cat-breed">{{ t('breed') }}</mat-label>
                   <input
                     #bred
                     type="text"
@@ -78,7 +85,7 @@
                     [matAutocomplete]="auto"
                     (input)="filterBred()"
                     (focus)="filterBred()"
-                    id="cat-breed"
+                    aria-labelledby="cat-breed"
                   />
                   <mat-autocomplete requireSelection #auto="matAutocomplete" [displayWith]="displayFn.bind(this)">
                     @for (option of filteredOptions; track option) {
@@ -93,7 +100,7 @@
                 </mat-form-field>
               }
               <mat-form-field class="w-80">
-                <mat-label for="cat-toys">{{ t('favourite-toys') }}</mat-label>
+                <mat-label id="cat-toys">{{ t('favourite-toys') }}</mat-label>
                 <mat-chip-grid #chipGrid formControlName="toys">
                   @for (toy of toys(); track toy) {
                     <mat-chip-row (removed)="removeToy(toy)">
@@ -110,23 +117,23 @@
                   [matChipInputFor]="chipGrid"
                   (matChipInputTokenEnd)="addToy($event)"
                   [matChipInputAddOnBlur]="true"
-                  id="cat-toys"
+                  aria-labelledby="cat-toys"
                 />
                 <mat-hint>{{ t('toys-hint') }}</mat-hint>
               </mat-form-field>
               <div class="flex flex-col gap-4 w-80 relative">
-                <mat-label for="cat-beauty">{{ t('beauty') }}</mat-label>
+                <mat-label id="cat-beauty">{{ t('beauty') }}</mat-label>
                 <mat-slider min="0" max="10" step="1" discrete>
-                  <input matSliderThumb formControlName="beauty" id="cat-beauty" />
+                  <input matSliderThumb formControlName="beauty" aria-labelledby="cat-beauty" />
                 </mat-slider>
                 @if (beauty?.hasError('min')) {
                   <mat-error class="absolute -bottom-2 text-xs">{{ t('beauty-error') }}</mat-error>
                 }
               </div>
               <div class="flex flex-col gap-4 w-80">
-                <mat-label for="cat-malice">{{ t('malice') }}</mat-label>
+                <mat-label id="cat-malice">{{ t('malice') }}</mat-label>
                 <mat-slider min="0" max="10" step="1" discrete [displayWith]="formatSliderLabel">
-                  <input matSliderThumb formControlName="malice" id="cat-malice" />
+                  <input matSliderThumb formControlName="malice" aria-labelledby="cat-malice" />
                 </mat-slider>
               </div>
               <span class="w-full flex flex-row justify-end gap-4">
