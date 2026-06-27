@@ -94,6 +94,7 @@
                   cpPresetLabel="{{ t('preset-colors') }}"
                   [cpPresetColors]="['#6f7480', '#3498db', '#2ecc71', '#9b59b6', '#e74c3c', '#f39c12']"
                   (colorPickerChange)="onColorPickerEdgeChange($event)"
+                  aria-labelledby="{{ 'label-' + item.key }}"
                 />
               }
               @case ('width') {
