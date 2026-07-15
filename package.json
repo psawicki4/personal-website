@@ -64,6 +64,7 @@
     "@nx/vite": "23.1.0",
     "@nx/vitest": "23.1.0",
     "@nx/workspace": "23.1.0",
+    "@oxc-project/runtime": "^0.140.0",
     "@schematics/angular": "22.0.6",
     "@swc-node/register": "1.11.1",
     "@swc/core": "^1.15.33",
