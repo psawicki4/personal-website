@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TranslocoService } from '@jsverse/transloco';
 import { GridApi, GridReadyEvent, StateUpdatedEvent } from 'ag-grid-community';
 import { of } from 'rxjs';
-import { createTranslocoMock, LangService } from 'utils';
+import { createTranslocoMock, LangService, setupLocalStorageMock } from 'utils';
 import { describe, expect, it, Mock, vi } from 'vitest';
 import { GridComponent } from './grid.component';
 import { GridService } from './grid.service';
@@ -12,10 +12,13 @@ describe('GridComponent', () => {
   let component: GridComponent;
   let fixture: ComponentFixture<GridComponent>;
   let gridServiceSpy: { getCountries: Mock };
+  let localStorageMock: ReturnType<typeof setupLocalStorageMock>;
 
   const translocoMock = createTranslocoMock();
 
   beforeEach(() => {
+    localStorageMock = setupLocalStorageMock();
+
     Object.defineProperty(globalThis, 'matchMedia', {
       writable: true,
       value: vi.fn().mockImplementation((query) => ({
@@ -72,20 +75,17 @@ describe('GridComponent', () => {
   });
 
   it('should update state in local storage', () => {
-    const setItemSpy = vi.spyOn(Storage.prototype, 'setItem');
     const state = { some: 'state' };
 
     component.updateState({ state } as unknown as StateUpdatedEvent);
 
-    expect(setItemSpy).toHaveBeenCalledWith('gridState', JSON.stringify(state));
+    expect(localStorageMock.setItem).toHaveBeenCalledWith('gridState', JSON.stringify(state));
   });
 
   it('should reset state', () => {
-    const removeItemSpy = vi.spyOn(Storage.prototype, 'removeItem');
-
     component.resetState();
 
-    expect(removeItemSpy).toHaveBeenCalledWith('gridState');
+    expect(localStorageMock.removeItem).toHaveBeenCalledWith('gridState');
     expect(component.initialState).toEqual({});
   });
 });
