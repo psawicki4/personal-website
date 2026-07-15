@@ -22,7 +22,10 @@
       "utils": ["libs/utils/src/index.ts"]
     },
     "baseUrl": ".",
-    "rootDir": "."
+    "rootDir": ".",
+    "noUncheckedSideEffectImports": false,
+    "types": ["*"],
+    "ignoreDeprecations": "6.0"
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
