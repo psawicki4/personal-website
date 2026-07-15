@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TranslocoService } from '@jsverse/transloco';
 import { GridApi, GridReadyEvent, StateUpdatedEvent } from 'ag-grid-community';
 import { of } from 'rxjs';
-import { createTranslocoMock, LangService, setupLocalStorageMock } from 'utils';
+import { createTranslocoMock, LangService } from 'utils';
 import { describe, expect, it, Mock, vi } from 'vitest';
 import { GridComponent } from './grid.component';
 import { GridService } from './grid.service';
@@ -12,12 +12,23 @@ describe('GridComponent', () => {
   let component: GridComponent;
   let fixture: ComponentFixture<GridComponent>;
   let gridServiceSpy: { getCountries: Mock };
-  let localStorageMock: ReturnType<typeof setupLocalStorageMock>;
 
   const translocoMock = createTranslocoMock();
+  const localStorageMock = {
+    getItem: vi.fn().mockReturnValue(null),
+    setItem: vi.fn(),
+    removeItem: vi.fn(),
+    clear: vi.fn(),
+    length: 0,
+    key: vi.fn(),
+  };
 
   beforeEach(() => {
-    localStorageMock = setupLocalStorageMock();
+    Object.defineProperty(globalThis, 'localStorage', {
+      value: localStorageMock,
+      writable: true,
+      configurable: true,
+    });
 
     Object.defineProperty(globalThis, 'matchMedia', {
       writable: true,
