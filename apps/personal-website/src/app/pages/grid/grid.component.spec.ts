@@ -14,8 +14,22 @@ describe('GridComponent', () => {
   let gridServiceSpy: { getCountries: Mock };
 
   const translocoMock = createTranslocoMock();
+  const localStorageMock = {
+    getItem: vi.fn().mockReturnValue(null),
+    setItem: vi.fn(),
+    removeItem: vi.fn(),
+    clear: vi.fn(),
+    length: 0,
+    key: vi.fn(),
+  };
 
   beforeEach(() => {
+    Object.defineProperty(globalThis, 'localStorage', {
+      value: localStorageMock,
+      writable: true,
+      configurable: true,
+    });
+
     Object.defineProperty(globalThis, 'matchMedia', {
       writable: true,
       value: vi.fn().mockImplementation((query) => ({
@@ -72,20 +86,17 @@ describe('GridComponent', () => {
   });
 
   it('should update state in local storage', () => {
-    const setItemSpy = vi.spyOn(Storage.prototype, 'setItem');
     const state = { some: 'state' };
 
     component.updateState({ state } as unknown as StateUpdatedEvent);
 
-    expect(setItemSpy).toHaveBeenCalledWith('gridState', JSON.stringify(state));
+    expect(localStorageMock.setItem).toHaveBeenCalledWith('gridState', JSON.stringify(state));
   });
 
   it('should reset state', () => {
-    const removeItemSpy = vi.spyOn(Storage.prototype, 'removeItem');
-
     component.resetState();
 
-    expect(removeItemSpy).toHaveBeenCalledWith('gridState');
+    expect(localStorageMock.removeItem).toHaveBeenCalledWith('gridState');
     expect(component.initialState).toEqual({});
   });
 });
