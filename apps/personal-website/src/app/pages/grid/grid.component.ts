@@ -63,13 +63,13 @@ export class GridComponent {
   colDefs: ColDef[] = [
     {
       headerValueGetter: this.headerTranslation('GRID.name'),
-      field: 'name.common',
+      field: 'name',
       filter: true,
       flex: 1,
     },
     {
       headerValueGetter: this.headerTranslation('GRID.capital'),
-      valueGetter: (p) => Object.values(p.data.capital).join(', '),
+      valueGetter: (p) => p.data?.capital ?? 'N/A',
       filter: true,
       flex: 1,
     },
@@ -82,26 +82,26 @@ export class GridComponent {
     {
       headerValueGetter: this.headerTranslation('GRID.population'),
       field: 'population',
-      valueFormatter: (p) => p.value.toLocaleString(),
+      valueFormatter: (p) => (p.value ? p.value.toLocaleString() : 'N/A'),
       filter: true,
       flex: 1,
     },
     {
       headerValueGetter: this.headerTranslation('GRID.area'),
       field: 'area',
-      valueFormatter: (p) => p.value.toLocaleString() + ' km²',
+      valueFormatter: (p) => (p.value ? p.value.toLocaleString() + ' km²' : 'N/A'),
       filter: true,
       flex: 1,
     },
     {
       headerValueGetter: this.headerTranslation('GRID.languages'),
-      valueGetter: (p) => Object.values(p.data.languages).join(', '),
+      valueGetter: (p) => (Object.values(p.data.languages) as { name: string }[]).map((v) => v.name).join(', '),
       filter: true,
       flex: 1,
     },
     {
-      headerValueGetter: this.headerTranslation('GRID.unMember'),
-      field: 'unMember',
+      headerValueGetter: this.headerTranslation('GRID.independent'),
+      field: 'independent',
       filter: true,
       flex: 1,
     },

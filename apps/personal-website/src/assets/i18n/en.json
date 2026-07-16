@@ -82,7 +82,7 @@
     "population": "Population",
     "region": "Region",
     "area": "Area",
-    "unMember": "UN member",
+    "independent": "Independent",
     "languages": "Language",
     "csv-export": "Export to CSV",
     "reset-state": "Reset state",

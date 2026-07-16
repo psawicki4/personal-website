@@ -1,6 +1,9 @@
 export type Country = {
-  name: {
-    common: string;
-  };
+  name: string;
   capital: string;
+  population: number;
+  region: string;
+  area: number;
+  independent: boolean;
+  languages: { name: string }[];
 };

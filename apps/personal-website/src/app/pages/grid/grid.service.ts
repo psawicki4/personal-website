@@ -11,7 +11,7 @@ export class GridService {
 
   getCountries(): Observable<Country[]> {
     return this.httpClient.get<Country[]>(
-      'https://restcountries.com/v3.1/all?fields=name,capital,population,region,area,unMember,languages'
+      'https://countries.dev/countries?fields=name,capital,population,region,area,independent,languages'
     );
   }
 }
