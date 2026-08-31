@@ -31,8 +31,8 @@ jobs:
           node-version: 24
           cache: 'pnpm'
 
-      - run: pnpm install --frozen-lockfile
-      - run: pnpm exec cypress install
+      - run: pnpm install --frozen-lockfile --ignore-scripts
+      - run: pnpm exec cypress install --ignore-scripts
       - uses: nrwl/nx-set-shas@v4
 
       - run: pnpm exec nx affected -t lint test build
