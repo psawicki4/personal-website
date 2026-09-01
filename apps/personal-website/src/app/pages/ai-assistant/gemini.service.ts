@@ -16,7 +16,7 @@ export class GeminiService {
     const prompt = this.transloco.translate('AI_ASSISTANT.prompt');
     try {
       const response = await this.ai.models.generateContent({
-        model: 'gemini-2.5-flash',
+        model: 'gemini-3.5-flash-lite',
         contents: [
           { text: prompt },
           {
