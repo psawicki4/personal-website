@@ -29,8 +29,8 @@
   },
   "FORM": {
     "header": "Demo formularza",
-    "component-desc-desktop": "Zaawansowany formularz dynamiczny wykorzystujący złożoną walidację krzyżową, logikę warunkową i reaktywną synchronizację stanu. Śledź podgląd modelu po prawej stronie, aby zobaczyć, jak system przetwarza dane w czasie rzeczywistym.",
-    "component-desc-mobile": "Zaawansowany formularz dynamiczny wykorzystujący złożoną walidację krzyżową, logikę warunkową i reaktywną synchronizację stanu. Śledź podgląd modelu na dole strony, aby zobaczyć, jak system przetwarza dane w czasie rzeczywistym.",
+    "component-desc-desktop": "Zaawansowany, dynamiczny formularz wykorzystujący złożoną walidację krzyżową, logikę warunkową i reaktywną synchronizację stanu. Śledź podgląd modelu po prawej stronie, aby zobaczyć, jak system przetwarza dane w czasie rzeczywistym.",
+    "component-desc-mobile": "Zaawansowany, dynamiczny formularz wykorzystujący złożoną walidację krzyżową, logikę warunkową i reaktywną synchronizację stanu. Śledź podgląd modelu na dole strony, aby zobaczyć, jak system przetwarza dane w czasie rzeczywistym.",
     "dog-or-cat": "Kot czy pies?",
     "dog": "pies",
     "cat": "kot",
