@@ -11,10 +11,10 @@ export const formHelpers = {
    * Fills in basic cat information
    */
   fillCatInfo(name: string, age: number, description?: string) {
-    cy.get('input[formControlName="name"]').type(name);
-    cy.get('input[formControlName="age"]').type(age.toString());
+    cy.get('input[data-testid="cat-name"]').type(name);
+    cy.get('input[data-testid="cat-age"]').type(age.toString());
     if (description) {
-      cy.get('textarea[formControlName="description"]').type(description);
+      cy.get('textarea[data-testid="cat-description"]').type(description);
     }
   },
 
@@ -24,9 +24,17 @@ export const formHelpers = {
   setupPurebredCat(name: string, age: number, breed: string) {
     this.selectPetType('cat');
     this.fillCatInfo(name, age);
-    cy.get('mat-checkbox[formControlName="purebred"]').click();
-    cy.get('input[formControlName="bred"]').type(breed);
+    cy.get('mat-checkbox[data-testid="cat-purebred"]').click();
+    cy.get('input[data-testid="cat-breed"]').type(breed);
     cy.get('mat-option').first().click();
+  },
+
+  /**
+   * Sets birthday date string (YYYY-MM-DD)
+   */
+  setBirthday(dateString: string) {
+    cy.get('input[data-testid="cat-birthday"]').type(dateString, { force: true });
+    cy.get('input[data-testid="cat-birthday"]').blur();
   },
 
   /**
@@ -40,19 +48,33 @@ export const formHelpers = {
   },
 
   /**
+   * Removes a toy by name
+   */
+  removeToy(toyName: string) {
+    cy.contains('mat-chip-row', toyName).find('button[matChipRemove]').click();
+  },
+
+  /**
    * Sets slider values
    */
   setSliderValues(beauty?: number, malice?: number) {
     if (beauty !== undefined) {
-      cy.get('mat-slider input[formControlName="beauty"]').invoke('val', beauty);
-      cy.get('mat-slider input[formControlName="beauty"]').trigger('input');
-      cy.get('mat-slider input[formControlName="beauty"]').trigger('change');
+      cy.get('mat-slider input[data-testid="cat-beauty"]').invoke('val', beauty);
+      cy.get('mat-slider input[data-testid="cat-beauty"]').trigger('input');
+      cy.get('mat-slider input[data-testid="cat-beauty"]').trigger('change');
     }
     if (malice !== undefined) {
-      cy.get('mat-slider input[formControlName="malice"]').invoke('val', malice);
-      cy.get('mat-slider input[formControlName="malice"]').trigger('input');
-      cy.get('mat-slider input[formControlName="malice"]').trigger('change');
+      cy.get('mat-slider input[data-testid="cat-malice"]').invoke('val', malice);
+      cy.get('mat-slider input[data-testid="cat-malice"]').trigger('input');
+      cy.get('mat-slider input[data-testid="cat-malice"]').trigger('change');
     }
+  },
+
+  /**
+   * Resets the form
+   */
+  resetForm() {
+    cy.get('button').contains('Resetuj').click();
   },
 
   /**
