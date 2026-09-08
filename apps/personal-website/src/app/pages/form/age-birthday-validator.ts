@@ -1,17 +1,14 @@
-import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
+import { PathKind, SchemaPath, SchemaPathRules, validate, ValidationError } from '@angular/forms/signals';
 import dayjs from 'dayjs';
+import { CatFormModel } from './form.type';
 
-export function ageBirthdayValidator(): ValidatorFn {
-  return (form: AbstractControl): ValidationErrors | null => {
-    const age: number = form.get('age')?.value;
-    const birthday: Date = form.get('birthday')?.value;
-
-    if (age != null && birthday) {
-      const isAgeValid = dayjs().diff(birthday, 'year') === age;
-
-      return isAgeValid ? null : { invalidAge: true };
+export function ageBirthdayValidator(catPath: SchemaPath<CatFormModel, SchemaPathRules.Supported, PathKind.Child>) {
+  validate(catPath, (ctx): ValidationError | null => {
+    const cat = ctx.value();
+    if (cat?.age != null && cat.birthday) {
+      const isAgeValid = dayjs().diff(cat.birthday, 'year') === cat.age;
+      return isAgeValid ? null : { kind: 'invalidAge' };
     }
-
     return null;
-  };
+  });
 }

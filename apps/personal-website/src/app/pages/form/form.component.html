@@ -5,149 +5,164 @@
     <p class="mb-8 max-md:hidden">{{ t('component-desc-desktop') }}</p>
     <div class="w-full flex flex-col md:flex-row gap-8">
       <div class="flex flex-col items-center md:w-1/2">
-        <form [formGroup]="form" class="flex flex-col gap-4 items-center">
+        <form class="flex flex-col gap-4 items-center">
           <p>{{ t('dog-or-cat') }}</p>
-          <mat-radio-group formControlName="petType">
+          <mat-radio-group [formField]="petForm.petType" data-testid="petType">
             <mat-radio-button value="cat">{{ t('cat') }}</mat-radio-button>
             <mat-radio-button class="ml-8" value="dog">{{ t('dog') }}</mat-radio-button>
           </mat-radio-group>
-          @if (cat) {
-            <ng-container formGroupName="cat">
-              <mat-form-field class="w-80">
-                <mat-label id="cat-name">{{ t('name') }}</mat-label>
-                <input matInput formControlName="name" aria-labelledby="cat-name" />
-                @if (name?.hasError('required')) {
-                  <mat-error>{{ t('required-field') }}</mat-error>
-                }
-              </mat-form-field>
-              <div class="relative">
-                <mat-form-field class="w-80">
-                  <mat-label id="cat-birthday">{{ t('birthday') }}</mat-label>
-                  <input
-                    matInput
-                    [matDatepicker]="picker"
-                    [max]="maxDate"
-                    placeholder="YYYY-MM-DD"
-                    formControlName="birthday"
-                    aria-labelledby="cat-birthday"
-                  />
-                  <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-                  <mat-datepicker #picker startView="multi-year"></mat-datepicker>
-                  @if (cat.get('birthday')?.hasError('matDatepickerParse')) {
-                    <mat-error>{{ t('invalid-date-format') }}</mat-error>
-                  }
-                </mat-form-field>
-                @if (cat.hasError('invalidAge')) {
-                  <mat-error class="absolute -bottom-1 text-xs">{{ t('invalid-age') }}</mat-error>
-                }
-              </div>
-              <mat-form-field class="w-80 mb-4">
-                <mat-label id="cat-age">{{ t('age') }}</mat-label>
-                <input
-                  matInput
-                  type="number"
-                  class="number"
-                  psaOnlyDigits
-                  formControlName="age"
-                  aria-labelledby="cat-age"
-                />
-                <mat-hint>{{ t('age-hint') }}</mat-hint>
-                @if (age?.hasError('required')) {
-                  <mat-error>{{ t('required-field') }}</mat-error>
-                } @else if (age?.hasError('min') || age?.hasError('max')) {
-                  <mat-error>{{ t('age-error-real') }}</mat-error>
-                }
-              </mat-form-field>
-              <mat-form-field class="w-80">
-                <mat-label id="cat-description">{{ t('description') }}</mat-label>
-                <textarea
-                  matInput
-                  cdkTextareaAutosize
-                  maxlength="200"
-                  formControlName="description"
-                  rows="2"
-                  cdkAutosizeMaxRows="6"
-                  aria-labelledby="cat-description"
-                ></textarea>
-                <mat-hint [align]="'end'">{{ descriptionVal?.length }}/200</mat-hint>
-              </mat-form-field>
-              <mat-checkbox labelPosition="before" class="self-end" formControlName="purebred"
-                >{{ t('purebred') }}
-              </mat-checkbox>
-              @if (cat.get('purebred')?.value === true) {
-                <mat-form-field class="w-80">
-                  <mat-label id="cat-breed">{{ t('breed') }}</mat-label>
-                  <input
-                    #bred
-                    type="text"
-                    matInput
-                    formControlName="bred"
-                    [matAutocomplete]="auto"
-                    (input)="filterBred()"
-                    (focus)="filterBred()"
-                    aria-labelledby="cat-breed"
-                  />
-                  <mat-autocomplete requireSelection #auto="matAutocomplete" [displayWith]="displayFn.bind(this)">
-                    @for (option of filteredOptions; track option) {
-                      <mat-option [value]="option.id">{{
-                        langService.lang() === 'pl' ? option.namePl : option.nameEN
-                      }}</mat-option>
-                    }
-                  </mat-autocomplete>
-                  @if (cat.get('bred')?.hasError('required')) {
-                    <mat-error>{{ t('required-field') }}</mat-error>
-                  }
-                </mat-form-field>
+          @if (!petForm.cat().hidden()) {
+            <mat-form-field class="w-80">
+              <mat-label id="cat-name">{{ t('name') }}</mat-label>
+              <input matInput [formField]="petForm.cat.name" data-testid="cat-name" aria-labelledby="cat-name" />
+              @if (petForm.cat.name().getError('required')) {
+                <mat-error>{{ t('required-field') }}</mat-error>
               }
+            </mat-form-field>
+            <div class="relative">
               <mat-form-field class="w-80">
-                <mat-label id="cat-toys">{{ t('favourite-toys') }}</mat-label>
-                <mat-chip-grid #chipGrid formControlName="toys">
-                  @for (toy of toys(); track toy) {
-                    <mat-chip-row (removed)="removeToy(toy)">
-                      {{ toy }}
-                      <button matChipRemove>
-                        <mat-icon fontIcon="cancel"></mat-icon>
-                      </button>
-                    </mat-chip-row>
-                  }
-                </mat-chip-grid>
+                <mat-label id="cat-birthday">{{ t('birthday') }}</mat-label>
                 <input
-                  [placeholder]="t('new-toy')"
-                  [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                  [matChipInputFor]="chipGrid"
-                  (matChipInputTokenEnd)="addToy($event)"
-                  [matChipInputAddOnBlur]="true"
-                  aria-labelledby="cat-toys"
+                  matInput
+                  [matDatepicker]="picker"
+                  [max]="maxDate"
+                  placeholder="YYYY-MM-DD"
+                  [formField]="petForm.cat.birthday"
+                  data-testid="cat-birthday"
+                  aria-labelledby="cat-birthday"
                 />
-                <mat-hint>{{ t('toys-hint') }}</mat-hint>
-              </mat-form-field>
-              <div class="flex flex-col gap-4 w-80 relative">
-                <mat-label id="cat-beauty">{{ t('beauty') }}</mat-label>
-                <mat-slider min="0" max="10" step="1" discrete>
-                  <input matSliderThumb formControlName="beauty" aria-labelledby="cat-beauty" />
-                </mat-slider>
-                @if (beauty?.hasError('min')) {
-                  <mat-error class="absolute -bottom-2 text-xs">{{ t('beauty-error') }}</mat-error>
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker startView="multi-year"></mat-datepicker>
+                @if (petForm.cat.birthday().getError('matDatepickerParse')) {
+                  <mat-error>{{ t('invalid-date-format') }}</mat-error>
                 }
-              </div>
-              <div class="flex flex-col gap-4 w-80">
-                <mat-label id="cat-malice">{{ t('malice') }}</mat-label>
-                <mat-slider min="0" max="10" step="1" discrete [displayWith]="formatSliderLabel">
-                  <input matSliderThumb formControlName="malice" aria-labelledby="cat-malice" />
-                </mat-slider>
-              </div>
-              <span class="w-full flex flex-row justify-end gap-4">
-                <button matButton type="button" (click)="reset()">{{ t('reset') }}</button>
-                <button matButton type="button" (click)="check()">{{ t('check') }}</button>
-              </span>
-            </ng-container>
+              </mat-form-field>
+              @if (petForm.cat().getError('invalidAge')) {
+                <mat-error class="absolute -bottom-1 text-xs">{{ t('invalid-age') }}</mat-error>
+              }
+            </div>
+            <mat-form-field class="w-80 mb-4">
+              <mat-label id="cat-age">{{ t('age') }}</mat-label>
+              <input
+                matInput
+                type="number"
+                class="number"
+                psaOnlyDigits
+                [formField]="petForm.cat.age"
+                data-testid="cat-age"
+                aria-labelledby="cat-age"
+              />
+              <mat-hint>{{ t('age-hint') }}</mat-hint>
+              @if (petForm.cat.age().getError('required')) {
+                <mat-error>{{ t('required-field') }}</mat-error>
+              } @else if (petForm.cat.age().getError('min') || petForm.cat.age().getError('max')) {
+                <mat-error>{{ t('age-error-real') }}</mat-error>
+              }
+            </mat-form-field>
+            <mat-form-field class="w-80">
+              <mat-label id="cat-description">{{ t('description') }}</mat-label>
+              <textarea
+                matInput
+                cdkTextareaAutosize
+                [formField]="petForm.cat.description"
+                data-testid="cat-description"
+                rows="2"
+                cdkAutosizeMaxRows="6"
+                aria-labelledby="cat-description"
+              ></textarea>
+              <mat-hint [align]="'end'">{{ descriptionVal.length }}/200</mat-hint>
+            </mat-form-field>
+            <mat-checkbox
+              labelPosition="before"
+              class="self-end"
+              [formField]="petForm.cat.purebred"
+              data-testid="cat-purebred"
+              >{{ t('purebred') }}
+            </mat-checkbox>
+            @if (!petForm.cat.bred().hidden()) {
+              <mat-form-field class="w-80">
+                <mat-label id="cat-breed">{{ t('breed') }}</mat-label>
+                <input
+                  #bred
+                  type="text"
+                  matInput
+                  [formField]="petForm.cat.bred"
+                  data-testid="cat-breed"
+                  [matAutocomplete]="auto"
+                  (input)="filterBred()"
+                  (focus)="filterBred()"
+                  aria-labelledby="cat-breed"
+                />
+                <mat-autocomplete requireSelection #auto="matAutocomplete" [displayWith]="displayFn.bind(this)">
+                  @for (option of filteredOptions; track option) {
+                    <mat-option [value]="option.id">{{
+                      langService.lang() === 'pl' ? option.namePl : option.nameEN
+                    }}</mat-option>
+                  }
+                </mat-autocomplete>
+                @if (petForm.cat.bred().getError('required')) {
+                  <mat-error>{{ t('required-field') }}</mat-error>
+                }
+              </mat-form-field>
+            }
+            <mat-form-field class="w-80">
+              <mat-label id="cat-toys">{{ t('favourite-toys') }}</mat-label>
+              <mat-chip-grid #chipGrid [formField]="petForm.cat.toys" data-testid="cat-toys">
+                @for (toy of toys(); track toy) {
+                  <mat-chip-row (removed)="removeToy(toy)">
+                    {{ toy }}
+                    <button matChipRemove>
+                      <mat-icon fontIcon="cancel"></mat-icon>
+                    </button>
+                  </mat-chip-row>
+                }
+              </mat-chip-grid>
+              <input
+                [placeholder]="t('new-toy')"
+                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                [matChipInputFor]="chipGrid"
+                (matChipInputTokenEnd)="addToy($event)"
+                [matChipInputAddOnBlur]="true"
+                aria-labelledby="cat-toys"
+              />
+              <mat-hint>{{ t('toys-hint') }}</mat-hint>
+            </mat-form-field>
+            <div class="flex flex-col gap-4 w-80 relative">
+              <mat-label id="cat-beauty">{{ t('beauty') }}</mat-label>
+              <mat-slider min="0" max="10" step="1" discrete>
+                <input
+                  matSliderThumb
+                  [formField]="petForm.cat.beauty"
+                  data-testid="cat-beauty"
+                  aria-labelledby="cat-beauty"
+                />
+              </mat-slider>
+              @if (petForm.cat.beauty().getError('min')) {
+                <mat-error class="absolute -bottom-2 text-xs">{{ t('beauty-error') }}</mat-error>
+              }
+            </div>
+            <div class="flex flex-col gap-4 w-80">
+              <mat-label id="cat-malice">{{ t('malice') }}</mat-label>
+              <mat-slider min="0" max="10" step="1" discrete [displayWith]="formatSliderLabel">
+                <input
+                  matSliderThumb
+                  [formField]="petForm.cat.malice"
+                  data-testid="cat-malice"
+                  aria-labelledby="cat-malice"
+                />
+              </mat-slider>
+            </div>
+            <span class="w-full flex flex-row justify-end gap-4">
+              <button matButton type="button" (click)="reset()">{{ t('reset') }}</button>
+              <button matButton type="button" (click)="check()">{{ t('check') }}</button>
+            </span>
           }
         </form>
       </div>
       <div class="divider max-md:hidden"></div>
       <div class="flex flex-col gap-8 sm:ml-8 md:w-1/2">
         <p class="text-center md:text-left">{{ t('form-model') }}</p>
-        <pre class="wrap-anywhere whitespace-pre-wrap">{{ form.getRawValue() | json }}</pre>
+        <pre class="wrap-anywhere whitespace-pre-wrap">{{ model() | json }}</pre>
       </div>
     </div>
   </lib-card>

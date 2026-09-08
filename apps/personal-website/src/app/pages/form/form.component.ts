@@ -1,9 +1,18 @@
 import { ENTER } from '@angular/cdk/keycodes';
 import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 import { JsonPipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, effect, ElementRef, inject, signal, viewChild } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators, ValueChangeEvent } from '@angular/forms';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  computed,
+  effect,
+  inject,
+  signal,
+  untracked,
+  viewChild,
+} from '@angular/core';
+import { FormField, form, hidden, max, maxLength, min, required } from '@angular/forms/signals';
 import { provideLuxonDateAdapter } from '@angular/material-luxon-adapter';
 import { MatAutocomplete, MatAutocompleteTrigger, MatOption } from '@angular/material/autocomplete';
 import { MatButton } from '@angular/material/button';
@@ -21,17 +30,34 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { TranslocoDirective, TranslocoService } from '@jsverse/transloco';
 import dayjs from 'dayjs';
 import { CardComponent } from 'personal-website-components';
-import { Subject, take, takeUntil } from 'rxjs';
+import { take } from 'rxjs';
 import { LangService } from 'utils';
 import { ageBirthdayValidator } from './age-birthday-validator';
-import { CatOption, DemoForm } from './form.type';
+import { CatFormModel, CatOption, PetFormModel } from './form.type';
 import { OnlyDigitsDirective } from './only-digits.directive';
+
+const createInitialCat = (): CatFormModel => ({
+  name: '',
+  age: null,
+  birthday: null,
+  description: '',
+  purebred: false,
+  bred: '',
+  toys: [],
+  beauty: 5,
+  malice: 0,
+});
+
+const createInitialPetModel = (): PetFormModel => ({
+  petType: '',
+  cat: createInitialCat(),
+});
 
 @Component({
   selector: 'psa-form',
   imports: [
     CardComponent,
-    ReactiveFormsModule,
+    FormField,
     MatRadioGroup,
     MatRadioButton,
     MatFormField,
@@ -78,13 +104,11 @@ import { OnlyDigitsDirective } from './only-digits.directive';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FormComponent {
-  fb = inject(FormBuilder);
   snackBar = inject(MatSnackBar);
   transloco = inject(TranslocoService);
   langService = inject(LangService);
   dateAdapter = inject(DateAdapter);
   dialog = inject(MatDialog);
-  destroy$ = new Subject<void>();
   maxDate = new Date();
   options: CatOption[] = [
     { namePl: 'Kot Sfinks', nameEN: 'Sphynx Cat', id: 'kot_sfinks' },
@@ -100,90 +124,72 @@ export class FormComponent {
     { namePl: 'Inny', nameEN: 'Other', id: 'inny' },
   ];
   filteredOptions: CatOption[] = [];
-  toys = signal<string[]>([]);
   separatorKeysCodes = [ENTER];
   bredInput = viewChild<ElementRef>('bred');
 
-  form = new FormGroup<DemoForm>({
-    petType: new FormControl('', { nonNullable: true }),
+  model = signal<PetFormModel>(createInitialPetModel());
+
+  petForm = form(this.model, (f) => {
+    required(f.petType);
+    hidden(f.cat, { when: () => this.model().petType !== 'cat' });
+    required(f.cat.name);
+    required(f.cat.age);
+    min(f.cat.age, 0);
+    max(f.cat.age, 99);
+    maxLength(f.cat.description, 200);
+    min(f.cat.beauty, 5);
+    hidden(f.cat.bred, { when: () => !this.model().cat.purebred });
+    required(f.cat.bred);
+    ageBirthdayValidator(f.cat);
   });
+
+  toys = computed(() => this.petForm.cat.toys().value() ?? []);
 
   constructor() {
     this.filteredOptions = this.options.slice();
-    this.destroy$.pipe(takeUntilDestroyed());
-    this.form
-      .get('petType')
-      ?.events.pipe(takeUntilDestroyed())
-      .subscribe((e) => {
-        if (e instanceof ValueChangeEvent && e.value === 'dog') {
-          this.removeCatForm();
+    this.dateAdapter.getFirstDayOfWeek = () => 1;
+
+    effect(() => {
+      this.setLocale(this.langService.lang());
+    });
+
+    effect(() => {
+      const petType = this.petForm.petType().value();
+      if (petType === 'dog') {
+        untracked(() => {
           this.dialog.open(DogDialog);
           this.dialog.afterAllClosed.pipe(take(1)).subscribe(() => {
             this.selectCat();
           });
-        } else if (e instanceof ValueChangeEvent && e.value === 'cat') {
-          this.addCatForm();
-        }
-      });
-    this.dateAdapter.getFirstDayOfWeek = () => 1;
+        });
+      }
+    });
+
     effect(() => {
-      this.setLocale(this.langService.lang());
+      const birthday = this.petForm.cat.birthday().value();
+      if (birthday) {
+        const calculatedAge = dayjs().diff(birthday, 'year');
+        untracked(() => {
+          if (this.petForm.cat.age().value() !== calculatedAge) {
+            this.petForm.cat.age().value.set(calculatedAge);
+          }
+        });
+      }
+      const purebred = this.petForm.cat.purebred().value();
+      if (!purebred) {
+        untracked(() => {
+          this.petForm.cat.bred().value.set('');
+        });
+      }
     });
   }
 
-  private addCatForm() {
-    this.form.addControl(
-      'cat',
-      this.fb.group(
-        {
-          name: ['', Validators.required],
-          age: [null, [Validators.required, Validators.min(0), Validators.max(99)]],
-          birthday: [null],
-          description: ['', Validators.maxLength(200)],
-          purebred: [false, Validators.required],
-          toys: [[]],
-          beauty: [5, Validators.min(5)],
-          malice: [0],
-        },
-        { validators: [ageBirthdayValidator()] }
-      )
-    );
-    this.cat
-      ?.get('purebred')
-      ?.events.pipe(takeUntil(this.destroy$))
-      .subscribe((e) => {
-        if (e instanceof ValueChangeEvent && e.value === true) {
-          this.addBred();
-        } else if (e instanceof ValueChangeEvent && e.value === false) {
-          this.removeBred();
-        }
-      });
-    this.cat
-      ?.get('birthday')
-      ?.events.pipe(takeUntil(this.destroy$))
-      .subscribe((e) => {
-        if (e instanceof ValueChangeEvent && e.value) {
-          if (this.age) {
-            this.age.setValue(dayjs().diff(e.value, 'year'));
-          }
-        }
-      });
-  }
-
   selectCat() {
-    this.form.get('petType')?.setValue('cat');
-  }
-
-  private addBred() {
-    this.cat?.addControl('bred', new FormControl('', [Validators.required]));
-  }
-
-  private removeBred() {
-    this.cat?.removeControl('bred');
+    this.petForm.petType().value.set('cat');
   }
 
   filterBred() {
-    const filterValue = this.bredInput()?.nativeElement.value.toLowerCase();
+    const filterValue = (this.bredInput()?.nativeElement.value ?? '').toLowerCase();
     this.filteredOptions = this.options.filter(
       (o) => o.namePl.toLocaleLowerCase().includes(filterValue) || o.nameEN.toLocaleLowerCase().includes(filterValue)
     );
@@ -198,22 +204,20 @@ export class FormComponent {
   }
 
   removeToy(toy: string) {
-    this.toys.update((toys) => {
-      const index = toys.indexOf(toy);
-      if (index < 0) {
-        return toys;
-      }
-      toys.splice(index, 1);
-      return [...toys];
-    });
-    this.cat?.get('toys')?.setValue(this.toys());
+    const currentToys = this.petForm.cat.toys().value() ?? [];
+    const index = currentToys.indexOf(toy);
+    if (index >= 0) {
+      const updated = [...currentToys];
+      updated.splice(index, 1);
+      this.petForm.cat.toys().value.set(updated);
+    }
   }
 
   addToy(event: MatChipInputEvent): void {
     const value = (event.value ?? '').trim();
     if (value) {
-      this.toys.update((toys) => [...toys, value]);
-      this.cat?.get('toys')?.setValue(this.toys());
+      const currentToys = this.petForm.cat.toys().value() ?? [];
+      this.petForm.cat.toys().value.set([...currentToys, value]);
     }
     if (event.chipInput) {
       event.chipInput.clear();
@@ -232,21 +236,15 @@ export class FormComponent {
   }
 
   reset() {
-    this.removeCatForm();
-    this.form.reset();
-  }
-
-  private removeCatForm() {
-    this.destroy$.next();
-    this.toys.set([]);
-    this.form.removeControl('cat');
+    this.model.set(createInitialPetModel());
+    this.petForm().reset();
   }
 
   check() {
-    this.form.markAllAsTouched();
-    if (this.form.valid) {
+    this.petForm().markAsTouched();
+    if (this.petForm().valid()) {
       this.snackBar.open(
-        this.transloco.translate('FORM.valid-form', { value: this.name?.value }),
+        this.transloco.translate('FORM.valid-form', { value: this.petForm.cat.name().value() }),
         this.transloco.translate('FORM.ok'),
         {
           duration: 5000,
@@ -265,24 +263,28 @@ export class FormComponent {
     this.dateAdapter.setLocale(lang);
   }
 
+  get form() {
+    return this.petForm;
+  }
+
   get cat() {
-    return this.form.controls['cat'];
+    return this.petForm.cat;
   }
 
   get name() {
-    return this.cat?.get('name');
+    return this.petForm.cat.name;
   }
 
   get age() {
-    return this.cat?.get('age');
+    return this.petForm.cat.age;
   }
 
   get beauty() {
-    return this.cat?.get('beauty');
+    return this.petForm.cat.beauty;
   }
 
   get descriptionVal() {
-    return this.cat?.get('description')?.value;
+    return this.petForm.cat.description().value();
   }
 }
 
