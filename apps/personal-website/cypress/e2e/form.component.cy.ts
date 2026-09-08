@@ -97,7 +97,7 @@ describe('Form Component (Signal Forms E2E Flows)', () => {
     cy.get('input[data-testid="cat-age"]').should('not.have.value', '');
 
     // Now intentionally set an invalid/mismatching age
-    cy.get('input[data-testid="cat-age"]').type('{selectall}{backspace}15', { force: true });
+    cy.get('input[data-testid="cat-age"]').should('be.visible').and('be.enabled').type('{selectall}{backspace}15');
     cy.get('input[data-testid="cat-age"]').blur();
 
     // Should display cross-field invalid age error
