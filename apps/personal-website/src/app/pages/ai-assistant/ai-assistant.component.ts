@@ -29,7 +29,7 @@ export class AiAssistantComponent {
 
   constructor() {
     afterNextRender(() => {
-      this.getCameraStream();
+      void this.getCameraStream();
     });
   }
 

@@ -11,7 +11,7 @@ export class ReverseMailDirective {
   copyMail(e: ClipboardEvent) {
     e.preventDefault();
     const reversedText = this.revertText(this.el.nativeElement.innerText);
-    navigator.clipboard.writeText(reversedText);
+    void navigator.clipboard.writeText(reversedText);
   }
 
   @HostListener('click')

@@ -60,7 +60,7 @@ export class DiagramSidebarComponent {
     },
     {
       submission: {
-        action: async () => this.onNodeSubmit(),
+        action: () => Promise.resolve(this.onNodeSubmit()),
       },
     }
   );
@@ -73,7 +73,7 @@ export class DiagramSidebarComponent {
     },
     {
       submission: {
-        action: async () => this.onEdgeSubmit(),
+        action: () => Promise.resolve(this.onEdgeSubmit()),
       },
     }
   );
