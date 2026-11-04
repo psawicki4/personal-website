@@ -4,17 +4,5 @@
   "sourceRoot": "libs/personal-website-components/src",
   "prefix": "lib",
   "projectType": "library",
-  "tags": ["ui"],
-  "targets": {
-    "test": {
-      "executor": "@nx/vitest:test",
-      "outputs": ["{options.reportsDirectory}"],
-      "options": {
-        "reportsDirectory": "{projectRoot}/../../coverage/libs/personal-website-components"
-      }
-    },
-    "lint": {
-      "executor": "@nx/eslint:lint"
-    }
-  }
+  "tags": ["ui"]
 }

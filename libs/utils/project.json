@@ -4,17 +4,5 @@
   "sourceRoot": "libs/utils/src",
   "prefix": "lib",
   "projectType": "library",
-  "tags": ["utils"],
-  "targets": {
-    "test": {
-      "executor": "@nx/vitest:test",
-      "outputs": ["{options.reportsDirectory}"],
-      "options": {
-        "reportsDirectory": "{projectRoot}/../../coverage/libs/utils"
-      }
-    },
-    "lint": {
-      "executor": "@nx/eslint:lint"
-    }
-  }
+  "tags": ["utils"]
 }
