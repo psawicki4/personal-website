@@ -6,9 +6,11 @@
   </mat-sidenav>
   <mat-sidenav-content>
     <div class="min-h-dvh flex flex-col gap-4">
-      @defer (hydrate on idle) {
-        <lib-header class="mt-4" (open)="sidenav.open()"></lib-header>
-      }
+      <div class="mt-4 h-10">
+        @defer (hydrate on idle) {
+          <lib-header (open)="sidenav.open()"></lib-header>
+        }
+      </div>
       <div class="grow mx-2 md:flex md:flex-row md:gap-8 md:mx-16">
         @defer (hydrate on idle) {
           <lib-menu class="max-md:hidden"></lib-menu>
